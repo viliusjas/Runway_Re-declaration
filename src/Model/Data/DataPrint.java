@@ -1,4 +1,4 @@
-package Core.Data;
+package Model.Data;
 
 public class DataPrint {
 }

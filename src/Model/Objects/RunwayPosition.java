@@ -1,4 +1,7 @@
 package Model.Objects;
 
-public class RunwayPosition {
+enum  RunwayPosition {
+    LEFT,
+    RIGHT,
+    NONE
 }

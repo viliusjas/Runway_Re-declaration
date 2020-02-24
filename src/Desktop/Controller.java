@@ -1,4 +1,4 @@
-package sample;
+package Desktop;
 
 public class Controller {
 }

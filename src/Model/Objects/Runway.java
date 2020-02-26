@@ -8,7 +8,7 @@ public class Runway {
      * @takeOffRunAvail length of runway available for take-off
      * @takeOffDistAvail TORA + area beyond the runway that is free from obstacles (safe)
      *                         TODA = TORA + Clearway
-     * @accStopDistAvail TORA + stopway, total distance in case of aborted take-off
+     * @accStopDistAvail    TORA + stopway, total distance in case of aborted take-off
      *                         ASDA = TORA + Stopway
      * @landDistAvail distance available for landing, starts at the THRESHOLD
      *
@@ -20,8 +20,6 @@ public class Runway {
      * @approachLandSurf surface between top of obstacle and runway when taking into account angle of descent
      * @takeoffCimbSurf surcace between the runway and top of obstacle when taking int account angle of ascent
      *
-     * @descentAngle
-     * @ascentAngle
      * In case of re-declaration, TORA, TODA, ASDA, LDA must be recalculated in both directions
      * clearway/stopway same in both directions?
      */
@@ -43,11 +41,27 @@ public class Runway {
     private int approchLandSurf;
     private int takeoffClimbSurf;
 
-    private double ascentAngle;
-    private double descentAngle;
 
     public Runway(int runwayNumber, RunwayPosition runwayPos) {
         this.runwayNumber = runwayNumber;
+        this.runwayPos = runwayPos;
+    }
+
+    public int getRunwayNumber() {
+        return runwayNumber;
+    }
+
+    public String getRunwayPos() {
+        if(runwayPos == RunwayPosition.LEFT) {
+            return "Left";
+        } else if(runwayPos == RunwayPosition.RIGHT) {
+            return "Right";
+        } else {
+            return "None";
+        }
+    }
+
+    public void setRunwayPos(RunwayPosition runwayPos) {
         this.runwayPos = runwayPos;
     }
 
@@ -131,21 +145,6 @@ public class Runway {
         this.takeoffClimbSurf = takeoffClimbSurf;
     }
 
-    public double getAscentAngle() {
-        return ascentAngle;
-    }
-
-    public void setAscentAngle(double ascentAngle) {
-        this.ascentAngle = ascentAngle;
-    }
-
-    public double getDescentAngle() {
-        return descentAngle;
-    }
-
-    public void setDescentAngle(double descentAngle) {
-        this.descentAngle = descentAngle;
-    }
 
 
 

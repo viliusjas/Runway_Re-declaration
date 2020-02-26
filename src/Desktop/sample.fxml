@@ -21,7 +21,13 @@
         <menus>
             <Menu mnemonicParsing="false" text="File">
                 <items>
-                    <MenuItem fx:id="importMenuButton" mnemonicParsing="false" onAction="#importMenuButtonClicked" text="Import" />
+                    <Menu mnemonicParsing="false" text="Import..">
+                        <items>
+                            <MenuItem fx:id="importAirportButton" mnemonicParsing="false" onAction="#importAirportButtonClicked" text="Airport" />
+                            <MenuItem fx:id="importObstaclesButton" mnemonicParsing="false" onAction="#importObstaclesButtonClicked" text="Obstacles" />
+                            <MenuItem fx:id="importAircraftButton" mnemonicParsing="false" onAction="#importAircraftButtonClicked" text="Aircraft" />
+                        </items>
+                    </Menu>
                     <MenuItem fx:id="exportMenuButton" mnemonicParsing="false" onAction="#exportMenuButtonClicked" text="Export" />
                     <MenuItem fx:id="settingsMenuButton" mnemonicParsing="false" onAction="#settingsMenuButtonClicked" text="Settings" />
                     <MenuItem fx:id="quitMenuButton" mnemonicParsing="false" onAction="#quitMenuButtonClicked" text="Quit" />
@@ -50,6 +56,7 @@
                     <Button fx:id="switchViewsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#switchViewsButtonClicked" text="Switch Views" />
                     <Button fx:id="addObstacleButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#addObstacleButtonClicked" text="Add obstacle" />
                     <Button fx:id="changeRunwaysButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#changeRunwayButtonClicked" text="Choose runway" />
+                    <Button fx:id="showAirportDetailsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showAirportDetailsButtonClicked" text="Show airport details" />
                     <Button fx:id="showDetailsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showDetailsButtonClicked" text="Show runway details" />
                     <Button fx:id="showCalculationsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showCalculationsButtonClicked" text="Show calculations" />
                 </children>

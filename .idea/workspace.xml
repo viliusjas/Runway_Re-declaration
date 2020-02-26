@@ -1,27 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Desktop/RunwayDetails.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Desktop/RunwayDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Desktop/AirportDetails.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Desktop/AirportDetails.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Desktop/AirportDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Desktop/AirportDetails.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Desktop/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Desktop/Controller.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Desktop/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Desktop/sample.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Model/Data/DataPersistance.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Model/Data/DataPersistance.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Model/Objects/Obstacle.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Model/Objects/Obstacle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/airport.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/airport.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/obstacle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/obstacle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/AirportDetails.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/AirportDetails.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/AirportDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/AirportDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/sample.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Data/DataPersistance.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Data/DataPersistance.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Model/Objects/Obstacle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Objects/Obstacle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/airport.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/airport.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/obstacle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/obstacle.xml" afterDir="false" />
-    </list>
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="" />
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
@@ -76,7 +56,7 @@
     <session id="1547378842">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.20" value="1" />
           <entry key="project.open.time.23" value="1" />
           <entry key="project.open.time.25" value="1" />
@@ -123,7 +103,7 @@
         <entry file="file://$PROJECT_DIR$/src/Desktop/AirportDetails.fxml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="198">
-              <caret line="9" column="22" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+              <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
             </state>
           </provider>
           <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -145,7 +125,7 @@
         <entry file="file://$PROJECT_DIR$/src/Desktop/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="161">
-              <caret line="28" column="9" lean-forward="true" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+              <caret line="28" column="9" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1392#1393#0" expanded="true" />
@@ -169,8 +149,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Desktop/RunwayDetails.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="506">
-              <caret line="35" column="38" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="38" />
+            <state relative-caret-position="71">
+              <caret line="11" column="110" lean-forward="true" selection-start-line="11" selection-start-column="110" selection-end-line="11" selection-end-column="110" />
             </state>
           </provider>
           <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -210,7 +190,7 @@
         <entry file="file://$PROJECT_DIR$/src/aircraft.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="132">
-              <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+              <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -228,7 +208,7 @@
         <entry file="file://$PROJECT_DIR$/src/Desktop/sample.fxml">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1144">
-              <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+              <caret line="52" selection-start-line="52" selection-end-line="52" />
               <folding>
                 <element signature="n#GridPane#1;n#children#0;n#AnchorPane#0;n#children#0;n#VBox#0;n#!!top" />
               </folding>
@@ -314,6 +294,16 @@
             <path>
               <item name="Runway_Re-declaration" type="b2602c69:ProjectViewProjectNode" />
               <item name="Runway_Re-declaration" type="462c0819:PsiDirectoryNode" />
+              <item name="_linux" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Runway_Re-declaration" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Runway_Re-declaration" type="462c0819:PsiDirectoryNode" />
+              <item name="codestyles" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Runway_Re-declaration" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Runway_Re-declaration" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -359,7 +349,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1582734989323" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1582735144756" />
     <property name="dynamic.classpath" value="false" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
@@ -471,7 +461,7 @@
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6703755" weight="0.16791044" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.6703755" visible="true" weight="0.16791044" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="Favorites" order="2" weight="0.3298887" />
       <window_info id="Designer" order="3" />
@@ -480,7 +470,7 @@
       <window_info id="Capture Tool" order="6" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32939914" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28004292" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.28004292" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.3993808" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -492,7 +482,7 @@
       <window_info anchor="bottom" id="Profiler" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" weight="0.32939914" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.32939914" />
-      <window_info anchor="bottom" id="Terminal" order="14" weight="0.32939914" />
+      <window_info anchor="bottom" id="Terminal" order="14" visible="true" weight="0.32939914" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -664,7 +654,7 @@
     <entry file="file://$PROJECT_DIR$/src/aircraft.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="132">
-          <caret line="6" column="12" lean-forward="true" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -678,7 +668,7 @@
     <entry file="file://$PROJECT_DIR$/src/Desktop/sample.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1144">
-          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
+          <caret line="52" selection-start-line="52" selection-end-line="52" />
           <folding>
             <element signature="n#GridPane#1;n#children#0;n#AnchorPane#0;n#children#0;n#VBox#0;n#!!top" />
           </folding>
@@ -689,7 +679,7 @@
     <entry file="file://$PROJECT_DIR$/src/Desktop/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="161">
-          <caret line="28" column="9" lean-forward="true" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+          <caret line="28" column="9" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1392#1393#0" expanded="true" />
@@ -712,7 +702,7 @@
     <entry file="file://$PROJECT_DIR$/src/Desktop/AirportDetails.fxml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
-          <caret line="9" column="22" lean-forward="true" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
+          <caret line="9" column="22" selection-start-line="9" selection-start-column="22" selection-end-line="9" selection-end-column="22" />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />
@@ -753,8 +743,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Desktop/RunwayDetails.fxml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="506">
-          <caret line="35" column="38" selection-start-line="35" selection-start-column="30" selection-end-line="35" selection-end-column="38" />
+        <state relative-caret-position="71">
+          <caret line="11" column="110" lean-forward="true" selection-start-line="11" selection-start-column="110" selection-end-line="11" selection-end-column="110" />
         </state>
       </provider>
       <provider editor-type-id="JavaFX-Scene-Builder" />

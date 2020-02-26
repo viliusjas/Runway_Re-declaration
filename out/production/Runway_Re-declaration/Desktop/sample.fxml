@@ -13,6 +13,10 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.ComboBox?>
+<?import com.sun.javafx.scene.control.skin.ContextMenuContent.ArrowMenuItem?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <VBox fx:id="root" prefHeight="658.0" prefWidth="933.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Desktop.Controller">
 <children>
 
@@ -55,7 +59,13 @@
                 <children>
                     <Button fx:id="switchViewsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#switchViewsButtonClicked" text="Switch Views" />
                     <Button fx:id="addObstacleButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#addObstacleButtonClicked" text="Add obstacle" />
-                    <Button fx:id="changeRunwaysButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#changeRunwayButtonClicked" text="Choose runway" />
+                    <!--<Button fx:id="changeRunwaysButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#changeRunwayButtonClicked" text="Choose runway" />-->
+                    <ComboBox fx:id="changeRunwaysMenu" promptText="Choose Runway" onAction="#changeRunwayButtonClicked">
+                        <items>
+                            <FXCollections fx:factory="observableArrayList">
+                            </FXCollections>
+                        </items>
+                    </ComboBox>
                     <Button fx:id="showAirportDetailsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showAirportDetailsButtonClicked" text="Show airport details" />
                     <Button fx:id="showDetailsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showDetailsButtonClicked" text="Show runway details" />
                     <Button fx:id="showCalculationsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showCalculationsButtonClicked" text="Show calculations" />

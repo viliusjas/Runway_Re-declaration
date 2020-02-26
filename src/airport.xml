@@ -18,7 +18,7 @@
     <takeoffClimbSurf>3</takeoffClimbSurf>
   </runway>
   <runway>
-    <number>1</number>
+    <number>3</number>
     <position>L</position>
     <tora>1</tora>
     <toda>1</toda>
@@ -32,7 +32,7 @@
     <takeoffClimbSurf>3</takeoffClimbSurf>
   </runway>
   <runway>
-    <number>1</number>
+    <number>2</number>
     <position>L</position>
     <tora>1</tora>
     <toda>1</toda>

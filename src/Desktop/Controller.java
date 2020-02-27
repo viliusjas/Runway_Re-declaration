@@ -10,13 +10,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 import Model.Data.*;
 import Model.Objects.*;
-import javafx.stage.StageStyle;
 
 public class Controller {
 
@@ -65,7 +62,7 @@ public class Controller {
         File file = fileChooser.showOpenDialog(root.getScene().getWindow());
         System.out.println("Opened " + file);
         try {
-            currentAirport = Model.Data.DataPersistance.importAirportXML(file);
+            currentAirport = XMLImport.importAirportXML(file);
 
             if (currentAirport != null)
                 System.out.println("Airport " + currentAirport.getAirportName() + " loaded successfully");
@@ -84,7 +81,7 @@ public class Controller {
         File file = fileChooser.showOpenDialog(root.getScene().getWindow());
         System.out.println("Opened " + file);
         try {
-            obstacles = Model.Data.DataPersistance.importObstaclesXML(file);
+            obstacles = XMLImport.importObstaclesXML(file);
 
             if (obstacles != null)
                 System.out.println(obstacles.size() + " obstacles loaded successfully");
@@ -103,7 +100,7 @@ public class Controller {
         File file = fileChooser.showOpenDialog(root.getScene().getWindow());
         System.out.println("Opened " + file);
         try {
-            aircrafts = Model.Data.DataPersistance.importAircraftXML(file);
+            aircrafts = XMLImport.importAircraftXML(file);
 
             if (aircrafts != null)
                 System.out.println(aircrafts.size() + " aircraft loaded successfully");

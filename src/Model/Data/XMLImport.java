@@ -10,7 +10,11 @@ import java.util.List;
 
 import Model.Objects.*;
 
-public class DataPersistance {
+public class XMLImport {
+
+    private static File aircraftSchema = new File("src/Model/Data/aircraft.xsd");
+    private static File airportSchema = new File("src/Model/Data/airport.xsd");
+    private static File obstacleSchema = new File("src/Model/Data/obstacle.xsd");
 
     /**
      * Parse an XML file to import airport and its runways / list of obstacles / list of aircraft
@@ -19,6 +23,11 @@ public class DataPersistance {
      */
 
     public static Airport importAirportXML(File file) throws Exception {
+
+        if(!(XMLValidate.validate(file, airportSchema))) {
+            throw new Exception("Invalid XML file");
+        }
+
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(file);
@@ -93,6 +102,11 @@ public class DataPersistance {
     }
 
     public static List<Obstacle> importObstaclesXML (File file) throws Exception {
+
+        if(!(XMLValidate.validate(file, obstacleSchema))) {
+            throw new Exception("Invalid XML file");
+        }
+
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(file);
@@ -127,6 +141,11 @@ public class DataPersistance {
     }
 
     public static List<Aircraft> importAircraftXML (File file) throws Exception {
+
+        if(!(XMLValidate.validate(file, aircraftSchema))) {
+            throw new Exception("Invalid XML file");
+        }
+
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
         Document doc = dBuilder.parse(file);

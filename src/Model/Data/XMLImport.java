@@ -12,6 +12,12 @@ import Model.Objects.*;
 
 public class XMLImport {
 
+    /**
+     * @aircraftSchema the xsd schema for aircraft XML files
+     * @airportSchema the xsd schema for airport XML files
+     * @obstacleSchema the xsd schema for obstacle XML files
+     */
+
     private static File aircraftSchema = new File("src/Model/Data/aircraft.xsd");
     private static File airportSchema = new File("src/Model/Data/airport.xsd");
     private static File obstacleSchema = new File("src/Model/Data/obstacle.xsd");

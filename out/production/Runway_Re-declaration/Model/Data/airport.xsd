@@ -1,0 +1,29 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="airport">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:string" name="name"/>
+                <xs:element type="xs:byte" name="descent"/>
+                <xs:element type="xs:byte" name="ascent"/>
+                <xs:element name="runway" maxOccurs="unbounded" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element type="xs:byte" name="number"/>
+                            <xs:element type="xs:string" name="position"/>
+                            <xs:element type="xs:byte" name="tora"/>
+                            <xs:element type="xs:byte" name="toda"/>
+                            <xs:element type="xs:byte" name="asda"/>
+                            <xs:element type="xs:byte" name="lsd"/>
+                            <xs:element type="xs:byte" name="stopway"/>
+                            <xs:element type="xs:byte" name="clearway"/>
+                            <xs:element type="xs:byte" name="runwayEnd"/>
+                            <xs:element type="xs:byte" name="stripEnd"/>
+                            <xs:element type="xs:byte" name="approachLandSurf"/>
+                            <xs:element type="xs:byte" name="takeoffClimbSurf"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

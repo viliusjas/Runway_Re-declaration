@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="Shaping the Calculator Class">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Runway_Re-declaration.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Runway_Re-declaration.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Desktop/Controller.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Desktop/Controller.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Desktop/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Desktop/sample.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Model/Data/DataPrint.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Model/Data/DataPrint.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Model/Data/XMLImport.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Model/Data/XMLImport.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Model/Data/XMLValidate.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Model/Data/XMLValidate.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Desktop/sample.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/Desktop/sample.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Model/Data/Calculator$Calculations.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Model/Data/Calculator$Calculations.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Model/Data/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/Model/Data/Calculator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Model/Data/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Data/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Objects/Obstacle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Objects/Obstacle.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,37 +189,47 @@
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
     </task>
+    <task id="LOCAL-00001" summary="Shaping the Calculator Class">
+      <created>1583002091364</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1583002091364</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <MESSAGE value="Shaping the Calculator Class" />
+    <option name="LAST_COMMIT_MESSAGE" value="Shaping the Calculator Class" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="984" y="96" width="926" height="912" key="CommitChangelistDialog2" timestamp="1583002072489">
+    <state x="874" y="122" width="926" height="912" key="CommitChangelistDialog2" timestamp="1583008132822">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="984" y="96" width="926" height="912" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1583002072489" />
-    <state width="832" height="238" key="GridCell.Tab.0.bottom" timestamp="1582999978026">
+    <state x="874" y="122" width="926" height="912" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1583008132822" />
+    <state width="832" height="238" key="GridCell.Tab.0.bottom" timestamp="1583008132846">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="832" height="238" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1582999978026" />
-    <state width="832" height="238" key="GridCell.Tab.0.center" timestamp="1582999978024">
+    <state width="832" height="238" key="GridCell.Tab.0.bottom/67.27.1853.1053@67.27.1853.1053" timestamp="1583008132846" />
+    <state width="832" height="238" key="GridCell.Tab.0.center" timestamp="1583008132846">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="832" height="238" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1582999978024" />
-    <state width="832" height="238" key="GridCell.Tab.0.left" timestamp="1582999978024">
+    <state width="832" height="238" key="GridCell.Tab.0.center/67.27.1853.1053@67.27.1853.1053" timestamp="1583008132846" />
+    <state width="832" height="238" key="GridCell.Tab.0.left" timestamp="1583008132845">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="832" height="238" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1582999978024" />
-    <state width="832" height="238" key="GridCell.Tab.0.right" timestamp="1582999978025">
+    <state width="832" height="238" key="GridCell.Tab.0.left/67.27.1853.1053@67.27.1853.1053" timestamp="1583008132845" />
+    <state width="832" height="238" key="GridCell.Tab.0.right" timestamp="1583008132846">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state width="832" height="238" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1582999978025" />
-    <state x="761" y="472" width="464" height="160" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1583001970355">
+    <state width="832" height="238" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1583008132846" />
+    <state x="761" y="472" width="464" height="160" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1583008087733">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="761" y="472" width="464" height="160" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1853.1053@67.27.1853.1053" timestamp="1583001970355" />
+    <state x="761" y="472" width="464" height="160" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/67.27.1853.1053@67.27.1853.1053" timestamp="1583008087733" />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />

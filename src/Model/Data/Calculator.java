@@ -13,21 +13,17 @@ public class Calculator {
     //int toda;
     //int asda;
     //int lda;
+    int visualStripEnd = 60;
+    int visualStripWidth = 75;
+    int resa = 240;
 
-    class Calculations {
-        Runway runway;
-        int tora;
-        int toda;
-        int asda;
-        int lda;
 
-        public Calculations(Runway runway, int tora, int toda, int asda, int lda) {
-            this.runway = runway;
-            this.tora = tora;
-            this.toda = toda;
-            this.asda = asda;
-            this.lda = lda;
-        }
+    public Calculator(){}
+
+    public Calculator(int visualStripEnd, int visualStripWidth, int resa){
+        this.visualStripEnd = visualStripEnd;
+        this.visualStripWidth = visualStripWidth;
+        this.resa = resa;
     }
 
     private Queue<Calculations> calculations;
@@ -46,6 +42,21 @@ public class Calculator {
         return false;
     }
 
+    class Calculations {
+        Runway runway;
+        int tora;
+        int toda;
+        int asda;
+        int lda;
+
+        public Calculations(Runway runway, int tora, int toda, int asda, int lda) {
+            this.runway = runway;
+            this.tora = tora;
+            this.toda = toda;
+            this.asda = asda;
+            this.lda = lda;
+        }
+    }
 
 
 

@@ -16,6 +16,12 @@ public class Obstacle {
         this.length = length;
         this.height = height;
     }
+    public Obstacle(int length, int height, Runway obstacleRunway) {
+        this.length = length;
+        this.height = height;
+        this.obstacleRunway = obstacleRunway;
+    }
+
 
     public Runway getObstacleRunway() {
         return obstacleRunway;

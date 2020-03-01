@@ -33,6 +33,14 @@ public class Calculator {
 
     }
 
+    public void takeOffAwaylandingOver(){
+
+
+    }
+    public void takeOffTowardslandingTowards(){
+
+    }
+
     public static Runway calculate(Runway runway, List<Obstacle> obstacles) {
 
         return null;
@@ -44,12 +52,14 @@ public class Calculator {
 
     class Calculations {
         Runway runway;
+        Obstacle o;
         int tora;
         int toda;
         int asda;
         int lda;
 
-        public Calculations(Runway runway, int tora, int toda, int asda, int lda) {
+        public Calculations(Runway runway, Obstacle o, int tora, int toda, int asda, int lda) {
+            this.o = o;
             this.runway = runway;
             this.tora = tora;
             this.toda = toda;

@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="obstacle xml">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Runway_Re-declaration/airport.xml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Runway_Re-declaration/airport.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,8 +105,8 @@
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1583261583266" />
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../javafx-sdk-11.0.2/lib" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="settings.editor.selected.configurable" value="preferences.JavaFX" />
@@ -196,7 +195,7 @@
       <option name="presentableId" value="Default" />
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
-      <workItem from="1583274778956" duration="745000" />
+      <workItem from="1583274778956" duration="992000" />
     </task>
     <task id="LOCAL-00001" summary="obstacle xml">
       <created>1583275040046</created>
@@ -205,7 +204,21 @@
       <option name="project" value="LOCAL" />
       <updated>1583275040046</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="obstacle xml">
+      <created>1583275537166</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1583275537166</updated>
+    </task>
+    <task id="LOCAL-00003" summary="obstacle xml">
+      <created>1583275705701</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1583275705701</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -218,10 +231,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="obstacle xml" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="536" y="96" width="904" height="912" key="CommitChangelistDialog2" timestamp="1583275537055">
+    <state x="636" y="106" width="904" height="912" key="CommitChangelistDialog2" timestamp="1583275770117">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="536" y="96" width="904" height="912" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1583275537055" />
+    <state x="636" y="106" width="904" height="912" key="CommitChangelistDialog2/67.27.1853.1053@67.27.1853.1053" timestamp="1583275770117" />
     <state x="615" y="296" width="735" height="513" key="FileChooserDialogImpl" timestamp="1583274870760">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
@@ -242,10 +255,10 @@
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
     <state width="1807" height="278" key="GridCell.Tab.0.right/67.27.1853.1053@67.27.1853.1053" timestamp="1583275284631" />
-    <state x="476" y="130" width="1024" height="845" key="SettingsEditor" timestamp="1583274874620">
+    <state x="476" y="130" width="1024" height="845" key="SettingsEditor" timestamp="1583275736618">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="476" y="130" width="1024" height="845" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1583274874620" />
+    <state x="476" y="130" width="1024" height="845" key="SettingsEditor/67.27.1853.1053@67.27.1853.1053" timestamp="1583275736618" />
     <state x="649" y="380" key="com.intellij.ide.util.TipDialog" timestamp="1583274780773">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>

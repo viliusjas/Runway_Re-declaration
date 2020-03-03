@@ -39,6 +39,7 @@ public class Obstacle {
     public int getObstacleRightPos(){
         return rightPos;
     }
+    public int getObstacleHeight(){return height;}
 
 
     public Runway getObstacleRunway() {

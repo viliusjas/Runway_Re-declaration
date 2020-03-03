@@ -47,15 +47,15 @@ public class Calculator {
         if(runway.getRunwayPos().equals("Left")){
             if(obstacle.getObstacleLeftPos() < obstacle.getObstacleRightPos()){
                 if(runwayDisplaced > 0){
-                    takeOffAwaylandingOverDisplaced(obstacle, runway);
+                    takeOffAwaylandingOverDisplaced(obstacle, obstacle.getObstacleLeftPos(), runway);
                 }else{
-                    takeOffAwaylandingOver(obstacle, runway);
+                    takeOffAwaylandingOver(obstacle, obstacle.getObstacleLeftPos(), runway);
                 }
             }else{
                 if(runwayDisplaced > 0){
-                    takeOffTowardslandingTowardsDisplaced(obstacle, runway);
+                    takeOffTowardslandingTowardsDisplaced(obstacle, obstacle.getObstacleLeftPos(), runway);
                 }else{
-                    takeOffTowardslandingTowards(obstacle, runway);
+                    takeOffTowardslandingTowards(obstacle,obstacle.getObstacleLeftPos(), runway);
                 }
             }
         }
@@ -63,31 +63,68 @@ public class Calculator {
         else{
             if(obstacle.getObstacleLeftPos() > obstacle.getObstacleRightPos()){
                 if(runwayDisplaced > 0){
-                    takeOffAwaylandingOverDisplaced(obstacle, runway);
+                    takeOffAwaylandingOverDisplaced(obstacle, obstacle.getObstacleRightPos(), runway);
                 }else{
-                    takeOffAwaylandingOver(obstacle, runway);
+                    takeOffAwaylandingOver(obstacle, obstacle.getObstacleRightPos(), runway);
                 }
             }else{
                 if(runwayDisplaced > 0){
-                    takeOffTowardslandingTowardsDisplaced(obstacle, runway);
+                    takeOffTowardslandingTowardsDisplaced(obstacle, obstacle.getObstacleRightPos(), runway);
                 }else{
-                    takeOffTowardslandingTowards(obstacle, runway);
+                    takeOffTowardslandingTowards(obstacle, obstacle.getObstacleRightPos(), runway);
                 }
             }
         }
     }
 
-    public void takeOffAwaylandingOverDisplaced(Obstacle obstacle, Runway runway){
-
+    public void takeOffAwaylandingOverDisplaced(Obstacle obstacle, int distanceFromTSH, Runway runway){
+        int displacedTSH = runway.getTakeOffRunAvail() - runway.getLandDistAvail();
+        int clearway = runway.getTakeOffDistAvail() - runway.getTakeOffRunAvail();
+        int stopway = runway.getAccStopDistAvail() - runway.getTakeOffRunAvail();
+        int slopeCalc = obstacle.getObstacleHeight() * 50;
+        if (slopeCalc < resa) {
+            slopeCalc = resa;
+        }
+        int recalculatedTORA = runway.getTakeOffRunAvail() - blastProtection - distanceFromTSH - displacedTSH;
+        int recalculatedTODA = recalculatedTORA + clearway;
+        int recalculatedASDA = recalculatedTORA + stopway;
+        int recalculatedLDA = runway.getLandDistAvail() - distanceFromTSH - visualStripEnd - slopeCalc;
     }
-    public void takeOffTowardslandingTowardsDisplaced(Obstacle obstacle, Runway runway){
 
+    public void takeOffTowardslandingTowardsDisplaced(Obstacle obstacle, int distanceFromTSH, Runway runway){
+        int slopeCalc = obstacle.getObstacleHeight() * 50;
+        if (slopeCalc < resa) {
+            slopeCalc = resa;
+        }
+        int recalculatedTORA = distanceFromTSH - slopeCalc - visualStripEnd;
+        int recalculatedTODA = recalculatedTORA;
+        int recalculatedASDA = recalculatedTORA;
+        int recalculatedLDA = distanceFromTSH - resa - visualStripEnd;
     }
-    public void takeOffAwaylandingOver(Obstacle obstacle, Runway runway){
 
+    public void takeOffAwaylandingOver(Obstacle obstacle, int distanceFromTSH, Runway runway){
+        int clearway = runway.getTakeOffDistAvail() - runway.getTakeOffRunAvail();
+        int stopway = runway.getAccStopDistAvail() - runway.getTakeOffRunAvail();
+        int slopeCalc = obstacle.getObstacleHeight() * 50;
+        if (slopeCalc < resa) {
+            slopeCalc = resa;
+        }
+        int recalculatedTORA = runway.getTakeOffRunAvail() - visualStripEnd - resa - distanceFromTSH;
+        int recalculaedTODA = recalculatedTORA + clearway;
+        int recalculatedASDA = recalculatedTORA + stopway;
+        int recalculatedLDA = runway.getLandDistAvail() - slopeCalc - distanceFromTSH - visualStripEnd;
     }
-    public void takeOffTowardslandingTowards(Obstacle obstacle, Runway runway){
+    public void takeOffTowardslandingTowards(Obstacle obstacle, int distanceFromTSH, Runway runway){
+        int slopeCalc = obstacle.getObstacleHeight() * 50;
+        if (slopeCalc < resa) {
+            slopeCalc = resa;
+        }
+        int displacedTSH = runway.getTakeOffRunAvail() - runway.getLandDistAvail();
 
+        int recalculatedTORA = distanceFromTSH + displacedTSH - slopeCalc - visualStripEnd;
+        int recalculatedTODA = recalculatedTORA;
+        int recalculatedASDA = recalculatedTORA;
+        int recalculatedLDA = distanceFromTSH - visualStripEnd - resa;
     }
 
 

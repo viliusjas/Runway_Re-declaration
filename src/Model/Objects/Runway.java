@@ -16,6 +16,7 @@ public class Runway {
      * @clearwayLength
      * @runwayEndSafeArea
      *
+     * @visualStripWidth
      * @stripEnd area between the end of the runway and the and of the runway strip
      * @approachLandSurf surface between top of obstacle and runway when taking into account angle of descent
      * @takeoffCimbSurf surcace between the runway and top of obstacle when taking int account angle of ascent

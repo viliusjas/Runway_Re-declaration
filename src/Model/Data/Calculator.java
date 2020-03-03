@@ -43,17 +43,53 @@ public class Calculator {
         }
     }
     public void decideRedeclarationCase(Obstacle obstacle, Runway runway){
+        int runwayDisplaced = runway.getTakeOffRunAvail() - runway.getLandDistAvail();
+        if(runway.getRunwayPos().equals("Left")){
+            if(obstacle.getObstacleLeftPos() < obstacle.getObstacleRightPos()){
+                if(runwayDisplaced > 0){
+                    takeOffAwaylandingOverDisplaced(obstacle, runway);
+                }else{
+                    takeOffAwaylandingOver(obstacle, runway);
+                }
+            }else{
+                if(runwayDisplaced > 0){
+                    takeOffTowardslandingTowardsDisplaced(obstacle, runway);
+                }else{
+                    takeOffTowardslandingTowards(obstacle, runway);
+                }
+            }
+        }
+        //Position "Right"
+        else{
+            if(obstacle.getObstacleLeftPos() > obstacle.getObstacleRightPos()){
+                if(runwayDisplaced > 0){
+                    takeOffAwaylandingOverDisplaced(obstacle, runway);
+                }else{
+                    takeOffAwaylandingOver(obstacle, runway);
+                }
+            }else{
+                if(runwayDisplaced > 0){
+                    takeOffTowardslandingTowardsDisplaced(obstacle, runway);
+                }else{
+                    takeOffTowardslandingTowards(obstacle, runway);
+                }
+            }
+        }
+    }
+
+    public void takeOffAwaylandingOverDisplaced(Obstacle obstacle, Runway runway){
+
+    }
+    public void takeOffTowardslandingTowardsDisplaced(Obstacle obstacle, Runway runway){
+
+    }
+    public void takeOffAwaylandingOver(Obstacle obstacle, Runway runway){
+
+    }
+    public void takeOffTowardslandingTowards(Obstacle obstacle, Runway runway){
 
     }
 
-
-    public void takeOffAwaylandingOver(){
-
-
-    }
-    public void takeOffTowardslandingTowards(){
-
-    }
 
 
 

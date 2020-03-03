@@ -3,9 +3,31 @@
 <!-- add runway it belongs to -->
 <obstacles>
 	<obstacle>
+		<name>Obstacle1</name>
+		<length>10</length>
+		<height>12</height>
+		<rightThreshold>-50</rightThreshold>
+		<leftThreshold>3646</leftThreshold>
+	</obstacle>
+	<obstacle>
+		<name>Obstacle2</name>
+		<length>10</length>
+		<height>25</height>
+		<rightThreshold>500</rightThreshold>
+		<leftThreshold>2853</leftThreshold>
+	</obstacle>
+	<obstacle>
+		<name>Obstacle3</name>
 		<length>10</length>
 		<height>15</height>
-		<rightThreshold>12</rightThreshold>
-		<leftThreshold>13</leftThreshold>
+		<rightThreshold>150</rightThreshold>
+		<leftThreshold>3203</leftThreshold>
+	</obstacle>
+	<obstacle>
+		<name>Obstacle4</name>
+		<length>10</length>
+		<height>20</height>
+		<rightThreshold>50</rightThreshold>
+		<leftThreshold>3546</leftThreshold>
 	</obstacle>
 </obstacles>

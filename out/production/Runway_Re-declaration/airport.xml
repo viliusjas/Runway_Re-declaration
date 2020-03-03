@@ -4,48 +4,50 @@
   <descent>15</descent>
   <ascent>15</ascent>
   <runway>
-    <number>1</number>
+    <number>9</number>
     <position>L</position>
-    <tora>1</tora>
-    <toda>1</toda>
-    <asda>1</asda>
-    <lsd>1</lsd>
+    <tora>3902</tora>
+    <toda>3902</toda>
+    <asda>3902</asda>
+    <lsd>3595</lsd>
     <stopway>2</stopway>
     <clearway>3</clearway>
     <runwayEnd>2</runwayEnd>
-    <stripEnd>23</stripEnd>
+    <stripEnd>60</stripEnd>
     <approachLandSurf>2</approachLandSurf>
     <takeoffClimbSurf>3</takeoffClimbSurf>
-    <visualStripWidth>12</visualStripWidth>
+    <visualStripWidth>125</visualStripWidth>
   </runway>
   <runway>
-    <number>3</number>
+    <number>9</number>
     <position>L</position>
-    <tora>1</tora>
-    <toda>1</toda>
-    <asda>1</asda>
-    <lsd>1</lsd>
+    <tora>3660</tora>
+    <toda>3660</toda>
+    <asda>3660</asda>
+    <lsd>3353</lsd>
     <stopway>2</stopway>
     <clearway>3</clearway>
     <runwayEnd>2</runwayEnd>
-    <stripEnd>23</stripEnd>
+    <stripEnd>60</stripEnd>
     <approachLandSurf>2</approachLandSurf>
     <takeoffClimbSurf>3</takeoffClimbSurf>
-    <visualStripWidth>12</visualStripWidth>
+    <visualStripWidth>125</visualStripWidth>
   </runway>
   <runway>
-    <number>2</number>
+    <number>27</number>
     <position>L</position>
-    <tora>1</tora>
-    <toda>1</toda>
-    <asda>1</asda>
-    <lsd>1</lsd>
+    <tora>3660</tora>
+    <toda>3660</toda>
+    <asda>3660</asda>
+    <lsd>3660</lsd>
     <stopway>2</stopway>
     <clearway>3</clearway>
     <runwayEnd>2</runwayEnd>
-    <stripEnd>23</stripEnd>
+    <stripEnd>60</stripEnd>
     <approachLandSurf>2</approachLandSurf>
     <takeoffClimbSurf>3</takeoffClimbSurf>
-    <visualStripWidth>12</visualStripWidth>
+    <visualStripWidth>125</visualStripWidth>
   </runway>
+
+
 </airport>

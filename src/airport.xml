@@ -16,6 +16,7 @@
     <stripEnd>23</stripEnd>
     <approachLandSurf>2</approachLandSurf>
     <takeoffClimbSurf>3</takeoffClimbSurf>
+    <visualStripWidth>12</visualStripWidth>
   </runway>
   <runway>
     <number>3</number>
@@ -30,6 +31,7 @@
     <stripEnd>23</stripEnd>
     <approachLandSurf>2</approachLandSurf>
     <takeoffClimbSurf>3</takeoffClimbSurf>
+    <visualStripWidth>12</visualStripWidth>
   </runway>
   <runway>
     <number>2</number>
@@ -44,5 +46,6 @@
     <stripEnd>23</stripEnd>
     <approachLandSurf>2</approachLandSurf>
     <takeoffClimbSurf>3</takeoffClimbSurf>
+    <visualStripWidth>12</visualStripWidth>
   </runway>
 </airport>

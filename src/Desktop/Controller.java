@@ -230,8 +230,8 @@ public class Controller {
 
         for(int i = 0; i < currentAirport.getAirportRunways().size(); i++) {
             Runway runway = currentAirport.getAirportRunways().get(i);
-            int runwayNum = runway.getRunwayNumber();
-            changeRunwaysMenu.getItems().add(String.valueOf(runwayNum));
+            //int runwayNum = runway.getRunwayNumber();
+            changeRunwaysMenu.getItems().add(runway.getRunwayName());
         }
 
 

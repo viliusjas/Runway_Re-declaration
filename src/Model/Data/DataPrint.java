@@ -28,8 +28,7 @@ public class DataPrint {
             writer.println("------------------------------------");
 
             for(Runway runway : airport.getAirportRunways()) {
-                writer.println("Runway number: " + runway.getRunwayNumber());
-                writer.println("Direction: " + runway.getRunwayPos());
+                writer.println("Runway : " + runway.getRunwayNumber());
                 writer.println("TORA: " + runway.getTakeOffRunAvail());
                 writer.println("TODA: " + runway.getTakeOffDistAvail());
                 writer.println("ASDA: " + runway.getAccStopDistAvail());

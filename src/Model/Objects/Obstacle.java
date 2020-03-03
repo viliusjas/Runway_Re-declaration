@@ -12,11 +12,16 @@ public class Obstacle {
     private int leftPos;
     private int rightPos;
 
+    private int leftThreshold;
+    private int rightThreshold;
+
     private Runway obstacleRunway;
 
-    public Obstacle(int length, int height) {
+    public Obstacle(int length, int height, int leftThreshold, int rightThreshold) {
         this.length = length;
         this.height = height;
+        this.leftThreshold = leftThreshold;
+        this.rightThreshold = rightThreshold;
     }
 
     public Obstacle(int length, int height, Runway obstacleRunway, int obstaclePos) {
@@ -43,5 +48,6 @@ public class Obstacle {
     public void setObstacleRunway(Runway obstacleRunway) {
         this.obstacleRunway = obstacleRunway;
     }
+
 
 }

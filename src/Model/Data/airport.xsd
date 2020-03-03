@@ -20,6 +20,7 @@
                             <xs:element type="xs:byte" name="stripEnd"/>
                             <xs:element type="xs:byte" name="approachLandSurf"/>
                             <xs:element type="xs:byte" name="takeoffClimbSurf"/>
+                            <xs:element type="xs:byte" name="visualStripWidth"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>

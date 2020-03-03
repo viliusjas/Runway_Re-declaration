@@ -10,6 +10,8 @@
                         <xs:sequence>
                             <xs:element type="xs:byte" name="length"/>
                             <xs:element type="xs:byte" name="height"/>
+                            <xs:element type="xs:byte" name="rightThreshold"/>
+                            <xs:element type="xs:byte" name="leftThreshold"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>

@@ -16,6 +16,7 @@ public class Calculator {
     int visualStripEnd = 60;
     int visualStripWidth = 75;
     int resa = 240;
+    int blastProtection = 300;
 
 
     public Calculator(){}
@@ -28,10 +29,23 @@ public class Calculator {
 
     private Queue<Calculations> calculations;
 
+    //public static Runway calculate(Runway runway, List<Obstacle> obstacles) {
 
-    public void testCalc(Runway runway, Obstacle obstacle, int tora, int toda, int asda, int lda){
+      //  return null;
+    //}
+
+    public void calculate(Obstacle obstacle, Runway runway){
+        if(obstacle.getObstacleLeftPos() < -visualStripEnd
+        || obstacle.getObstacleRightPos() < -visualStripEnd){
+            System.out.println("No re-declaration needed");
+        }else{
+            decideRedeclarationCase(obstacle, runway);
+        }
+    }
+    public void decideRedeclarationCase(Obstacle obstacle, Runway runway){
 
     }
+
 
     public void takeOffAwaylandingOver(){
 
@@ -41,10 +55,7 @@ public class Calculator {
 
     }
 
-    public static Runway calculate(Runway runway, List<Obstacle> obstacles) {
 
-        return null;
-    }
 
     public static boolean runwayIsSafe(Runway runway, Aircraft aircraft, boolean takeoff) {
         return false;

@@ -87,6 +87,8 @@ public class XMLImport {
                 int stripEnd = Integer.parseInt(element.getElementsByTagName("stripEnd").item(0).getTextContent());
                 int approachLandSurf = Integer.parseInt(element.getElementsByTagName("approachLandSurf").item(0).getTextContent());
                 int takeoffClimbSurf = Integer.parseInt(element.getElementsByTagName("takeoffClimbSurf").item(0).getTextContent());
+                int visualStripWidth = Integer.parseInt(element.getElementsByTagName("visualStripWidth").item(0).getTextContent());
+
 
                 runway.setTakeOffRunAvail(tora);
                 runway.setTakeOffDistAvail(toda);
@@ -98,6 +100,7 @@ public class XMLImport {
                 runway.setStripEnd(stripEnd);
                 runway.setApprochLandSurf(approachLandSurf);
                 runway.setTakeoffClimbSurf(takeoffClimbSurf);
+                runway.setVisualStripWidth(visualStripWidth);
 
                 airport.addRunway(runway);
 
@@ -120,9 +123,6 @@ public class XMLImport {
         doc.getDocumentElement().normalize();
         System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
 
-        if(!doc.getDocumentElement().getNodeName().equals("obstacles"))
-            throw new Exception();
-
         List<Obstacle> obstacles = new ArrayList<>();
 
         NodeList nList = doc.getElementsByTagName("obstacle");
@@ -137,7 +137,11 @@ public class XMLImport {
 
                 int height = Integer.parseInt(element.getElementsByTagName("height").item(0).getTextContent());
                 int length = Integer.parseInt(element.getElementsByTagName("length").item(0).getTextContent());
-                Obstacle obstacle = new Obstacle(length, height);
+                int leftThreshold = Integer.parseInt(element.getElementsByTagName("leftThreshold").item(0).getTextContent());
+                int rightThreshold = Integer.parseInt(element.getElementsByTagName("rightThreshold").item(0).getTextContent());
+
+
+                Obstacle obstacle = new Obstacle(length, height, leftThreshold, rightThreshold);
                 obstacles.add(obstacle);
             }
         }
@@ -158,9 +162,6 @@ public class XMLImport {
 
         doc.getDocumentElement().normalize();
         System.out.println("Root element :" + doc.getDocumentElement().getNodeName());
-
-        if(!doc.getDocumentElement().getNodeName().equals("aircrtafts"))
-            throw new Exception();
 
         List<Aircraft> aircrafts = new ArrayList<>();
 

@@ -5,5 +5,7 @@
 	<obstacle>
 		<length>10</length>
 		<height>15</height>
+		<rightThreshold>12</rightThreshold>
+		<leftThreshold>13</leftThreshold>
 	</obstacle>
 </obstacles>

@@ -38,6 +38,8 @@ public class Runway {
     private int runwayEndSafeArea;
     private int stripEnd;
 
+    private int visualStripWidth;
+
     private int approchLandSurf;
     private int takeoffClimbSurf;
 
@@ -45,6 +47,10 @@ public class Runway {
     public Runway(int runwayNumber, RunwayPosition runwayPos) {
         this.runwayNumber = runwayNumber;
         this.runwayPos = runwayPos;
+    }
+
+    public String getRunwayName() {
+        return String.valueOf(runwayNumber) + runwayPos;
     }
 
     public int getRunwayNumber() {
@@ -143,6 +149,14 @@ public class Runway {
 
     public void setTakeoffClimbSurf(int takeoffClimbSurf) {
         this.takeoffClimbSurf = takeoffClimbSurf;
+    }
+
+    public int getVisualStripWidth() {
+        return visualStripWidth;
+    }
+
+    public void setVisualStripWidth(int visualStripWidth) {
+        this.visualStripWidth = visualStripWidth;
     }
 
 

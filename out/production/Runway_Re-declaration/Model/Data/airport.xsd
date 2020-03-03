@@ -8,19 +8,19 @@
                 <xs:element name="runway" maxOccurs="unbounded" minOccurs="0">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element type="xs:byte" name="number"/>
+                            <xs:element type="xs:short" name="number"/>
                             <xs:element type="xs:string" name="position"/>
-                            <xs:element type="xs:byte" name="tora"/>
-                            <xs:element type="xs:byte" name="toda"/>
-                            <xs:element type="xs:byte" name="asda"/>
-                            <xs:element type="xs:byte" name="lsd"/>
-                            <xs:element type="xs:byte" name="stopway"/>
-                            <xs:element type="xs:byte" name="clearway"/>
-                            <xs:element type="xs:byte" name="runwayEnd"/>
-                            <xs:element type="xs:byte" name="stripEnd"/>
-                            <xs:element type="xs:byte" name="approachLandSurf"/>
-                            <xs:element type="xs:byte" name="takeoffClimbSurf"/>
-                            <xs:element type="xs:byte" name="visualStripWidth"/>
+                            <xs:element type="xs:short" name="tora"/>
+                            <xs:element type="xs:short" name="toda"/>
+                            <xs:element type="xs:short" name="asda"/>
+                            <xs:element type="xs:short" name="lsd"/>
+                            <xs:element type="xs:short" name="stopway"/>
+                            <xs:element type="xs:short" name="clearway"/>
+                            <xs:element type="xs:short" name="runwayEnd"/>
+                            <xs:element type="xs:short" name="stripEnd"/>
+                            <xs:element type="xs:short" name="approachLandSurf"/>
+                            <xs:element type="xs:short" name="takeoffClimbSurf"/>
+                            <xs:element type="xs:short" name="visualStripWidth"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>

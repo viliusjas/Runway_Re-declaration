@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <airport>
-  <name>Test</name>
+  <name>UKairport</name>
   <descent>15</descent>
   <ascent>15</ascent>
   <runway>

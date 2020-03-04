@@ -254,7 +254,42 @@ public class Controller {
 
     }
 
-    public void showCalculationsButtonClicked() {
+    public void showCalculationsButtonClicked() throws Exception {
+
+
+        Calculator calc = new Calculator();
+        //int runwayIndex = changeRunwaysMenu.getSelectionModel().getSelectedIndex();
+        calc.calculate(obstacles.get(0), currentRunway);
+
+        Stage popupwindow=new Stage();
+        popupwindow.initModality(Modality.APPLICATION_MODAL);
+        popupwindow.setTitle("Calculation Breakdown");
+        Label label1= new Label(calc.getCalculationBreakdown());
+        Button button1= new Button("It matches!");
+        button1.setOnAction(e -> popupwindow.close());
+        VBox layout= new VBox(10);
+        layout.getChildren().addAll(label1, button1);
+        layout.setAlignment(Pos.CENTER);
+        Scene scene1= new Scene(layout, 600, 250);
+        popupwindow.setScene(scene1);
+        popupwindow.showAndWait();
+        //showPopupMessage(calc.getCalculationBreakdown(), Alert.AlertType.ERROR);
+
+        /*
+
+        TopDownView topDown = new TopDownView();
+        SideOnView sideOn = new SideOnView();
+
+        try {
+            topdownViewPane = topDown.setUpSideOnView(currentRunway);
+            sideViewPane = sideOn.setUpSideOnView(currentRunway);
+            System.out.println("Runway Re-declared");
+        } catch (Exception e) {
+            showPopupMessage("Error setting up the runway re-declaration ", Alert.AlertType.ERROR);
+        }
+
+         */
+
 
     }
 

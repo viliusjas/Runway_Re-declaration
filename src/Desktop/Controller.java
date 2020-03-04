@@ -157,8 +157,6 @@ public class Controller {
 
     public void changeRunwayButtonClicked() {
 
-        if(currentRunway == null || currentAirport == null)
-            return;
 
         System.out.println("Selected runway " + changeRunwaysMenu.getSelectionModel().getSelectedItem());
 

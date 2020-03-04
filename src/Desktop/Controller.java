@@ -1,6 +1,7 @@
 package Desktop;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -139,6 +140,12 @@ public class Controller {
     }
 
     public void switchViewsButtonClicked() {
+
+        if(currentRunway == null) {
+            showPopupMessage("No runway is currently chosen", Alert.AlertType.ERROR);
+            return;
+        }
+
         System.out.println("Switching views...");
 
         if(topdownViewPane.isVisible()) {
@@ -191,6 +198,8 @@ public class Controller {
 
                 anchorPane.getChildren().add(topdownViewPane);
                 anchorPane.getChildren().add(sideViewPane);
+
+
                 System.out.println("Runway GUI set up");
             } catch (Exception e) {
                 showPopupMessage("Error setting up the runway visualisation ", Alert.AlertType.ERROR);

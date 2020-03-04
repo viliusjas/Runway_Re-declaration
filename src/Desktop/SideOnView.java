@@ -48,7 +48,7 @@ public class SideOnView {
 
 
     private int RUNWAY_LENGTH = 3902;
-    private int runwayWidth = 450;
+    private int runwayWidth = 600;
     private int blastAllowance = 300;
     private float scale;
 

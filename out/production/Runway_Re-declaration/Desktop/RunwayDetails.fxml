@@ -21,7 +21,7 @@
                       <Label text="Runway End" />
                       <Label text="Strip End" />
                       <Label text="Approach Landing Surface" />
-                      <Label text="takeoff climb surf" />
+                      <Label text="Takeoff Climbing Surface" />
                </children>
             </VBox>
             <VBox layoutX="160.0" layoutY="28.0" prefHeight="204.0" prefWidth="80.0">

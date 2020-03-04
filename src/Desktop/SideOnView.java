@@ -1,5 +1,6 @@
 package Desktop;
 
+import Model.Objects.Runway;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,7 +23,7 @@ import java.io.FileInputStream;
 
 import static javafx.scene.paint.Color.*;
 
-public class SideOnView extends Application {
+public class SideOnView {
     
     //dummydata
     private int obstacleLength = 60;
@@ -40,10 +41,10 @@ public class SideOnView extends Application {
 
     private String LandingDirection = "LEFT";
 
-    private int TORA = 3902;
-    private int TODA = 3902;
-    private int ASDA = 3902;
-    private int LDA = 3595;
+    private int TORA;
+    private int TODA;
+    private int ASDA;
+    private int LDA;
 
 
     private int RUNWAY_LENGTH = 3902;
@@ -51,8 +52,15 @@ public class SideOnView extends Application {
     private int blastAllowance = 300;
     private float scale;
 
-    @Override
-    public void start(Stage stage) throws Exception {
+    public BorderPane setUpSideOnView(Runway runwayObject) throws Exception {
+
+        // SETUP VALUES
+
+        this.TORA = runwayObject.getTakeOffRunAvail();
+        this.TODA = runwayObject.getTakeOffDistAvail();
+        this.ASDA = runwayObject.getAccStopDistAvail();
+        this.LDA = runwayObject.getLandDistAvail();
+
 
         // CALCULATIONS FOR SCALE
         scale = (float) runwayWidth / RUNWAY_LENGTH;
@@ -205,10 +213,14 @@ public class SideOnView extends Application {
         plane.setLayoutX(obstacleScaledDistance);
         runwayVBox.setLayoutY(obstacleScaledHeight + 15);
 
+        borderPane.setLayoutX(152.0);
+        borderPane.setLayoutY(88.0);
+
+        borderPane.setPrefHeight(408.0);
+        borderPane.setPrefWidth(629.0);
+
         borderPane.setCenter(group);
 
-        stage.setTitle("Side-On View");
-        stage.setScene(scene);
-        stage.show();
+        return borderPane;
     }
 }

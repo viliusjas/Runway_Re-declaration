@@ -17,10 +17,11 @@ import Model.Objects.*;
 
 public class Controller {
 
+    private BorderPane topdownViewPane;
+    private BorderPane sideViewPane;
+
     @FXML
-    private GridPane topdownViewPane;
-    @FXML
-    private GridPane sideViewPane;
+    private AnchorPane anchorPane;
     @FXML
     private MenuItem importAirportButton;
     @FXML
@@ -160,6 +161,40 @@ public class Controller {
         int runwayIndex = changeRunwaysMenu.getSelectionModel().getSelectedIndex();
 
         this.setCurrentRunway(this.currentAirport.getAirportRunways().get(runwayIndex));
+
+        boolean sideViewVis = false;
+        boolean topDownVis = true;
+
+        if(currentRunway != null) {
+
+            if(topdownViewPane != null) {
+                topDownVis = topdownViewPane.isVisible();
+                anchorPane.getChildren().remove(topdownViewPane);
+            }
+
+            if(sideViewPane != null) {
+                sideViewVis = sideViewPane.isVisible();
+                anchorPane.getChildren().remove(sideViewPane);
+            }
+
+            TopDownView topDown = new TopDownView();
+            SideOnView sideOn = new SideOnView();
+
+            try {
+                topdownViewPane = topDown.setUpSideOnView(currentRunway);
+                sideViewPane = sideOn.setUpSideOnView(currentRunway);
+
+                topdownViewPane.setVisible(topDownVis);
+                sideViewPane.setVisible(sideViewVis);
+
+                anchorPane.getChildren().add(topdownViewPane);
+                anchorPane.getChildren().add(sideViewPane);
+                System.out.println("Runway GUI set up");
+            } catch (Exception e) {
+                showPopupMessage("Error setting up the runway visualisation ", Alert.AlertType.ERROR);
+            }
+
+        }
     }
 
     public void showDetailsButtonClicked() throws Exception {

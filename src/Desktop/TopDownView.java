@@ -78,7 +78,7 @@ public class TopDownView {
         HBox hBox = new HBox();
         hBox.prefHeight(27);
         hBox.setAlignment(Pos.CENTER_LEFT);
-        hBox.getChildren().add(new Label("09L"));
+        hBox.getChildren().add(new Label(runwayObject.getRunwayName()));
         Insets insets = new Insets(5, 10, 5, 10);
         hBox.setPadding(insets);
         borderPane.setBottom(hBox);

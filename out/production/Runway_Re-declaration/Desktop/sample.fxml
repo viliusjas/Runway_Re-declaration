@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" prefHeight="750.0" prefWidth="950.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Desktop.Controller">
+<VBox fx:id="root" prefHeight="750.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Desktop.Controller">
 <children>
 
     <!-- Top Menu Bars -->
@@ -48,10 +48,10 @@
     <AnchorPane fx:id="anchorPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
         <children>
             <!-- Buttons at the bottom -->
-            <HBox alignment="CENTER" layoutX="30.0" layoutY="659.0" prefHeight="58.0" prefWidth="889.0" spacing="10">
+            <HBox alignment="CENTER" layoutX="30.0" layoutY="659.0" prefHeight="58.0" prefWidth="950.0" spacing="10">
                 <children>
                     <Button fx:id="switchViewsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#switchViewsButtonClicked" text="Switch Views" />
-                    <Button fx:id="addObstacleButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#addObstacleButtonClicked" text="Add obstacle" />
+                    <Button fx:id="addObstacleButton" disable="true" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#addObstacleButtonClicked" text="Add obstacle" />
                     <!--<Button fx:id="changeRunwaysButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#changeRunwayButtonClicked" text="Choose runway" />-->
                     <ComboBox fx:id="changeRunwaysMenu" onAction="#changeRunwayButtonClicked" promptText="Choose Runway">
                         <items>
@@ -61,7 +61,8 @@
                     </ComboBox>
                     <Button fx:id="showAirportDetailsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showAirportDetailsButtonClicked" text="Show airport details" />
                     <Button fx:id="showDetailsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showDetailsButtonClicked" text="Show runway details" />
-                    <Button fx:id="showCalculationsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showCalculationsButtonClicked" text="Show calculations" />
+                    <Button fx:id="showCalculationsButton" disable="true" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showCalculationsButtonClicked" text="Show calculations" />
+                    <Button fx:id="resetButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#reset" text="Reset" />
                 </children>
             </HBox>
             <!-- Side View GridPane -->

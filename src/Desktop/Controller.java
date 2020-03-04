@@ -156,6 +156,10 @@ public class Controller {
     }
 
     public void changeRunwayButtonClicked() {
+
+        if(currentRunway == null || currentAirport == null)
+            return;
+
         System.out.println("Selected runway " + changeRunwaysMenu.getSelectionModel().getSelectedItem());
 
         int runwayIndex = changeRunwaysMenu.getSelectionModel().getSelectedIndex();
@@ -269,6 +273,24 @@ public class Controller {
             changeRunwaysMenu.getItems().add(runway.getRunwayName());
         }
 
+
+    }
+
+    public void reset() {
+
+        changeRunwaysMenu.getItems().clear();
+
+        this.currentRunway = null;
+        this.currentAirport = null;
+        this.obstacles = null;
+        this.aircrafts = null;
+
+
+        if(topdownViewPane != null)
+            anchorPane.getChildren().remove(topdownViewPane);
+
+        if(sideViewPane != null)
+            anchorPane.getChildren().remove(sideViewPane);
 
     }
 }

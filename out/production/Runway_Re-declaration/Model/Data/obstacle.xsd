@@ -8,6 +8,7 @@
                 <xs:element name="obstacle">
                     <xs:complexType>
                         <xs:sequence>
+                            <xs:element type="xs:string" name="name"/>
                             <xs:element type="xs:short" name="length"/>
                             <xs:element type="xs:short" name="height"/>
                             <xs:element type="xs:short" name="rightThreshold"/>

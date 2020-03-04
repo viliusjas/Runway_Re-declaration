@@ -10,6 +10,10 @@ import java.io.File;
 public class XMLValidate {
 
     static boolean validate(File xmlFile, File schemaFile) {
+
+        if(xmlFile == null || schemaFile == null)
+            return false;
+
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
         try {
             Schema schema = schemaFactory.newSchema(schemaFile);

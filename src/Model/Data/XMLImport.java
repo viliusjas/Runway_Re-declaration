@@ -139,9 +139,11 @@ public class XMLImport {
                 int length = Integer.parseInt(element.getElementsByTagName("length").item(0).getTextContent());
                 int leftThreshold = Integer.parseInt(element.getElementsByTagName("leftThreshold").item(0).getTextContent());
                 int rightThreshold = Integer.parseInt(element.getElementsByTagName("rightThreshold").item(0).getTextContent());
+                String name = element.getElementsByTagName("name").item(0).getTextContent();
 
 
                 Obstacle obstacle = new Obstacle(length, height, leftThreshold, rightThreshold);
+                obstacle.setName(name);
                 obstacles.add(obstacle);
             }
         }

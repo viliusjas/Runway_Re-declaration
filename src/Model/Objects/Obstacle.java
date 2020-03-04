@@ -7,6 +7,8 @@ public class Obstacle {
      * @height obstacle's height
      */
 
+    private String name;
+
     private int length;
     private int height;
     private int leftPos;
@@ -41,13 +43,20 @@ public class Obstacle {
     }
     public int getObstacleHeight(){return height;}
 
-
     public Runway getObstacleRunway() {
         return obstacleRunway;
     }
 
     public void setObstacleRunway(Runway obstacleRunway) {
         this.obstacleRunway = obstacleRunway;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 

@@ -17,6 +17,7 @@ public class Calculator {
     int visualStripWidth = 75;
     int resa = 240;
     int blastProtection = 300;
+    String calcB = "";
 
 
     public Calculator(){}
@@ -89,6 +90,17 @@ public class Calculator {
         int recalculatedTODA = recalculatedTORA + clearway;
         int recalculatedASDA = recalculatedTORA + stopway;
         int recalculatedLDA = runway.getLandDistAvail() - distanceFromTSH - visualStripEnd - slopeCalc;
+
+        calcB = "TORA = Original TORA - Blast Protection - Distance from Threshold - Displaced Threshold" +"\n" +
+                "TORA = " + runway.getTakeOffRunAvail() + " - " + blastProtection + " - " + distanceFromTSH +
+                " - " + displacedTSH + " = " + recalculatedTORA + "\n" +
+                "TODA = (R) TORA + CLEARWAY" + "\n" +
+                "TODA = " + recalculatedTORA + " + " + clearway + " = " + recalculatedTODA + "\n" +
+                "ASDA = (R) TORA + STOPWAY" + "\n" +
+                "ASDA = " + recalculatedTORA + " + " + stopway + " = " + recalculatedASDA + "\n" +
+                "LDA = Original LDA - Distance from Threshold - Slope Calculation - Strip End " + "\n" +
+                "LDA = " + runway.getLandDistAvail() + " - " + distanceFromTSH + " - " + slopeCalc + " - " +
+                visualStripEnd + " = " + recalculatedLDA;
     }
 
     public void takeOffTowardslandingTowardsDisplaced(Obstacle obstacle, int distanceFromTSH, Runway runway){
@@ -100,6 +112,16 @@ public class Calculator {
         int recalculatedTODA = recalculatedTORA;
         int recalculatedASDA = recalculatedTORA;
         int recalculatedLDA = distanceFromTSH - resa - visualStripEnd;
+
+        calcB = "TORA = Distance from Threshold - Slope Calculation - Strip End" +"\n" +
+                "TORA = " + distanceFromTSH + " - " + slopeCalc + " - " + visualStripEnd + " = " + recalculatedTORA + "\n" +
+                "TODA = (R) TORA" + "\n" +
+                "TODA = " + recalculatedTORA + " = " + recalculatedTODA + "\n" +
+                "ASDA = (R) TORA" + "\n" +
+                "ASDA = " + recalculatedTORA + " = " + recalculatedASDA + "\n" +
+                "LDA = Original LDA - RESA - Strip End" + "\n" +
+                "LDA = " + distanceFromTSH + " - " + resa + " - " + visualStripEnd + " = " + recalculatedLDA;
+
     }
 
     public void takeOffAwaylandingOver(Obstacle obstacle, int distanceFromTSH, Runway runway){
@@ -110,10 +132,22 @@ public class Calculator {
             slopeCalc = resa;
         }
         int recalculatedTORA = runway.getTakeOffRunAvail() - visualStripEnd - resa - distanceFromTSH;
-        int recalculaedTODA = recalculatedTORA + clearway;
+        int recalculatedTODA = recalculatedTORA + clearway;
         int recalculatedASDA = recalculatedTORA + stopway;
         int recalculatedLDA = runway.getLandDistAvail() - slopeCalc - distanceFromTSH - visualStripEnd;
+
+        calcB = "TORA = Original TORA - Strip End - RESA - Distance from Threshold" +"\n" +
+                "TORA = " + runway.getTakeOffRunAvail() + " - " + visualStripEnd + " - " + resa + " - " +
+                distanceFromTSH + " = " + recalculatedTORA + "\n" +
+                "TODA = (R) TORA + CLEARWAY" + "\n" +
+                "TODA = " + recalculatedTORA + " + " + clearway + " = " + recalculatedTODA + "\n" +
+                "ASDA = (R) TORA + STOPWAY" + "\n" +
+                "ASDA = " + recalculatedTORA + " + " + stopway + " = " + recalculatedASDA + "\n" +
+                "LDA = Original LDA - Slope Calculation - Distance from Threshold - Strip End" + "\n" +
+                "LDA = " + runway.getLandDistAvail() + " - " + slopeCalc + " - " + distanceFromTSH + " - " +
+                visualStripEnd + " = " + recalculatedLDA;
     }
+
     public void takeOffTowardslandingTowards(Obstacle obstacle, int distanceFromTSH, Runway runway){
         int slopeCalc = obstacle.getObstacleHeight() * 50;
         if (slopeCalc < resa) {
@@ -125,10 +159,23 @@ public class Calculator {
         int recalculatedTODA = recalculatedTORA;
         int recalculatedASDA = recalculatedTORA;
         int recalculatedLDA = distanceFromTSH - visualStripEnd - resa;
+
+        calcB = "TORA = Distance from Threshold + Displaced Threshold - Slope Calculation - Strip End" +"\n" +
+                "TORA = " + distanceFromTSH + " + " + displacedTSH + " - " + slopeCalc + " - " + visualStripEnd +
+                " = " + recalculatedTORA + "\n" +
+                "TODA = (R) TORA" + "\n" +
+                "TODA = " + recalculatedTORA + " = " + recalculatedTODA + "\n" +
+                "ASDA = (R) TORA" + "\n" +
+                "ASDA = " + recalculatedTORA + " = " + recalculatedASDA + "\n" +
+                "LDA = Distance from Threshold - Strip End - RESA" + "\n" +
+                "LDA = " + distanceFromTSH + " - " + visualStripEnd + " - " + resa + " = " + recalculatedLDA;
     }
 
 
 
+    public String getCalculationBreakdown(){
+        return calcB;
+    }
 
     public static boolean runwayIsSafe(Runway runway, Aircraft aircraft, boolean takeoff) {
         return false;

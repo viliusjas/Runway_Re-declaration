@@ -67,5 +67,13 @@ public class Obstacle {
         this.name = name;
     }
 
+    public void setLeftThreshold(int leftThreshold) {
+        this.leftThreshold = leftThreshold;
+    }
+
+    public void setRightThreshold(int rightThreshold) {
+        this.rightThreshold = rightThreshold;
+    }
+
 
 }

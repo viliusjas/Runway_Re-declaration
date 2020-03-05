@@ -9,10 +9,10 @@ import java.util.Queue;
 
 public class Calculator {
     //Runway runway;
-    int toraOG;
-    int todaOG;
-    int asdaOG;
-    int ldaOG;
+    int toraOG = 0;
+    int todaOG = 0;
+    int asdaOG = 0;
+    int ldaOG = 0;
     int visualStripEnd = 60;
     int visualStripWidth = 75;
     int resa = 240;
@@ -30,17 +30,12 @@ public class Calculator {
 
     private Queue<Calculations> calculations;
 
-    //public static Runway calculate(Runway runway, List<Obstacle> obstacles) {
-
-      //  return null;
-    //}
-
     public void calculate(Obstacle obstacle, Runway runway){
         if(obstacle.getObstacleLeftPos() < -visualStripEnd
         || obstacle.getObstacleRightPos() < -visualStripEnd){
             System.out.println("No re-declaration needed");
         }else{
-            setOGValues(runway.getTakeOffRunAvail(), runway.getTakeOffDistAvail(), runway.getAccStopDistAvail(), runway.getLandDistAvail());
+            runway.setOGValues(runway.getTakeOffRunAvail(), runway.getTakeOffDistAvail(), runway.getAccStopDistAvail(), runway.getLandDistAvail());
             decideRedeclarationCase(obstacle, runway);
         }
     }
@@ -221,22 +216,32 @@ public class Calculator {
         }
     }
 
-
+/*
     public void setOGValues(int tora, int toda, int asda, int lda){
         toraOG = tora;
-        toraOG = toda;
-        toraOG = asda;
+        todaOG = toda;
+        asdaOG = asda;
         ldaOG = lda;
     }
 
-    public void setOGValues(Runway runway){
+    public void setOGValuesToRunway(Runway runway){
         runway.setTakeOffRunAvail(toraOG);
         runway.setTakeOffDistAvail(todaOG);
         runway.setAccStopDistAvail(asdaOG);
         runway.setLandDistAvail(ldaOG);
+
+        //System.out.println(toraOG + " " + todaOG + " " + asdaOG + " " + ldaOG);
     }
 
+    //ah this is cancer lines but i dont want to have the bug anymore, will fix lateer
 
+    public int getToraOG(){
+        return toraOG;
+    }
+    public int getTodaOG(){
+        return todaOG;
+    }
+*/
 
 
 }

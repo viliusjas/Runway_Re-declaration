@@ -357,7 +357,7 @@ public class Controller {
             popupwindow.setScene(scene1);
             popupwindow.showAndWait();
             resetView();
-                currentRunway.calculationsMade();
+            currentRunway.calculationsMade();
 
         }
         else {
@@ -367,10 +367,12 @@ public class Controller {
             Label label1 = new Label("Would you like to revert to previous values?");
             Button button1 = new Button("Yes!");
             button1.setOnAction(e -> {
-                popupwindow.close();
-                calc.setOGValues(currentRunway);
+                //System.out.println(calc.getTodaOG() +" "+ calc.getToraOG());
+                currentRunway.resetRunwayValues();
                 currentRunway.calculationsReverted();
                 resetView();
+                popupwindow.close();
+
             });
             VBox layout = new VBox(10);
             layout.getChildren().addAll(label1, button1);

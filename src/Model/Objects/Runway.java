@@ -32,6 +32,11 @@ public class Runway {
      * clearway/stopway same in both directions?
      */
 
+    int toraOG = 0;
+    int todaOG = 0;
+    int asdaOG = 0;
+    int ldaOG = 0;
+
     private int runwayNumber;
     private RunwayPosition runwayPos;
 
@@ -191,6 +196,18 @@ public class Runway {
     }
     public boolean getAlreadyCalculated(){
         return alreadyCalculated;
+    }
+    public void setOGValues(int tora, int toda, int asda, int lda){
+        toraOG = tora;
+        todaOG = toda;
+        asdaOG = asda;
+        ldaOG = lda;
+    }
+    public void resetRunwayValues(){
+        takeOffRunAvail = toraOG;
+        takeOffDistAvail = todaOG;
+        accStopDistAvail = asdaOG;
+        landDistAvail = ldaOG;
     }
 
 

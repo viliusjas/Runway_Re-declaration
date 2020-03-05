@@ -1,5 +1,10 @@
 package Model.Objects;
 
+import org.omg.CORBA.OBJ_ADAPTER;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Runway {
 
     /**
@@ -20,6 +25,8 @@ public class Runway {
      * @stripEnd area between the end of the runway and the and of the runway strip
      * @approachLandSurf surface between top of obstacle and runway when taking into account angle of descent
      * @takeoffCimbSurf surcace between the runway and top of obstacle when taking int account angle of ascent
+     *
+     * @obstacles list of obstacles on the runway
      *
      * In case of re-declaration, TORA, TODA, ASDA, LDA must be recalculated in both directions
      * clearway/stopway same in both directions?
@@ -44,10 +51,13 @@ public class Runway {
     private int approchLandSurf;
     private int takeoffClimbSurf;
 
+    private List<Obstacle> obstacles;
+
 
     public Runway(int runwayNumber, RunwayPosition runwayPos) {
         this.runwayNumber = runwayNumber;
         this.runwayPos = runwayPos;
+        this.obstacles = new ArrayList<>();
     }
 
     public String getRunwayName() {
@@ -66,6 +76,14 @@ public class Runway {
         } else {
             return "None";
         }
+    }
+
+    public void addObstacle(Obstacle obstacle) {
+        this.obstacles.add(obstacle);
+    }
+
+    public List<Obstacle> getObstacles() {
+        return this.obstacles;
     }
 
     public void setRunwayPos(RunwayPosition runwayPos) {

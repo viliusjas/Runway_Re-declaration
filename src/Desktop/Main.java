@@ -10,7 +10,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        //Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample.fxml"));
+        Parent root = fxmlLoader.load();
+        Controller controller = fxmlLoader.getController();
+        controller.setupObstaclesComboBox();
+        controller.setupRunwayComboBox();
         primaryStage.setTitle("Runway Re-decleration Tool");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root));
@@ -22,3 +27,9 @@ public class Main extends Application {
         launch(args);
     }
 }
+
+
+/*
+ FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Settings.fxml"));
+        Parent root1 = (Parent) fxmlLoader.load();
+ */

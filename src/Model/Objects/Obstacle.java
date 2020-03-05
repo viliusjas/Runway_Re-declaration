@@ -36,10 +36,10 @@ public class Obstacle {
 
 
     public int getObstacleLeftPos(){
-        return leftThreshold;
+        return leftPos;
     }
     public int getObstacleRightPos(){
-        return rightThreshold;
+        return rightPos;
     }
     public int getObstacleHeight(){return height;}
 

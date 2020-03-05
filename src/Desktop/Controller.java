@@ -1,7 +1,6 @@
 package Desktop;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -38,6 +37,8 @@ public class Controller {
     @FXML
     private ComboBox changeRunwaysMenu;
     @FXML
+    private ComboBox addObstacleButton;
+    @FXML
     private VBox root;
 
     /**
@@ -68,7 +69,7 @@ public class Controller {
 
             if (currentAirport != null)
                 System.out.println("Airport " + currentAirport.getAirportName() + " loaded successfully");
-            setupComboBox();
+            setupRunwayComboBox();
         } catch (Exception e ) {
             e.printStackTrace();
             if(file != null)
@@ -87,6 +88,7 @@ public class Controller {
 
             if (obstacles != null)
                 System.out.println(obstacles.size() + " obstacles loaded successfully");
+            setupObstaclesComboBox();
         }  catch (Exception e ) {
             e.printStackTrace();
             if(file != null)
@@ -199,7 +201,6 @@ public class Controller {
                 anchorPane.getChildren().add(topdownViewPane);
                 anchorPane.getChildren().add(sideViewPane);
 
-
                 System.out.println("Runway GUI set up");
             } catch (Exception e) {
                 showPopupMessage("Error setting up the runway visualisation ", Alert.AlertType.ERROR);
@@ -266,32 +267,48 @@ public class Controller {
         alert.showAndWait();
     }
 
-    public void setupComboBox() {
-
-        if(this.currentAirport == null) {
-            return;
-        }
+    public void setupRunwayComboBox() {
 
         changeRunwaysMenu.getItems().clear();
 
-        for(int i = 0; i < currentAirport.getAirportRunways().size(); i++) {
-            Runway runway = currentAirport.getAirportRunways().get(i);
-            //int runwayNum = runway.getRunwayNumber();
-            changeRunwaysMenu.getItems().add(runway.getRunwayName());
+        if(this.currentAirport != null) {
+            for(int i = 0; i < currentAirport.getAirportRunways().size(); i++) {
+                Runway runway = currentAirport.getAirportRunways().get(i);
+                //int runwayNum = runway.getRunwayNumber();
+                changeRunwaysMenu.getItems().add(runway.getRunwayName());
+            }
         }
 
+        changeRunwaysMenu.getItems().add("Add a new runway");
+
+    }
+
+    public void setupObstaclesComboBox() {
+
+        addObstacleButton.getItems().clear();
+
+        if(this.obstacles != null) {
+            for(int i = 0; i < obstacles.size(); i++) {
+                Obstacle obstacle = obstacles.get(i);
+                addObstacleButton.getItems().add(obstacle.getName() + " " +
+                        String.valueOf(obstacle.getObstacleHeight()) + " x " +
+                        String.valueOf(obstacle.getObstacleLength()));
+            }
+        }
+
+        addObstacleButton.getItems().add("Add a new object");
 
     }
 
     public void reset() {
 
         changeRunwaysMenu.getItems().clear();
+        addObstacleButton.getItems().clear();
 
         this.currentRunway = null;
         this.currentAirport = null;
         this.obstacles = null;
         this.aircrafts = null;
-
 
         if(topdownViewPane != null)
             anchorPane.getChildren().remove(topdownViewPane);

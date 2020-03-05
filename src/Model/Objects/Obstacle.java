@@ -36,12 +36,20 @@ public class Obstacle {
 
 
     public int getObstacleLeftPos(){
-        return leftPos;
+        return this.leftPos;
     }
+
     public int getObstacleRightPos(){
-        return rightPos;
+        return this.rightPos;
     }
-    public int getObstacleHeight(){return height;}
+
+    public int getObstacleHeight() {
+        return this.height;
+    }
+
+    public int getObstacleLength() {
+        return this.height;
+    }
 
     public Runway getObstacleRunway() {
         return obstacleRunway;

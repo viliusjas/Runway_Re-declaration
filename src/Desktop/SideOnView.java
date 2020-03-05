@@ -1,7 +1,6 @@
 package Desktop;
 
 import Model.Objects.Runway;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -9,37 +8,32 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
-import java.io.File;
 import java.io.FileInputStream;
 
 import static javafx.scene.paint.Color.*;
 
 public class SideOnView {
-    
+
     //dummydata
     private int obstacleLength = 60;
-    private int obstacleHeight = 25;
+    private int obstacleHeight = 20;
     private int obstaclePosition = 2500;
     private int displacedThreshold = 300;
     private int threshold = 0;
-    private int startRESA = 2000;
-    private int endRESA = 2240;
+    private int RESA = 240;
 
-    private int stopwayLeftDistance = 50;
-    private int clearwayLeftDistance = 100;
+    private int stopwayLeftDistance = 0;
+    private int clearwayLeftDistance = 0;
     private int stopwayRightDistance = 40;
     private int clearwayRightDistance = 100;
 
-    private String LandingDirection = "LEFT";
+    private String LandingDirection = "RIGHT";
 
     private int TORA;
     private int TODA;
@@ -48,9 +42,8 @@ public class SideOnView {
 
 
     private int RUNWAY_LENGTH = 3902;
-    private int runwayWidth = 600;
-    private int blastAllowance = 300;
-    private float scale;
+    private int runwayWidth = 800;
+    private int BLAST = 300;
 
     public BorderPane setUpSideOnView(Runway runwayObject) throws Exception {
 
@@ -61,9 +54,8 @@ public class SideOnView {
         this.ASDA = runwayObject.getAccStopDistAvail();
         this.LDA = runwayObject.getLandDistAvail();
 
-
-        // CALCULATIONS FOR SCALE
-        scale = (float) runwayWidth / RUNWAY_LENGTH;
+//        // CALCULATIONS FOR SCALE
+        float scale = (float) runwayWidth / RUNWAY_LENGTH;
         System.out.println(scale);
         float obstacleScaledHeight = scale * obstacleHeight * 10;
         float obstacleScaledLength = scale * obstacleLength * 10;
@@ -72,18 +64,45 @@ public class SideOnView {
         float scaledTODA = scale * TODA;
         float scaledASDA = scale * ASDA;
         float scaledLDA = scale * LDA;
+        float scaledClearway = scale * clearwayRightDistance;
+        float scaledStopway = scale * stopwayRightDistance;
+        float scaledRESA = scale * RESA;
+        float scaledBlast = scale * BLAST;
 
         BorderPane borderPane = new BorderPane();
         Scene scene = new Scene(borderPane, 600, 400);
 
         // THRESHOLD DESIGNATOR
+        HBox bottom = new HBox();
+        bottom.prefHeight(27);
+
         HBox hBox = new HBox();
         hBox.prefHeight(27);
         hBox.setAlignment(Pos.CENTER_LEFT);
         hBox.getChildren().add(new Label(runwayObject.getRunwayName()));
         Insets insets = new Insets(5, 10, 5, 10);
         hBox.setPadding(insets);
-        borderPane.setBottom(hBox);
+
+        HBox keyHBox = new HBox();
+        keyHBox.prefHeight(27);
+        keyHBox.setAlignment(Pos.CENTER_RIGHT);
+        Label key = new Label("KEY:    ");
+        Rectangle stopwayKey = new Rectangle(10,10);
+        stopwayKey.setFill(DARKBLUE);
+        Label key1 = new Label(" - Stopway  ");
+        Rectangle clearwayKey = new Rectangle(10,10);
+        clearwayKey.setFill(LIGHTBLUE);
+        Label key2 = new Label(" - Clearway");
+        Insets insets2 = new Insets(5, 10, 5, 10);
+        keyHBox.setPadding(insets2);
+        keyHBox.getChildren().addAll(key, stopwayKey, key1, clearwayKey, key2);
+
+        Region region = new Region();
+        region.setMaxHeight(27);
+
+        bottom.getChildren().addAll(hBox, region, keyHBox);
+        bottom.setHgrow(region, Priority.ALWAYS);
+        borderPane.setBottom(bottom);
 
         Group group = new Group();
 
@@ -98,29 +117,39 @@ public class SideOnView {
         runway.setStrokeType(StrokeType.INSIDE);
 
         float leftStopwayScaled = scale * stopwayLeftDistance;
-        Rectangle leftStopway = new Rectangle(leftStopwayScaled,15);
-        leftStopway.setFill(DARKBLUE);
-
-        float leftClearwayScaled = (scale * clearwayLeftDistance) - leftStopwayScaled;
-        Rectangle leftClearway = new Rectangle(leftClearwayScaled, 15);
-        leftClearway.setFill(LIGHTBLUE);
-
+        float leftClearwayScaled = Math.max(0, (scale * clearwayLeftDistance) - leftStopwayScaled);
         float rightStopwayScaled = scale * stopwayRightDistance;
-        Rectangle rightStopway = new Rectangle(rightStopwayScaled, 15);
-        rightStopway.setFill(DARKBLUE);
-
         float rightClearwayScaled = (scale * clearwayRightDistance) - rightStopwayScaled;
-        Rectangle rightClearway = new Rectangle(rightClearwayScaled, 15);
-        rightClearway.setFill(LIGHTBLUE);
 
-        float widthChanged = runwayWidth - leftStopwayScaled - leftClearwayScaled -
-                rightStopwayScaled - rightClearwayScaled;
+        HBox left = new HBox();
+        float leftWidth;
+        if (clearwayLeftDistance > stopwayLeftDistance) {
+            left.getChildren().addAll(new Rectangle(leftClearwayScaled, 15, LIGHTBLUE),
+                    new Rectangle(leftStopwayScaled, 15, DARKBLUE));
+            leftWidth = leftClearwayScaled + leftStopwayScaled;
+        } else {
+            left.getChildren().addAll(new Rectangle(leftStopwayScaled, 15, DARKBLUE));
+            leftWidth = leftStopwayScaled;
+        }
+
+        HBox right = new HBox();
+        float rightWidth;
+        if (clearwayRightDistance > stopwayRightDistance) {
+            right.getChildren().addAll(new Rectangle(rightStopwayScaled, 15, DARKBLUE),
+                    new Rectangle(rightClearwayScaled, 15, LIGHTBLUE));
+            rightWidth = rightClearwayScaled + rightStopwayScaled;
+        } else {
+            right.getChildren().addAll(new Rectangle(rightStopwayScaled, 15, DARKBLUE));
+            rightWidth = rightStopwayScaled;
+        }
+
+        float widthChanged = runwayWidth - leftWidth - rightWidth;
+
         runway.setWidth(widthChanged);
-
-        wholeRunway.getChildren().addAll(leftClearway, leftStopway, runway, rightStopway, rightClearway);
+        wholeRunway.getChildren().addAll(left, runway, right);
 
         // DASHED LINE
-        Line dashed = new Line(0, 0, widthChanged, 0);
+        Line dashed = new Line(0, 0, widthChanged - 10, 0);
         dashed.getStrokeDashArray().addAll(25d, 10d);
         dashed.setStroke(WHITE);
 
@@ -131,15 +160,29 @@ public class SideOnView {
 //        object.setStrokeType(StrokeType.INSIDE);
 //        object.setWidth(obstacleScaledLength);
 //        object.setHeight(obstacleScaledHeight);
+
+        // PLANE OBSTACLE
         FileInputStream input = new FileInputStream("2Dplane.png");
         Image image = new Image(input);
         ImageView plane = new ImageView(image);
         plane.setFitHeight(obstacleScaledHeight);
         plane.setFitWidth(obstacleScaledLength);
 
+        // ARROW
+        FileInputStream arrowFile = new FileInputStream("arrow.png");
+        Image arrowImage = new Image(arrowFile);
+        ImageView arrow = new ImageView(arrowImage);
+        arrow.setFitWidth(50);
+        arrow.setFitHeight(15);
+        VBox arrowVBox = new VBox();
+        arrowVBox.getChildren().addAll(arrow, new Label("Landing Direction"));
+        arrowVBox.setAlignment(Pos.CENTER);
+        if (LandingDirection.equals("LEFT")) {
+            arrow.setRotate(180);
+        }
 
         // LINE FOR RUNWAY DISTANCE
-        Line runwayDistance = new Line(0, 0, runway.getWidth(), 0);
+        Line runwayDistance = new Line(0, 0, runwayWidth, 0);
 
         // LINE FOR OBJECT DISTANCE
         Line objectDistance = new Line(0, 0, obstacleScaledDistance, 0);
@@ -155,6 +198,18 @@ public class SideOnView {
 
         // LINE FOR LDA
         Line ldaDistance = new Line(0, 0, scaledLDA, 0);
+
+        // LINE FOR CLEARWAY
+        Line clearwayDistance = new Line(0, 0, scaledClearway, 0);
+
+        // LINE FOR STOPWAY
+        Line stopwayDistance = new Line(0, 0, scaledStopway, 0);
+
+        // LINE FOR RESA
+        Line resaDistance = new Line(0, 0, scaledRESA, 0);
+
+        // LINE FOR BLAST
+        Line blastDistance = new Line(0, 0, scaledBlast, 0);
 
         // LABEL FOR RUNWAY DISTANCE
         VBox runwayVBox = new VBox();
@@ -198,24 +253,88 @@ public class SideOnView {
         ldaLabel.setFont(new Font("Arial", 10));
         ldaVBox.getChildren().addAll(ldaLabel, ldaDistance);
 
+        // LABEL FOR STOPWAY
+        VBox stopwayVBox = new VBox();
+        stopwayVBox.setAlignment(Pos.CENTER_RIGHT);
+        Label stopwayLabel = new Label("(" + stopwayRightDistance + "m)");
+        stopwayLabel.setFont(new Font("Arial", 10));
+        stopwayVBox.getChildren().addAll(stopwayLabel, stopwayDistance);
+
+        // LABEL FOR CLEARWAY
+        VBox clearwayVBox = new VBox();
+        clearwayVBox.setAlignment(Pos.CENTER_RIGHT);
+        Label clearwayLabel = new Label("(" + clearwayRightDistance + "m)");
+        clearwayLabel.setFont(new Font("Arial", 10));
+        clearwayVBox.getChildren().addAll(clearwayLabel, clearwayDistance);
+
+        HBox clearwayHBox = new HBox();
+        clearwayHBox.getChildren().add(clearwayVBox);
+        clearwayHBox.setPrefWidth(runwayWidth);
+        clearwayHBox.setAlignment(Pos.CENTER_RIGHT);
+
+        HBox stopwayHBox = new HBox();
+        stopwayHBox.getChildren().add(stopwayVBox);
+        stopwayHBox.setPrefWidth(runwayWidth);
+        stopwayHBox.setAlignment(Pos.CENTER_RIGHT);
+
+        // LABEL FOR RESA
+        VBox resaVBox = new VBox();
+        resaVBox.setAlignment(Pos.CENTER_RIGHT);
+        Label resaLabel = new Label("(RESA = " + RESA + "m)");
+        resaLabel.setFont(new Font("Arial", 10));
+        resaVBox.getChildren().addAll(resaDistance, resaLabel);
+
+        HBox resaHBox = new HBox();
+        resaHBox.getChildren().add(resaVBox);
+        resaHBox.setPrefWidth(runwayWidth);
+        resaHBox.setAlignment(Pos.CENTER_RIGHT);
+
+        // LABEL FOR BLAST
+        VBox blastVBox = new VBox();
+        blastVBox.setAlignment(Pos.CENTER_RIGHT);
+        Label blastLabel = new Label("(BLAST = " + BLAST + "M)");
+        blastLabel.setFont(new Font("Arial", 10));
+        blastVBox.getChildren().addAll(blastLabel, blastDistance);
+
+        HBox blastHBox = new HBox();
+        blastHBox.getChildren().add(blastVBox);
+        blastHBox.setPrefWidth(runwayWidth);
+        blastHBox.setAlignment(Pos.CENTER_RIGHT);
+
         group.getChildren().addAll(wholeRunway, dashed, plane, runwayVBox,
-                objectVBox, toraVBox, todaVBox, asdaVBox, ldaVBox);
-        
+                objectVBox, toraVBox, todaVBox, asdaVBox, ldaVBox,
+                stopwayHBox, clearwayHBox, arrowVBox, resaHBox, blastHBox);
+
+        arrowVBox.setLayoutY(-150);
+        arrowVBox.setLayoutX(0.2 * runwayWidth);
+
         todaVBox.setLayoutY(-100);
         asdaVBox.setLayoutY(-80);
         toraVBox.setLayoutY(-60);
         ldaVBox.setLayoutY(-40);
 
         objectVBox.setLayoutY(-20);
-        wholeRunway.setLayoutY(obstacleScaledHeight - 10);
-        dashed.setLayoutY(obstacleScaledHeight - 2.5);
-        dashed.setLayoutX(leftClearwayScaled + leftStopwayScaled);
+
+        clearwayHBox.setLayoutY(obstacleScaledHeight - 40);
+        stopwayHBox.setLayoutY(obstacleScaledHeight - 25);
+        stopwayHBox.setLayoutX(-rightClearwayScaled);
+
+        blastHBox.setLayoutY(obstacleScaledHeight - 25);
+        blastHBox.setPrefWidth(obstacleScaledDistance - scaledRESA);
+
+        wholeRunway.setLayoutY(obstacleScaledHeight - 7.5);
+        dashed.setLayoutY(obstacleScaledHeight);
+        dashed.setLayoutX(leftClearwayScaled + leftStopwayScaled + 5);
         plane.setLayoutX(obstacleScaledDistance);
-        runwayVBox.setLayoutY(obstacleScaledHeight + 15);
+
+        resaHBox.setLayoutY(obstacleScaledHeight + 15);
+        resaHBox.setPrefWidth(obstacleScaledDistance);
+
+        runwayVBox.setLayoutY(obstacleScaledHeight + 35);
 
         borderPane.setLayoutX(152.0);
         borderPane.setLayoutY(88.0);
-
+        
         borderPane.setPrefHeight(408.0);
         borderPane.setPrefWidth(629.0);
 

@@ -171,7 +171,7 @@ public class Controller {
     }
 
     public void addObstacleButtonClicked() {
-
+        /*
         if(currentRunway == null) {
             showPopupMessage("Please select a runway first", Alert.AlertType.ERROR);
             return;
@@ -243,7 +243,7 @@ public class Controller {
         System.out.println("Obstacles on " + currentRunway.getRunwayName() + " " + currentRunway.getObstacles().size());
 
 
-
+*/
     }
 
     public void changeRunwayButtonClicked() {
@@ -356,6 +356,41 @@ public class Controller {
         Scene scene1= new Scene(layout, 600, 250);
         popupwindow.setScene(scene1);
         popupwindow.showAndWait();
+
+        boolean sideViewVis = false;
+        boolean topDownVis = true;
+
+        if(currentRunway != null) {
+
+            if (topdownViewPane != null) {
+                topDownVis = topdownViewPane.isVisible();
+                anchorPane.getChildren().remove(topdownViewPane);
+            }
+
+            if (sideViewPane != null) {
+                sideViewVis = sideViewPane.isVisible();
+                anchorPane.getChildren().remove(sideViewPane);
+            }
+
+            TopDownView topDown = new TopDownView();
+            SideOnView sideOn = new SideOnView();
+
+            try {
+                topdownViewPane = topDown.setUpSideOnView(currentRunway);
+                sideViewPane = sideOn.setUpSideOnView(currentRunway);
+
+                topdownViewPane.setVisible(topDownVis);
+                sideViewPane.setVisible(sideViewVis);
+
+                anchorPane.getChildren().add(topdownViewPane);
+                anchorPane.getChildren().add(sideViewPane);
+
+                System.out.println("Runway GUI set up");
+            } catch (Exception e) {
+                showPopupMessage("Error setting up the runway visualisation ", Alert.AlertType.ERROR);
+            }
+        }
+
         //showPopupMessage(calc.getCalculationBreakdown(), Alert.AlertType.ERROR);
 
         /*
@@ -372,8 +407,6 @@ public class Controller {
         }
 
          */
-
-
     }
 
     private void showPopupMessage(String message, Alert.AlertType type) {

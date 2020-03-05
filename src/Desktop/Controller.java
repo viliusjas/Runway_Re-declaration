@@ -11,6 +11,8 @@ import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.geometry.Pos;
+
 
 import java.io.File;
 import java.util.ArrayList;

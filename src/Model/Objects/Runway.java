@@ -1,6 +1,6 @@
 package Model.Objects;
 
-import org.omg.CORBA.OBJ_ADAPTER;
+//import org.omg.CORBA.OBJ_ADAPTER;
 
 import java.util.ArrayList;
 import java.util.List;

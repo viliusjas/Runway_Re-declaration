@@ -69,7 +69,7 @@
                     </ComboBox>
                     <Button fx:id="showAirportDetailsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showAirportDetailsButtonClicked" text="Show airport details" />
                     <Button fx:id="showDetailsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showDetailsButtonClicked" text="Show runway details" />
-                    <Button fx:id="showCalculationsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showCalculationsButtonClicked" text="Show calculations" />
+                    <Button fx:id="showCalculationsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#showCalculationsButtonClicked" text="Re-declare runways" />
                     <Button fx:id="resetButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#reset" text="Reset" />
                 </children>
             </HBox>

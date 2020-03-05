@@ -26,6 +26,7 @@ public class Obstacle {
         this.rightThreshold = rightThreshold;
     }
 
+    /*
     public Obstacle(int length, int height, Runway obstacleRunway, int obstaclePos) {
         this.length = length;
         this.height = height;
@@ -34,17 +35,23 @@ public class Obstacle {
         this.rightPos = obstacleRunway.getTakeOffRunAvail() - obstaclePos;
     }
 
+     */
+
 
     public int getObstacleLeftPos(){
-        return leftPos;
+        return leftThreshold;
     }
     public int getObstacleRightPos(){
-        return rightPos;
+        return rightThreshold;
     }
     public int getObstacleHeight(){return height;}
 
     public Runway getObstacleRunway() {
         return obstacleRunway;
+    }
+
+    public int getObstacleLength(){
+        return length;
     }
 
     public void setObstacleRunway(Runway obstacleRunway) {
@@ -54,6 +61,14 @@ public class Obstacle {
     public String getName() {
         return this.name;
     }
+    public void setLeftThreshold(int leftThreshold) {
+        this.leftThreshold = leftThreshold;
+    }
+
+    public void setRightThreshold(int rightThreshold) {
+        this.rightThreshold = rightThreshold;
+    }
+
 
     public void setName(String name) {
         this.name = name;

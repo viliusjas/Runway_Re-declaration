@@ -356,81 +356,29 @@ public class Controller {
             Scene scene1= new Scene(layout, 600, 250);
             popupwindow.setScene(scene1);
             popupwindow.showAndWait();
-
-            boolean sideViewVis = false;
-            boolean topDownVis = true;
-
-            if(currentRunway != null) {
-
-                if (topdownViewPane != null) {
-                    topDownVis = topdownViewPane.isVisible();
-                    anchorPane.getChildren().remove(topdownViewPane);
-                }
-
-                if (sideViewPane != null) {
-                    sideViewVis = sideViewPane.isVisible();
-                    anchorPane.getChildren().remove(sideViewPane);
-                }
-
-                TopDownView topDown = new TopDownView();
-                SideOnView sideOn = new SideOnView();
-
-                try {
-                    topdownViewPane = topDown.setUpSideOnView(currentRunway);
-                    sideViewPane = sideOn.setUpSideOnView(currentRunway);
-
-                    topdownViewPane.setVisible(topDownVis);
-                    sideViewPane.setVisible(sideViewVis);
-
-                    anchorPane.getChildren().add(topdownViewPane);
-                    anchorPane.getChildren().add(sideViewPane);
-
-                    System.out.println("Runway GUI set up");
-                } catch (Exception e) {
-                    showPopupMessage("Error setting up the runway visualisation ", Alert.AlertType.ERROR);
-                }
+            resetView();
                 currentRunway.calculationsMade();
-            }
+
         }
         else {
-            Stage popupwindow=new Stage();
+            Stage popupwindow = new Stage();
             popupwindow.initModality(Modality.APPLICATION_MODAL);
             popupwindow.setTitle("Already re-declared!");
-            Label label1= new Label("Would you like to revert to previous values?");
-            Button button1= new Button("Yes!");
+            Label label1 = new Label("Would you like to revert to previous values?");
+            Button button1 = new Button("Yes!");
             button1.setOnAction(e -> {
                 popupwindow.close();
                 calc.setOGValues(currentRunway);
                 currentRunway.calculationsReverted();
-                /////////////
-                /////////////
-                /////////////
+                resetView();
             });
-            VBox layout= new VBox(10);
+            VBox layout = new VBox(10);
             layout.getChildren().addAll(label1, button1);
             layout.setAlignment(Pos.CENTER);
-            Scene scene1= new Scene(layout, 600, 250);
+            Scene scene1 = new Scene(layout, 600, 250);
             popupwindow.setScene(scene1);
             popupwindow.showAndWait();
         }
-
-
-        //showPopupMessage(calc.getCalculationBreakdown(), Alert.AlertType.ERROR);
-
-        /*
-
-        TopDownView topDown = new TopDownView();
-        SideOnView sideOn = new SideOnView();
-
-        try {
-            topdownViewPane = topDown.setUpSideOnView(currentRunway);
-            sideViewPane = sideOn.setUpSideOnView(currentRunway);
-            System.out.println("Runway Re-declared");
-        } catch (Exception e) {
-            showPopupMessage("Error setting up the runway re-declaration ", Alert.AlertType.ERROR);
-        }
-
-         */
     }
 
     private void showPopupMessage(String message, Alert.AlertType type) {
@@ -486,5 +434,41 @@ public class Controller {
         if(sideViewPane != null)
             anchorPane.getChildren().remove(sideViewPane);
 
+    }
+
+    public void resetView(){
+        boolean sideViewVis = false;
+        boolean topDownVis = true;
+
+        if(currentRunway != null) {
+
+            if (topdownViewPane != null) {
+                topDownVis = topdownViewPane.isVisible();
+                anchorPane.getChildren().remove(topdownViewPane);
+            }
+
+            if (sideViewPane != null) {
+                sideViewVis = sideViewPane.isVisible();
+                anchorPane.getChildren().remove(sideViewPane);
+            }
+
+            TopDownView topDown = new TopDownView();
+            SideOnView sideOn = new SideOnView();
+
+            try {
+                topdownViewPane = topDown.setUpSideOnView(currentRunway);
+                sideViewPane = sideOn.setUpSideOnView(currentRunway);
+
+                topdownViewPane.setVisible(topDownVis);
+                sideViewPane.setVisible(sideViewVis);
+
+                anchorPane.getChildren().add(topdownViewPane);
+                anchorPane.getChildren().add(sideViewPane);
+
+                System.out.println("Runway GUI set up");
+            } catch (Exception e1) {
+                showPopupMessage("Error setting up the runway visualisation ", Alert.AlertType.ERROR);
+            }
+        }
     }
 }

@@ -53,6 +53,8 @@ public class Runway {
 
     private List<Obstacle> obstacles;
 
+    private boolean alreadyCalculated = false;
+
 
     public Runway(int runwayNumber, RunwayPosition runwayPos) {
         this.runwayNumber = runwayNumber;
@@ -178,6 +180,18 @@ public class Runway {
         this.visualStripWidth = visualStripWidth;
     }
 
+
+    ////// WILL MAKE IT FOR OPTIMAL FOR NEXT SHOWCASE
+
+    public void calculationsMade(){
+        alreadyCalculated = true;
+    }
+    public void calculationsReverted(){
+        alreadyCalculated = false;
+    }
+    public boolean getAlreadyCalculated(){
+        return alreadyCalculated;
+    }
 
 
 

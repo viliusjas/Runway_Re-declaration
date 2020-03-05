@@ -9,10 +9,10 @@ import java.util.Queue;
 
 public class Calculator {
     //Runway runway;
-    //int tora;
-    //int toda;
-    //int asda;
-    //int lda;
+    int toraOG;
+    int todaOG;
+    int asdaOG;
+    int ldaOG;
     int visualStripEnd = 60;
     int visualStripWidth = 75;
     int resa = 240;
@@ -40,6 +40,7 @@ public class Calculator {
         || obstacle.getObstacleRightPos() < -visualStripEnd){
             System.out.println("No re-declaration needed");
         }else{
+            setOGValues(runway.getTakeOffRunAvail(), runway.getTakeOffDistAvail(), runway.getAccStopDistAvail(), runway.getLandDistAvail());
             decideRedeclarationCase(obstacle, runway);
         }
     }
@@ -91,11 +92,6 @@ public class Calculator {
         int recalculatedASDA = recalculatedTORA + stopway;
         int recalculatedLDA = runway.getLandDistAvail() - distanceFromTSH - visualStripEnd - slopeCalc;
 
-        runway.setTakeOffRunAvail(recalculatedTORA);
-        runway.setTakeOffDistAvail(recalculatedTODA);
-        runway.setAccStopDistAvail(recalculatedASDA);
-        runway.setLandDistAvail(recalculatedLDA);
-
         calcB = "TORA = Original TORA - Blast Protection - Distance from Threshold - Displaced Threshold" +"\n" +
                 "TORA = " + runway.getTakeOffRunAvail() + " - " + blastProtection + " - " + distanceFromTSH +
                 " - " + displacedTSH + " = " + recalculatedTORA + "\n" +
@@ -106,6 +102,11 @@ public class Calculator {
                 "LDA = Original LDA - Distance from Threshold - Slope Calculation - Strip End " + "\n" +
                 "LDA = " + runway.getLandDistAvail() + " - " + distanceFromTSH + " - " + slopeCalc + " - " +
                 visualStripEnd + " = " + recalculatedLDA;
+
+        runway.setTakeOffRunAvail(recalculatedTORA);
+        runway.setTakeOffDistAvail(recalculatedTODA);
+        runway.setAccStopDistAvail(recalculatedASDA);
+        runway.setLandDistAvail(recalculatedLDA);
     }
 
     public void takeOffTowardslandingTowardsDisplaced(Obstacle obstacle, int distanceFromTSH, Runway runway){
@@ -118,11 +119,6 @@ public class Calculator {
         int recalculatedASDA = recalculatedTORA;
         int recalculatedLDA = distanceFromTSH - resa - visualStripEnd;
 
-        runway.setTakeOffRunAvail(recalculatedTORA);
-        runway.setTakeOffDistAvail(recalculatedTODA);
-        runway.setAccStopDistAvail(recalculatedASDA);
-        runway.setLandDistAvail(recalculatedLDA);
-
         calcB = "TORA = Distance from Threshold - Slope Calculation - Strip End" +"\n" +
                 "TORA = " + distanceFromTSH + " - " + slopeCalc + " - " + visualStripEnd + " = " + recalculatedTORA + "\n" +
                 "TODA = (R) TORA" + "\n" +
@@ -132,6 +128,10 @@ public class Calculator {
                 "LDA = Original LDA - RESA - Strip End" + "\n" +
                 "LDA = " + distanceFromTSH + " - " + resa + " - " + visualStripEnd + " = " + recalculatedLDA;
 
+        runway.setTakeOffRunAvail(recalculatedTORA);
+        runway.setTakeOffDistAvail(recalculatedTODA);
+        runway.setAccStopDistAvail(recalculatedASDA);
+        runway.setLandDistAvail(recalculatedLDA);
     }
 
     public void takeOffAwaylandingOver(Obstacle obstacle, int distanceFromTSH, Runway runway){
@@ -146,11 +146,6 @@ public class Calculator {
         int recalculatedASDA = recalculatedTORA + stopway;
         int recalculatedLDA = runway.getLandDistAvail() - slopeCalc - distanceFromTSH - visualStripEnd;
 
-        runway.setTakeOffRunAvail(recalculatedTORA);
-        runway.setTakeOffDistAvail(recalculatedTODA);
-        runway.setAccStopDistAvail(recalculatedASDA);
-        runway.setLandDistAvail(recalculatedLDA);
-
         calcB = "TORA = Original TORA - Strip End - RESA - Distance from Threshold" +"\n" +
                 "TORA = " + runway.getTakeOffRunAvail() + " - " + visualStripEnd + " - " + resa + " - " +
                 distanceFromTSH + " = " + recalculatedTORA + "\n" +
@@ -161,6 +156,11 @@ public class Calculator {
                 "LDA = Original LDA - Slope Calculation - Distance from Threshold - Strip End" + "\n" +
                 "LDA = " + runway.getLandDistAvail() + " - " + slopeCalc + " - " + distanceFromTSH + " - " +
                 visualStripEnd + " = " + recalculatedLDA;
+
+        runway.setTakeOffRunAvail(recalculatedTORA);
+        runway.setTakeOffDistAvail(recalculatedTODA);
+        runway.setAccStopDistAvail(recalculatedASDA);
+        runway.setLandDistAvail(recalculatedLDA);
     }
 
     public void takeOffTowardslandingTowards(Obstacle obstacle, int distanceFromTSH, Runway runway){
@@ -175,10 +175,6 @@ public class Calculator {
         int recalculatedASDA = recalculatedTORA;
         int recalculatedLDA = distanceFromTSH - visualStripEnd - resa;
 
-        runway.setTakeOffRunAvail(recalculatedTORA);
-        runway.setTakeOffDistAvail(recalculatedTODA);
-        runway.setAccStopDistAvail(recalculatedASDA);
-        runway.setLandDistAvail(recalculatedLDA);
 
         calcB = "TORA = Distance from Threshold + Displaced Threshold - Slope Calculation - Strip End" +"\n" +
                 "TORA = " + distanceFromTSH + " + " + displacedTSH + " - " + slopeCalc + " - " + visualStripEnd +
@@ -189,6 +185,12 @@ public class Calculator {
                 "ASDA = " + recalculatedASDA + "\n" +
                 "LDA = Distance from Threshold - Strip End - RESA" + "\n" +
                 "LDA = " + distanceFromTSH + " - " + visualStripEnd + " - " + resa + " = " + recalculatedLDA;
+
+        runway.setTakeOffRunAvail(recalculatedTORA);
+        runway.setTakeOffDistAvail(recalculatedTODA);
+        runway.setAccStopDistAvail(recalculatedASDA);
+        runway.setLandDistAvail(recalculatedLDA);
+
     }
 
 
@@ -218,6 +220,22 @@ public class Calculator {
             this.lda = lda;
         }
     }
+
+
+    public void setOGValues(int tora, int toda, int asda, int lda){
+        toraOG = tora;
+        toraOG = toda;
+        toraOG = asda;
+        ldaOG = lda;
+    }
+
+    public void setOGValues(Runway runway){
+        runway.setTakeOffRunAvail(toraOG);
+        runway.setTakeOffDistAvail(todaOG);
+        runway.setAccStopDistAvail(asdaOG);
+        runway.setLandDistAvail(ldaOG);
+    }
+
 
 
 

@@ -168,18 +168,18 @@ public class SideOnView {
         plane.setFitHeight(obstacleScaledHeight);
         plane.setFitWidth(obstacleScaledLength);
 
-        // ARROW
-        FileInputStream arrowFile = new FileInputStream("arrow.png");
-        Image arrowImage = new Image(arrowFile);
-        ImageView arrow = new ImageView(arrowImage);
-        arrow.setFitWidth(50);
-        arrow.setFitHeight(15);
-        VBox arrowVBox = new VBox();
-        arrowVBox.getChildren().addAll(arrow, new Label("Landing Direction"));
-        arrowVBox.setAlignment(Pos.CENTER);
-        if (LandingDirection.equals("LEFT")) {
-            arrow.setRotate(180);
-        }
+//        // ARROW
+//        FileInputStream arrowFile = new FileInputStream("arrow.png");
+//        Image arrowImage = new Image(arrowFile);
+//        ImageView arrow = new ImageView(arrowImage);
+//        arrow.setFitWidth(50);
+//        arrow.setFitHeight(15);
+//        VBox arrowVBox = new VBox();
+//        arrowVBox.getChildren().addAll(arrow, new Label("Landing Direction"));
+//        arrowVBox.setAlignment(Pos.CENTER);
+//        if (LandingDirection.equals("LEFT")) {
+//            arrow.setRotate(180);
+//        }
 
         // LINE FOR RUNWAY DISTANCE
         Line runwayDistance = new Line(0, 0, runwayWidth, 0);
@@ -303,10 +303,10 @@ public class SideOnView {
 
         group.getChildren().addAll(wholeRunway, dashed, plane, runwayVBox,
                 objectVBox, toraVBox, todaVBox, asdaVBox, ldaVBox,
-                stopwayHBox, clearwayHBox, arrowVBox, resaHBox, blastHBox);
+                stopwayHBox, clearwayHBox, resaHBox, blastHBox);
 
-        arrowVBox.setLayoutY(-150);
-        arrowVBox.setLayoutX(0.2 * runwayWidth);
+//        arrowVBox.setLayoutY(-150);
+//        arrowVBox.setLayoutX(0.2 * runwayWidth);
 
         todaVBox.setLayoutY(-100);
         asdaVBox.setLayoutY(-80);

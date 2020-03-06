@@ -367,7 +367,6 @@ public class Controller {
             Label label1 = new Label("Would you like to revert to previous values?");
             Button button1 = new Button("Yes!");
             button1.setOnAction(e -> {
-                //System.out.println(calc.getTodaOG() +" "+ calc.getToraOG());
                 currentRunway.resetRunwayValues();
                 currentRunway.calculationsReverted();
                 resetView();

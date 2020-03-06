@@ -18,6 +18,9 @@ public class Calculator {
     int resa = 240;
     int blastProtection = 300;
     String calcB = "";
+    String calcHelp1 = "";
+    String calcHelp2 = "";
+    String calcHelp3 = "";
 
 
     public Calculator(){}
@@ -81,7 +84,8 @@ public class Calculator {
         int slopeCalc = obstacle.getObstacleHeight() * 50;
         if (slopeCalc < resa) {
             slopeCalc = resa;
-        }
+            calcHelp1 = "" +resa;
+        }else {calcHelp1 = obstacle.getObstacleHeight() + "*50";}
         int recalculatedTORA = runway.getTakeOffRunAvail() - blastProtection - distanceFromTSH - displacedTSH;
         int recalculatedTODA = recalculatedTORA + clearway;
         int recalculatedASDA = recalculatedTORA + stopway;
@@ -95,7 +99,7 @@ public class Calculator {
                 "ASDA = (R) TORA + STOPWAY" + "\n" +
                 "ASDA = " + recalculatedTORA + " + " + stopway + " = " + recalculatedASDA + "\n" +
                 "LDA = Original LDA - Distance from Threshold - Slope Calculation - Strip End " + "\n" +
-                "LDA = " + runway.getLandDistAvail() + " - " + distanceFromTSH + " - " + slopeCalc + " - " +
+                "LDA = " + runway.getLandDistAvail() + " - " + distanceFromTSH + " - " + calcHelp1 + " - " +
                 visualStripEnd + " = " + recalculatedLDA;
 
         runway.setTakeOffRunAvail(recalculatedTORA);
@@ -108,14 +112,15 @@ public class Calculator {
         int slopeCalc = obstacle.getObstacleHeight() * 50;
         if (slopeCalc < resa) {
             slopeCalc = resa;
-        }
+            calcHelp1 = "" +resa;
+        }else {calcHelp1 = obstacle.getObstacleHeight() + "*50";}
         int recalculatedTORA = distanceFromTSH - slopeCalc - visualStripEnd;
         int recalculatedTODA = recalculatedTORA;
         int recalculatedASDA = recalculatedTORA;
         int recalculatedLDA = distanceFromTSH - resa - visualStripEnd;
 
         calcB = "TORA = Distance from Threshold - Slope Calculation - Strip End" +"\n" +
-                "TORA = " + distanceFromTSH + " - " + slopeCalc + " - " + visualStripEnd + " = " + recalculatedTORA + "\n" +
+                "TORA = " + distanceFromTSH + " - " + calcHelp1 + " - " + visualStripEnd + " = " + recalculatedTORA + "\n" +
                 "TODA = (R) TORA" + "\n" +
                 "TODA = " + recalculatedTORA + " = " + recalculatedTODA + "\n" +
                 "ASDA = (R) TORA" + "\n" +
@@ -135,7 +140,8 @@ public class Calculator {
         int slopeCalc = obstacle.getObstacleHeight() * 50;
         if (slopeCalc < resa) {
             slopeCalc = resa;
-        }
+            calcHelp1 = "" +resa;
+        }else {calcHelp1 = obstacle.getObstacleHeight() + "*50";}
         int recalculatedTORA = runway.getTakeOffRunAvail() - visualStripEnd - resa - distanceFromTSH;
         int recalculatedTODA = recalculatedTORA + clearway;
         int recalculatedASDA = recalculatedTORA + stopway;
@@ -149,7 +155,7 @@ public class Calculator {
                 "ASDA = (R) TORA + STOPWAY" + "\n" +
                 "ASDA = " + recalculatedTORA + " + " + stopway + " = " + recalculatedASDA + "\n" +
                 "LDA = Original LDA - Slope Calculation - Distance from Threshold - Strip End" + "\n" +
-                "LDA = " + runway.getLandDistAvail() + " - " + slopeCalc + " - " + distanceFromTSH + " - " +
+                "LDA = " + runway.getLandDistAvail() + " - " + calcHelp1 + " - " + distanceFromTSH + " - " +
                 visualStripEnd + " = " + recalculatedLDA;
 
         runway.setTakeOffRunAvail(recalculatedTORA);
@@ -162,7 +168,8 @@ public class Calculator {
         int slopeCalc = obstacle.getObstacleHeight() * 50;
         if (slopeCalc < resa) {
             slopeCalc = resa;
-        }
+            calcHelp1 = "" +resa;
+        }else {calcHelp1 = obstacle.getObstacleHeight() + "*50";}
         int displacedTSH = runway.getTakeOffRunAvail() - runway.getLandDistAvail();
 
         int recalculatedTORA = distanceFromTSH + displacedTSH - slopeCalc - visualStripEnd;
@@ -172,7 +179,7 @@ public class Calculator {
 
 
         calcB = "TORA = Distance from Threshold + Displaced Threshold - Slope Calculation - Strip End" +"\n" +
-                "TORA = " + distanceFromTSH + " + " + displacedTSH + " - " + slopeCalc + " - " + visualStripEnd +
+                "TORA = " + distanceFromTSH + " + " + displacedTSH + " - " + calcHelp1 + " - " + visualStripEnd +
                 " = " + recalculatedTORA + "\n" +
                 "TODA = (R) TORA" + "\n" +
                 "TODA = " + recalculatedTODA + "\n" +

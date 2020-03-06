@@ -18,9 +18,9 @@ public class XMLImport {
      * @obstacleSchema the xsd schema for obstacle XML files
      */
 
-    private static File aircraftSchema = new File("src/Model/Data/aircraft.xsd");
-    private static File airportSchema = new File("src/Model/Data/airport.xsd");
-    private static File obstacleSchema = new File("src/Model/Data/obstacle.xsd");
+    private static File aircraftSchema = new File("src/Model/Data/XMLSchema/aircraft.xsd");
+    private static File airportSchema = new File("src/Model/Data/XMLSchema/airport.xsd");
+    private static File obstacleSchema = new File("src/Model/Data/XMLSchema/obstacle.xsd");
 
     /**
      * Parse an XML file to import airport and its runways / list of obstacles / list of aircraft
@@ -30,9 +30,8 @@ public class XMLImport {
 
     public static Airport importAirportXML(File file) throws Exception {
 
-        if(!(XMLValidate.validate(file, airportSchema))) {
+        if(!(XMLValidate.validate(file, airportSchema)))
             throw new Exception("Invalid XML file");
-        }
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -53,6 +52,9 @@ public class XMLImport {
         Airport airport = new Airport(name);
         airport.setAscentAngle(Double.parseDouble(ascentAngle));
         airport.setDescentAngle(Double.parseDouble(descentAngle));
+
+        if(!checkAirportDetails(airport))
+            throw new Exception("Invalid airport details");
 
 
         NodeList nList = doc.getElementsByTagName("runway");
@@ -102,7 +104,8 @@ public class XMLImport {
                 runway.setTakeoffClimbSurf(takeoffClimbSurf);
                 runway.setVisualStripWidth(visualStripWidth);
 
-                airport.addRunway(runway);
+                if(checkRunwayValues(runway))
+                    airport.addRunway(runway);
 
             }
         }
@@ -112,9 +115,8 @@ public class XMLImport {
 
     public static List<Obstacle> importObstaclesXML (File file) throws Exception {
 
-        if(!(XMLValidate.validate(file, obstacleSchema))) {
+        if(!(XMLValidate.validate(file, obstacleSchema)))
             throw new Exception("Invalid XML file");
-        }
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -144,7 +146,9 @@ public class XMLImport {
 
                 Obstacle obstacle = new Obstacle(length, height, leftThreshold, rightThreshold);
                 obstacle.setName(name);
-                obstacles.add(obstacle);
+
+                if(checkObstacleValues(obstacle))
+                    obstacles.add(obstacle);
             }
         }
 
@@ -154,9 +158,8 @@ public class XMLImport {
 
     public static List<Aircraft> importAircraftXML (File file) throws Exception {
 
-        if(!(XMLValidate.validate(file, aircraftSchema))) {
+        if(!(XMLValidate.validate(file, aircraftSchema)))
             throw new Exception("Invalid XML file");
-        }
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
@@ -181,10 +184,62 @@ public class XMLImport {
                 int engineBlast = Integer.parseInt(element.getElementsByTagName("engineBlast").item(0).getTextContent());
                 Aircraft aircraft = new Aircraft(model);
                 aircraft.setEngineBlast(engineBlast);
-                aircrafts.add(aircraft);
+
+                if(checkAircraftValues(aircraft))
+                    aircrafts.add(aircraft);
             }
         }
 
         return aircrafts;
+    }
+
+    private static boolean checkAircraftValues(Aircraft aircraft) {
+
+        if(aircraft.getEngineBlast() <= 0)
+            return false;
+
+        return true;
+    }
+
+    private static boolean checkObstacleValues(Obstacle obstacle) {
+        if(obstacle.getObstacleLeftPos() < 0 ||
+           obstacle.getObstacleRightPos() < 0 ||
+           obstacle.getObstacleHeight() <= 0 ||
+           obstacle.getObstacleLength() <= 0)
+            return false;
+
+        return true;
+    }
+
+    private static boolean checkAirportDetails(Airport airport) {
+        if(airport.getAscentAngle() <= 0 || airport.getDescentAngle() <= 0)
+            return false;
+
+        return true;
+    }
+
+    private static boolean checkRunwayValues(Runway runway) {
+        int runwayNumber = runway.getRunwayNumber();
+        int tora = runway.getTakeOffRunAvail();
+        int toda = runway.getTakeOffDistAvail();
+        int asda = runway.getAccStopDistAvail();
+        int lds = runway.getLandDistAvail();
+        int stopway = runway.getStopwayLength();
+        int clearway = runway.getClearwayLength();
+        int stripEnd = runway.getStripEnd();
+        int approachLandSurf = runway.getApprochLandSurf();
+        int takeoffClimbSurf = runway.getTakeoffClimbSurf();
+        int visualStripWidth = runway.getVisualStripWidth();
+
+        if(runwayNumber <= 0 ||
+           tora <= 0 || toda <= 0 ||
+           asda <= 0 || lds <= 0 ||
+           stopway <= 0 || clearway <=0 ||
+           stripEnd <= 0 || approachLandSurf <= 0 ||
+           takeoffClimbSurf <= 0 || visualStripWidth <= 0)
+            return false;
+
+        return true;
+
     }
 }

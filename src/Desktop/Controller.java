@@ -266,40 +266,7 @@ public class Controller {
 
         this.setCurrentRunway(this.currentAirport.getAirportRunways().get(runwayIndex));
 
-        boolean sideViewVis = false;
-        boolean topDownVis = true;
-
-        if(currentRunway != null) {
-
-            if(topdownViewPane != null) {
-                topDownVis = topdownViewPane.isVisible();
-                anchorPane.getChildren().remove(topdownViewPane);
-            }
-
-            if(sideViewPane != null) {
-                sideViewVis = sideViewPane.isVisible();
-                anchorPane.getChildren().remove(sideViewPane);
-            }
-
-            TopDownView topDown = new TopDownView();
-            SideOnView sideOn = new SideOnView();
-
-            try {
-                topdownViewPane = topDown.setUpSideOnView(currentRunway);
-                sideViewPane = sideOn.setUpSideOnView(currentRunway);
-
-                topdownViewPane.setVisible(topDownVis);
-                sideViewPane.setVisible(sideViewVis);
-
-                anchorPane.getChildren().add(topdownViewPane);
-                anchorPane.getChildren().add(sideViewPane);
-
-                System.out.println("Runway GUI set up");
-            } catch (Exception e) {
-                showPopupMessage("Error setting up the runway visualisation ", Alert.AlertType.ERROR);
-            }
-
-        }
+        setupRunwayViews();
     }
 
     public void showDetailsButtonClicked() throws Exception {
@@ -348,7 +315,7 @@ public class Controller {
 
     }
 
-    public void showCalculationsButtonClicked() throws Exception {
+    public void showCalculationsButtonClicked() {
         Calculator calc = new Calculator();
 
         if(!currentRunway.getAlreadyCalculated())
@@ -402,7 +369,7 @@ public class Controller {
         alert.showAndWait();
     }
 
-    public void setupRunwayComboBox() {
+    void setupRunwayComboBox() {
 
         changeRunwaysMenu.getItems().clear();
 
@@ -416,7 +383,7 @@ public class Controller {
 
     }
 
-    public void setupObstaclesComboBox() {
+    void setupObstaclesComboBox() {
 
         addObstacleButton.getItems().clear();
 
@@ -449,18 +416,41 @@ public class Controller {
 
     }
 
-    public void resetView(){
+    private void resetView(){
+        setupRunwayViews();
+    }
+
+    void setupPredefinedObstacles() {
+
+        File predefinedObstacles = new File("src/obstacle.xml");
+
+        try {
+
+            List<Obstacle> importResult = XMLImport.importObstaclesXML(predefinedObstacles);
+
+            List<Obstacle> newList = new ArrayList<>();
+            Stream.of(obstacles, importResult).forEach(newList::addAll);
+
+            obstacles = newList;
+
+            setupObstaclesComboBox();
+        }  catch (Exception e ) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setupRunwayViews() {
         boolean sideViewVis = false;
         boolean topDownVis = true;
 
         if(currentRunway != null) {
 
-            if (topdownViewPane != null) {
+            if(topdownViewPane != null) {
                 topDownVis = topdownViewPane.isVisible();
                 anchorPane.getChildren().remove(topdownViewPane);
             }
 
-            if (sideViewPane != null) {
+            if(sideViewPane != null) {
                 sideViewVis = sideViewPane.isVisible();
                 anchorPane.getChildren().remove(sideViewPane);
             }
@@ -479,9 +469,10 @@ public class Controller {
                 anchorPane.getChildren().add(sideViewPane);
 
                 System.out.println("Runway GUI set up");
-            } catch (Exception e1) {
+            } catch (Exception e) {
                 showPopupMessage("Error setting up the runway visualisation ", Alert.AlertType.ERROR);
             }
+
         }
     }
 }

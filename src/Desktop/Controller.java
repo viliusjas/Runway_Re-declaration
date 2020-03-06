@@ -18,6 +18,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 import Model.Data.*;
 import Model.Objects.*;
@@ -94,10 +95,15 @@ public class Controller {
         File file = fileChooser.showOpenDialog(root.getScene().getWindow());
         System.out.println("Opened " + file);
         try {
-            obstacles = XMLImport.importObstaclesXML(file);
+            List<Obstacle> importResult = XMLImport.importObstaclesXML(file);
 
-            if (obstacles != null)
-                System.out.println(obstacles.size() + " obstacles loaded successfully");
+            List<Obstacle> newList = new ArrayList<>();
+            Stream.of(obstacles, importResult).forEach(newList::addAll);
+
+            obstacles = newList;
+
+            if (importResult != null)
+                System.out.println(importResult.size() + " obstacles loaded successfully");
             setupObstaclesComboBox();
         }  catch (Exception e ) {
             e.printStackTrace();
@@ -114,7 +120,12 @@ public class Controller {
         File file = fileChooser.showOpenDialog(root.getScene().getWindow());
         System.out.println("Opened " + file);
         try {
-            aircrafts = XMLImport.importAircraftXML(file);
+            List<Aircraft> importResult = XMLImport.importAircraftXML(file);
+
+            List<Aircraft> newList = new ArrayList<>();
+            Stream.of(aircrafts, importResult).forEach(newList::addAll);
+
+            aircrafts = newList;
 
             if (aircrafts != null)
                 System.out.println(aircrafts.size() + " aircraft loaded successfully");

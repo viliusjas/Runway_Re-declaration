@@ -12,9 +12,9 @@ class XMLValidateTest {
     private static File obstacleValidXML = new File("src/obstacle.xml");
     private static File airportValidXML = new File("src/airport.xml");
 
-    private static File aircraftSchema = new File("src/Model/Data/aircraft.xsd");
-    private static File airportSchema = new File("src/Model/Data/airport.xsd");
-    private static File obstacleSchema = new File("src/Model/Data/obstacle.xsd");
+    private static File aircraftSchema = new File("src/Model/Data/XMLSchema/aircraft.xsd");
+    private static File airportSchema = new File("src/Model/Data/XMLSchema/airport.xsd");
+    private static File obstacleSchema = new File("src/Model/Data/XMLSchema/obstacle.xsd");
 
     @Test
     void testAircraftValidXML() {

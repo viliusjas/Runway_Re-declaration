@@ -42,7 +42,7 @@ public class SideOnView {
 
 
     private int RUNWAY_LENGTH = 3902;
-    private int runwayWidth = 800;
+    private int runwayWidth = 600;
     private int BLAST = 300;
 
     public BorderPane setUpSideOnView(Runway runwayObject) throws Exception {

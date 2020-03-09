@@ -34,23 +34,46 @@ public class Controller {
     @FXML
     private AnchorPane anchorPane;
     @FXML
-    private MenuItem importAirportButton;
+    private Label airportName;
     @FXML
-    private MenuItem importObstaclesButton;
-    @FXML
-    private MenuItem importAircraftButton;
-    @FXML
-    private MenuItem exportMenuButton;
-    @FXML
-    private MenuItem settingsMenuButton;
-    @FXML
-    private MenuItem quitMenuButton;
+    private Label airportRunways;
     @FXML
     private ComboBox changeRunwaysMenu;
     @FXML
     private ComboBox addObstacleButton;
     @FXML
     private VBox root;
+    @FXML
+    private Label runwayNumber;
+    @FXML
+    private Label runwayPos;
+    @FXML
+    private Label runwayTora;
+    @FXML
+    private Label runwayToda;
+    @FXML
+    private Label runwayAsda;
+    @FXML
+    private Label runwaySld;
+    @FXML
+    private Label runwayClearway;
+    @FXML
+    private Label runwayStopway;
+    @FXML
+    private Label runwayStripEnd;
+    @FXML
+    private Label runwayALS;
+    @FXML
+    private Label runwayTCS;
+    @FXML
+    private Label runwayEnd;
+    @FXML
+    private TextField obstacleLengthInput;
+    @FXML
+    private TextField obstacleNameInput;
+    @FXML
+    private TextField obstacleHeightInput;
+
 
     /**
      * @currentAirport the currently imported airport
@@ -67,6 +90,12 @@ public class Controller {
 
     public void setCurrentRunway(Runway currentRunway) {
         this.currentRunway = currentRunway;
+        setUpRunwayTab();
+    }
+
+    public void setCurrentAirport(Airport airport) {
+        this.currentAirport = airport;
+        setUpAirportTab();
     }
 
     public void importAirportButtonClicked() {
@@ -76,7 +105,7 @@ public class Controller {
         File file = fileChooser.showOpenDialog(root.getScene().getWindow());
         System.out.println("Opened " + file);
         try {
-            currentAirport = XMLImport.importAirportXML(file);
+            setCurrentAirport(XMLImport.importAirportXML(file));
 
             if (currentAirport != null)
                 System.out.println("Airport " + currentAirport.getAirportName() + " loaded successfully");
@@ -257,6 +286,26 @@ public class Controller {
 */
     }
 
+    public void createObstacleButtonClicked() {
+        try {
+            String name = obstacleNameInput.getText();
+            int height = Integer.parseInt(obstacleHeightInput.getText());
+            int length = Integer.parseInt(obstacleLengthInput.getText());
+
+            if(height < 0 || length < 0)
+                throw new Exception("Invalid input");
+
+            Obstacle obstacle = new Obstacle(length, height, 0, 0);
+            obstacle.setName(name);
+
+            obstacles.add(obstacle);
+            setupObstaclesComboBox();
+
+        } catch (Exception e ) {
+            showPopupMessage("Invalid input", Alert.AlertType.ERROR);
+        }
+    }
+
     public void changeRunwayButtonClicked() {
 
 
@@ -267,52 +316,6 @@ public class Controller {
         this.setCurrentRunway(this.currentAirport.getAirportRunways().get(runwayIndex));
 
         setupRunwayViews();
-    }
-
-    public void showDetailsButtonClicked() throws Exception {
-
-        if(currentRunway == null)
-            showPopupMessage("No runway chosen currently", Alert.AlertType.ERROR);
-
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RunwayDetails.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
-        RunwayDetails controller = (RunwayDetails)fxmlLoader.getController();
-        controller.initData(currentRunway);
-        Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setResizable(false);
-        stage.setTitle("Current Runway");
-        stage.setScene(new Scene(root1));
-        stage.show();
-
-    }
-
-    public void showAirportDetailsButtonClicked()  {
-
-        try {
-            System.out.println("Current airport is " + currentAirport.getAirportName());
-            System.out.println("Runways : " + currentAirport.getAirportRunways().size());
-
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AirportDetails.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            AirportDetails controller = (AirportDetails)fxmlLoader.getController();
-            controller.initData(currentAirport.getAirportName(), currentAirport.getAirportRunways().size());
-
-            Stage stage = new Stage();
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.setResizable(false);
-            stage.setTitle("Airport Details");
-            stage.setScene(new Scene(root1));
-
-            stage.showAndWait();
-        } catch (Exception e) {
-            if(currentAirport == null)
-                showPopupMessage("No airport currently imported ", Alert.AlertType.ERROR);
-            else
-                showPopupMessage("There was an error ", Alert.AlertType.ERROR);
-
-        }
-
     }
 
     public void showCalculationsButtonClicked() {
@@ -393,6 +396,7 @@ public class Controller {
                 addObstacleButton.getItems().add(obstacle.getName() + " " +
                         String.valueOf(obstacle.getObstacleHeight()) + " x " +
                         String.valueOf(obstacle.getObstacleLength()));
+                System.out.println(obstacle.getName());
             }
         }
 
@@ -473,6 +477,30 @@ public class Controller {
                 showPopupMessage("Error setting up the runway visualisation ", Alert.AlertType.ERROR);
             }
 
+        }
+    }
+
+    private void setUpAirportTab() {
+        if(currentAirport != null) {
+            airportName.setText(this.currentAirport.getAirportName());
+            airportRunways.setText(String.valueOf(currentAirport.getAirportRunways().size()));
+        }
+    }
+
+    private void setUpRunwayTab() {
+        if(currentRunway != null) {
+            runwayNumber.setText(String.valueOf(currentRunway.getRunwayNumber()));
+            runwayClearway.setText(String.valueOf(currentRunway.getClearwayLength()));
+            runwayTora.setText(String.valueOf(currentRunway.getTakeOffRunAvail()));
+            runwayAsda.setText(String.valueOf(currentRunway.getAccStopDistAvail()));
+            runwaySld.setText(String.valueOf(currentRunway.getLandDistAvail()));
+            runwayTCS.setText(String.valueOf(currentRunway.getTakeoffClimbSurf()));
+            runwayStopway.setText(String.valueOf(currentRunway.getStopwayLength()));
+            runwayStripEnd.setText(String.valueOf(currentRunway.getStripEnd()));
+            runwayToda.setText(String.valueOf(currentRunway.getTakeOffDistAvail()));
+            runwayEnd.setText(String.valueOf(currentRunway.getRunwayEndSafeArea()));
+            runwayALS.setText(String.valueOf(currentRunway.getApprochLandSurf()));
+            runwayPos.setText(String.valueOf(currentRunway.getRunwayPos()));
         }
     }
 }

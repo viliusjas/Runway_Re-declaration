@@ -24,6 +24,7 @@ import Model.Data.*;
 import Model.Objects.*;
 import javafx.util.Pair;
 
+import javax.print.DocFlavor;
 import javax.swing.text.html.ImageView;
 
 public class Controller {
@@ -73,6 +74,12 @@ public class Controller {
     private TextField obstacleNameInput;
     @FXML
     private TextField obstacleHeightInput;
+    @FXML
+    private Button redeclareButton;
+    @FXML
+    private Button resetCalcButton;
+    @FXML
+    private Label calculationsLabel;
 
 
     /**
@@ -316,6 +323,29 @@ public class Controller {
         this.setCurrentRunway(this.currentAirport.getAirportRunways().get(runwayIndex));
 
         setupRunwayViews();
+    }
+
+
+    public void redeclareButtonClicked() {
+
+        Calculator calc = new Calculator();
+
+        if(!currentRunway.getAlreadyCalculated()) {
+            calc.calculate(obstacles.get(changeRunwaysMenu.getSelectionModel().getSelectedIndex()), currentRunway);
+            calculationsLabel.setText(calc.getCalculationBreakdown());
+            resetView();
+            currentRunway.calculationsMade();
+        }
+
+        resetCalcButton.setDisable(false);
+
+    }
+
+    public void resetCalcButtonClicked() {
+        currentRunway.resetRunwayValues();
+        currentRunway.calculationsReverted();
+        calculationsLabel.setText("");
+        resetView();
     }
 
     public void showCalculationsButtonClicked() {

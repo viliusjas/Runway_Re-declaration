@@ -56,16 +56,22 @@ public class Runway {
     private int approchLandSurf;
     private int takeoffClimbSurf;
 
-    private List<Obstacle> obstacles;
+   // private List<Obstacle> obstacles;
 
     private boolean alreadyCalculated = false;
+
+    private Obstacle obstacle;
 
 
     public Runway(int runwayNumber, RunwayPosition runwayPos) {
         this.runwayNumber = runwayNumber;
         this.runwayPos = runwayPos;
-        this.obstacles = new ArrayList<>();
+        //this.obstacles = new ArrayList<>();
     }
+
+    public Obstacle getObstacle() {return  obstacle;}
+
+    public void setObstacle(Obstacle obstacle) {this.obstacle=obstacle;}
 
     public String getRunwayName() {
         return String.valueOf(runwayNumber) + runwayPos;
@@ -85,14 +91,14 @@ public class Runway {
         }
     }
 
-    public void addObstacle(Obstacle obstacle) {
+    /*public void addObstacle(Obstacle obstacle) {
         this.obstacles.add(obstacle);
     }
 
     public List<Obstacle> getObstacles() {
         return this.obstacles;
     }
-
+*/
     public void setRunwayPos(RunwayPosition runwayPos) {
         this.runwayPos = runwayPos;
     }

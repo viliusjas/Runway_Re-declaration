@@ -107,6 +107,7 @@
                                                 <Label text="Runway End" />
                                                 <Label text="Approach Land Surface" />
                                                 <Label text="Takeoff Climb Surface" />
+                                    <Label text="Obstacle" />
                                             </children>
                                         </VBox>
                                         <VBox layoutX="164.0" layoutY="37.0" prefHeight="351.0" prefWidth="181.0">
@@ -123,6 +124,7 @@
                                                 <Label fx:id="runwayEnd" />
                                                 <Label fx:id="runwayTCS" />
                                                 <Label fx:id="runwayALS" />
+                                    <Label fx:id="runwayObstacle" />
                                             </children>
                                         </VBox>
                                     </children>
@@ -133,29 +135,40 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="615.0" prefWidth="319.0">
                                     <children>
-                                        <ComboBox fx:id="addObstacleButton" layoutX="107.0" layoutY="51.0" onAction="#addObstacleButtonClicked" prefHeight="26.0" prefWidth="166.0" promptText="Choose an obstacle">
+                                        <ComboBox fx:id="addObstacleButton" layoutX="108.0" layoutY="138.0" onAction="#addObstacleButtonClicked" prefHeight="26.0" prefWidth="166.0" promptText="Choose an obstacle">
                                             <items>
                                                 <FXCollections fx:factory="observableArrayList">
                                                 </FXCollections>
                                             </items>
                                         </ComboBox>
-                              <Label layoutX="107.0" layoutY="84.0" text="Left Threshold" />
-                              <Label layoutX="107.0" layoutY="110.0" text="Right Threshold" />
-                              <TextField fx:id="leftThreshInput" layoutX="213.0" layoutY="80.0" prefHeight="25.0" prefWidth="60.0" />
-                              <TextField fx:id="rightThreshInput" layoutX="213.0" layoutY="106.0" prefHeight="25.0" prefWidth="60.0" />
-                              <Label layoutX="110.0" layoutY="172.0" prefHeight="30.0" prefWidth="143.0" text="Create new obstacle">
+                                        <Label layoutX="108.0" layoutY="171.0" text="Left Threshold" />
+                                        <Label layoutX="108.0" layoutY="197.0" text="Right Threshold" />
+                                        <TextField fx:id="leftThreshInput" layoutX="214.0" layoutY="167.0" prefHeight="25.0" prefWidth="60.0" />
+                                        <TextField fx:id="rightThreshInput" layoutX="214.0" layoutY="193.0" prefHeight="25.0" prefWidth="60.0" />
+                                        <Label layoutX="121.0" layoutY="259.0" prefHeight="30.0" prefWidth="143.0" text="Create new obstacle">
+                                            <font>
+                                                <Font size="16.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="112.0" layoutY="293.0" text="Name" />
+                                        <Label layoutX="112.0" layoutY="319.0" text="Height" />
+                                        <TextField fx:id="obstacleNameInput" layoutX="214.0" layoutY="289.0" prefHeight="25.0" prefWidth="60.0" />
+                                        <TextField fx:id="obstacleHeightInput" layoutX="214.0" layoutY="315.0" prefHeight="25.0" prefWidth="60.0" />
+                                        <Label layoutX="112.0" layoutY="345.0" text="Length" />
+                                        <TextField fx:id="obstacleLengthInput" layoutX="214.0" layoutY="341.0" prefHeight="25.0" prefWidth="60.0" />
+                                        <Button fx:id="createObstacleButton" layoutX="111.0" layoutY="372.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="163.0" text="Create" />
+                                        <Button fx:id="addObstacleToRunwayButton" layoutX="109.0" layoutY="224.0" mnemonicParsing="false" onAction="#addObstacleToRunwayButtonClicked" prefHeight="26.0" prefWidth="166.0" text="Add" />
+                              <Label layoutX="107.0" layoutY="101.0" prefHeight="30.0" prefWidth="167.0" text="Add obstacle to runway">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="111.0" layoutY="206.0" text="Name" />
-                              <Label layoutX="111.0" layoutY="232.0" text="Height" />
-                              <TextField fx:id="obstacleNameInput" layoutX="213.0" layoutY="202.0" prefHeight="25.0" prefWidth="60.0" />
-                              <TextField fx:id="obstacleHeightInput" layoutX="213.0" layoutY="228.0" prefHeight="25.0" prefWidth="60.0" />
-                              <Label layoutX="111.0" layoutY="258.0" text="Length" />
-                              <TextField fx:id="obstacleLengthInput" layoutX="213.0" layoutY="254.0" prefHeight="25.0" prefWidth="60.0" />
-                              <Button fx:id="createObstacleButton" layoutX="110.0" layoutY="285.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="163.0" text="Create" />
-                              <Button fx:id="addObstaclesButton" layoutX="108.0" layoutY="137.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="166.0" text="Add" />
+                              <Label layoutX="97.0" layoutY="36.0" prefHeight="30.0" prefWidth="190.0" text="Remove current obstacle">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="remObstacleButton" layoutX="100.0" layoutY="67.0" mnemonicParsing="false" onAction="#remObstacleButtonClicked" prefHeight="26.0" prefWidth="166.0" text="Remove" />
                                     </children>
                                 </AnchorPane>
                             </content>
@@ -163,11 +176,11 @@
                         <Tab text="Calculations">
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <Button fx:id="redeclareButton" layoutX="104.0" layoutY="244.0" mnemonicParsing="false" text="Redeclare" onAction="#redeclareButtonClicked" />
-                              <Button fx:id="resetCalcButton" layoutX="210.0" layoutY="243.0" mnemonicParsing="false" prefHeight="26.0" onAction="#resetCalcButtonClicked" prefWidth="68.0" text="Reset" />
-                              <Label fx:id="calculationsLabel" layoutX="20.0" layoutY="32.0" />
-                           </children></AnchorPane>
+                                    <children>
+                                        <Button fx:id="redeclareButton" layoutX="104.0" layoutY="244.0" mnemonicParsing="false" onAction="#redeclareButtonClicked" text="Redeclare" />
+                                        <Button fx:id="resetCalcButton" layoutX="210.0" layoutY="243.0" mnemonicParsing="false" onAction="#resetCalcButtonClicked" prefHeight="26.0" prefWidth="68.0" text="Reset" />
+                                        <Label fx:id="calculationsLabel" layoutX="20.0" layoutY="32.0" />
+                                    </children></AnchorPane>
                             </content>
                         </Tab>
                     </tabs>

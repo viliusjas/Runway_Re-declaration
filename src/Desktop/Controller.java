@@ -24,6 +24,7 @@ import Model.Data.*;
 import Model.Objects.*;
 import javafx.util.Pair;
 
+import javax.print.DocFlavor;
 import javax.swing.text.html.ImageView;
 
 public class Controller {
@@ -73,6 +74,14 @@ public class Controller {
     private TextField obstacleNameInput;
     @FXML
     private TextField obstacleHeightInput;
+    @FXML
+    private Button redeclareButton;
+    @FXML
+    private Button resetCalcButton;
+    @FXML
+    private Label calculationsLabel;
+    @FXML
+    private Label runwayObstacleLabel;
 
 
     /**
@@ -286,24 +295,17 @@ public class Controller {
 */
     }
 
-    public void createObstacleButtonClicked() {
-        try {
-            String name = obstacleNameInput.getText();
-            int height = Integer.parseInt(obstacleHeightInput.getText());
-            int length = Integer.parseInt(obstacleLengthInput.getText());
+    public void addObstacleToRunwayButtonClicked() {
+        int obstIndex = addObstacleButton.getSelectionModel().getSelectedIndex();
+        Obstacle selectedObstacle = obstacles.get(obstIndex);
 
-            if(height < 0 || length < 0)
-                throw new Exception("Invalid input");
+        System.out.println("Adding " + selectedObstacle.getName()+ " to " + currentRunway.getRunwayName());
+        currentRunway.setObstacle(selectedObstacle);
+    }
 
-            Obstacle obstacle = new Obstacle(length, height, 0, 0);
-            obstacle.setName(name);
-
-            obstacles.add(obstacle);
-            setupObstaclesComboBox();
-
-        } catch (Exception e ) {
-            showPopupMessage("Invalid input", Alert.AlertType.ERROR);
-        }
+    public void remObstacleButtonClicked() {
+        if(currentRunway.getObstacle() != null)
+            currentRunway.setObstacle(null);
     }
 
     public void changeRunwayButtonClicked() {
@@ -316,6 +318,38 @@ public class Controller {
         this.setCurrentRunway(this.currentAirport.getAirportRunways().get(runwayIndex));
 
         setupRunwayViews();
+    }
+
+
+
+    public void redeclareButtonClicked() {
+
+        Calculator calc = new Calculator();
+
+        if(currentRunway == null || currentRunway.getObstacle() == null) {
+            showPopupMessage("No obstacle has been placed onto the runway", Alert.AlertType.ERROR);
+            return;
+        }
+
+        if(!currentRunway.getAlreadyCalculated()) {
+            calc.calculate(currentRunway.getObstacle(), currentRunway);
+            calculationsLabel.setText(calc.getCalculationBreakdown());
+            setUpRunwayTab();
+            resetView();
+            currentRunway.calculationsMade();
+        }
+
+        resetCalcButton.setDisable(false);
+
+    }
+
+    public void resetCalcButtonClicked() {
+        currentRunway.resetRunwayValues();
+        currentRunway.calculationsReverted();
+        calculationsLabel.setText("");
+        setUpRunwayTab();
+        resetView();
+        resetCalcButton.setDisable(true);
     }
 
     public void showCalculationsButtonClicked() {
@@ -361,7 +395,7 @@ public class Controller {
             popupwindow.setScene(scene1);
             popupwindow.showAndWait();
         }
-    }
+    } // not used anymore
 
     private void showPopupMessage(String message, Alert.AlertType type) {
         Alert alert = new Alert(type);
@@ -500,6 +534,9 @@ public class Controller {
             runwayEnd.setText(String.valueOf(currentRunway.getRunwayEndSafeArea()));
             runwayALS.setText(String.valueOf(currentRunway.getApprochLandSurf()));
             runwayPos.setText(String.valueOf(currentRunway.getRunwayPos()));
+            if(currentRunway.getObstacle() != null) {
+                runwayObstacleLabel.setText(currentRunway.getObstacle().getName());
+            }
         }
     }
 }

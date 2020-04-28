@@ -91,7 +91,7 @@ public class TopDownView {
         runway.setFill(DARKGRAY);
         runway.setArcHeight(5);
         runway.setArcWidth(5);
-        runway.setHeight(350);
+        runway.setHeight(400);
         runway.setWidth(40);
         runway.setStroke(BLACK);
         runway.setStrokeType(StrokeType.INSIDE);
@@ -160,13 +160,13 @@ public class TopDownView {
         toraVBox.setAlignment(Pos.CENTER_RIGHT);
         Label toraLabel = new Label("(TORA = " + TORA + "m)");
         toraLabel.setFont(new Font("Arial", 10));
-        toraVBox.getChildren().addAll(toraLabel, toraDistance);
+        toraVBox.getChildren().addAll(toraDistance, toraLabel);
 
         VBox todaVBox = new VBox();
         todaVBox.setAlignment(Pos.CENTER_RIGHT);
         Label todaLabel = new Label("(TODA = " + TODA + "m)");
         todaLabel.setFont(new Font("Arial", 10));
-        todaVBox.getChildren().addAll(todaLabel, todaDistance);
+        todaVBox.getChildren().addAll(todaDistance, todaLabel);
 
         VBox asdaVBox = new VBox();
         asdaVBox.setAlignment(Pos.CENTER_RIGHT);
@@ -183,24 +183,24 @@ public class TopDownView {
         group.getChildren().addAll(wholeRunway, dashed, plane, runwayVBox,
                 objectVBox, toraVBox, todaVBox, asdaVBox, ldaVBox);
 
-        todaVBox.setLayoutY(-100);
-        todaVBox.setLayoutX(105);
-        asdaVBox.setLayoutY(-80);
-        asdaVBox.setLayoutX(95);
-        toraVBox.setLayoutY(-60);
-        toraVBox.setLayoutX(85);
-        ldaVBox.setLayoutY(-40);
-        ldaVBox.setLayoutX(79);
+        todaVBox.setLayoutY(obstacleScaledHeight - 17);
+        todaVBox.setLayoutX(225);
+        asdaVBox.setLayoutY(obstacleScaledHeight - 28);
+        asdaVBox.setLayoutX(175);
+        toraVBox.setLayoutY(obstacleScaledHeight - 17);
+        toraVBox.setLayoutX(135);
+        ldaVBox.setLayoutY(obstacleScaledHeight - 28);
+        ldaVBox.setLayoutX(95);
 
-        objectVBox.setLayoutY(-20);
+        objectVBox.setLayoutY(obstacleScaledHeight - 28);
         objectVBox.setLayoutX(3 - obstacleScaledHeight);
-        wholeRunway.setLayoutY(obstacleScaledHeight - 10);
+        wholeRunway.setLayoutY(obstacleScaledHeight - 17);
         wholeRunway.setLayoutX(100);
         dashed.setLayoutY(obstacleScaledHeight - 2.5);
         dashed.setLayoutX(120);
         plane.setLayoutY(obstacleScaledDistance);
         plane.setLayoutX(92);
-        runwayVBox.setLayoutY(obstacleScaledHeight + 15);
+        runwayVBox.setLayoutY(obstacleScaledHeight + 11);
         runwayVBox.setLayoutX(-obstacleScaledHeight - 5);
 
         borderPane.setCenter(group);

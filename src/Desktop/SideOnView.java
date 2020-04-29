@@ -40,10 +40,11 @@ public class SideOnView {
     private int ASDA;
     private int LDA;
 
-
     private int RUNWAY_LENGTH = 3902;
     private int runwayWidth = 600;
     private int BLAST = 300;
+
+    private float runwayHeight = 15;
 
     public BorderPane setUpSideOnView(Runway runwayObject) throws Exception {
 
@@ -112,7 +113,7 @@ public class SideOnView {
         runway.setFill(DARKGRAY);
         runway.setArcHeight(5);
         runway.setArcWidth(5);
-        runway.setHeight(15);
+        runway.setHeight(runwayHeight);
         runway.setStroke(BLACK);
         runway.setStrokeType(StrokeType.INSIDE);
 
@@ -124,22 +125,22 @@ public class SideOnView {
         HBox left = new HBox();
         float leftWidth;
         if (clearwayLeftDistance > stopwayLeftDistance) {
-            left.getChildren().addAll(new Rectangle(leftClearwayScaled, 15, LIGHTBLUE),
-                    new Rectangle(leftStopwayScaled, 15, DARKBLUE));
+            left.getChildren().addAll(new Rectangle(leftClearwayScaled, runwayHeight, LIGHTBLUE),
+                    new Rectangle(leftStopwayScaled, runwayHeight, DARKBLUE));
             leftWidth = leftClearwayScaled + leftStopwayScaled;
         } else {
-            left.getChildren().addAll(new Rectangle(leftStopwayScaled, 15, DARKBLUE));
+            left.getChildren().addAll(new Rectangle(leftStopwayScaled, runwayHeight, DARKBLUE));
             leftWidth = leftStopwayScaled;
         }
 
         HBox right = new HBox();
         float rightWidth;
         if (clearwayRightDistance > stopwayRightDistance) {
-            right.getChildren().addAll(new Rectangle(rightStopwayScaled, 15, DARKBLUE),
-                    new Rectangle(rightClearwayScaled, 15, LIGHTBLUE));
+            right.getChildren().addAll(new Rectangle(rightStopwayScaled, runwayHeight, DARKBLUE),
+                    new Rectangle(rightClearwayScaled, runwayHeight, LIGHTBLUE));
             rightWidth = rightClearwayScaled + rightStopwayScaled;
         } else {
-            right.getChildren().addAll(new Rectangle(rightStopwayScaled, 15, DARKBLUE));
+            right.getChildren().addAll(new Rectangle(rightStopwayScaled, runwayHeight, DARKBLUE));
             rightWidth = rightStopwayScaled;
         }
 
@@ -322,7 +323,7 @@ public class SideOnView {
         blastHBox.setLayoutY(obstacleScaledHeight - 25);
         blastHBox.setPrefWidth(obstacleScaledDistance - scaledRESA);
 
-        wholeRunway.setLayoutY(obstacleScaledHeight - 7.5);
+        wholeRunway.setLayoutY(obstacleScaledHeight - (runwayHeight/2));
         dashed.setLayoutY(obstacleScaledHeight);
         dashed.setLayoutX(leftClearwayScaled + leftStopwayScaled + 5);
         plane.setLayoutX(obstacleScaledDistance);

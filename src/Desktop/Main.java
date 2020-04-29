@@ -18,7 +18,7 @@ public class Main extends Application {
         controller.setupRunwayComboBox();
         controller.setupPredefinedObstacles();
 
-        primaryStage.setTitle("Runway Re-decleration Tool");
+        primaryStage.setTitle("Runway Re-Declaration Tool");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();

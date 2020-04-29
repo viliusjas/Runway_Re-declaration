@@ -106,9 +106,13 @@ public class Calculator {
         runway.setTakeOffDistAvail(recalculatedTODA);
         runway.setAccStopDistAvail(recalculatedASDA);
         runway.setLandDistAvail(recalculatedLDA);
+        runway.setClearwayLength(clearway);
+        runway.setStopwayLength(stopway);
     }
 
     public void takeOffTowardslandingTowardsDisplaced(Obstacle obstacle, int distanceFromTSH, Runway runway){
+        int clearway = runway.getTakeOffDistAvail() - runway.getTakeOffRunAvail();
+        int stopway = runway.getAccStopDistAvail() - runway.getTakeOffRunAvail();
         int slopeCalc = obstacle.getObstacleHeight() * 50;
         if (slopeCalc < resa) {
             slopeCalc = resa;
@@ -132,6 +136,8 @@ public class Calculator {
         runway.setTakeOffDistAvail(recalculatedTODA);
         runway.setAccStopDistAvail(recalculatedASDA);
         runway.setLandDistAvail(recalculatedLDA);
+        runway.setClearwayLength(clearway);
+        runway.setStopwayLength(stopway);
     }
 
     public void takeOffAwaylandingOver(Obstacle obstacle, int distanceFromTSH, Runway runway){
@@ -162,9 +168,13 @@ public class Calculator {
         runway.setTakeOffDistAvail(recalculatedTODA);
         runway.setAccStopDistAvail(recalculatedASDA);
         runway.setLandDistAvail(recalculatedLDA);
+        runway.setClearwayLength(clearway);
+        runway.setStopwayLength(stopway);
     }
 
     public void takeOffTowardslandingTowards(Obstacle obstacle, int distanceFromTSH, Runway runway){
+        int clearway = runway.getTakeOffDistAvail() - runway.getTakeOffRunAvail();
+        int stopway = runway.getAccStopDistAvail() - runway.getTakeOffRunAvail();
         int slopeCalc = obstacle.getObstacleHeight() * 50;
         if (slopeCalc < resa) {
             slopeCalc = resa;
@@ -192,6 +202,8 @@ public class Calculator {
         runway.setTakeOffDistAvail(recalculatedTODA);
         runway.setAccStopDistAvail(recalculatedASDA);
         runway.setLandDistAvail(recalculatedLDA);
+        runway.setClearwayLength(clearway);
+        runway.setStopwayLength(stopway);
 
     }
 

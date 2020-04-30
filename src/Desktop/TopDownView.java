@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
@@ -106,9 +107,12 @@ public class TopDownView {
         borderPane.setBottom(bottom);
 
         Group group = new Group();
+        StackPane overlapElem =  new StackPane();
 
-        // RUNWAY + STOPWAY + CLEARWAY
+        //Cleared and Graded Area + Runway, Stopway, Clearway
         HBox wholeRunway = new HBox();
+        // RUNWAY + STOPWAY + CLEARWAY
+        HBox runStopClearWay = new HBox();
         Rectangle runway = new Rectangle();
         runway.setFill(DARKGRAY);
         runway.setArcHeight(5);
@@ -116,6 +120,16 @@ public class TopDownView {
         runway.setHeight(runwayHeight);
         runway.setStroke(BLACK);
         runway.setStrokeType(StrokeType.INSIDE);
+
+        Rectangle clearedGradedArea = new Rectangle();
+        clearedGradedArea.setFill(PINK);
+        clearedGradedArea.setArcHeight(20);
+        clearedGradedArea.setArcWidth(20);
+        clearedGradedArea.setHeight(runway.getHeight() + 100);
+
+        Label clearedGradedLabel = new Label("Cleared and Graded Area");
+        clearedGradedLabel.setFont(new Font("Arial", 10));
+        clearedGradedLabel.setTextFill(MEDIUMPURPLE);
 
         float leftStopwayScaled = scale * stopwayLeftDistance;
         float leftClearwayScaled = Math.max(0, (scale * clearwayLeftDistance) - leftStopwayScaled);
@@ -145,9 +159,20 @@ public class TopDownView {
         }
 
         float widthChanged = runwayWidth - leftWidth - rightWidth;
+        float clearedGradedWidth = runwayWidth + leftWidth + rightWidth + 25;
 
         runway.setWidth(widthChanged);
-        wholeRunway.getChildren().addAll(left, runway, right);
+        clearedGradedArea.setWidth(clearedGradedWidth);
+
+        runStopClearWay.getChildren().addAll(left, runway, right);
+        overlapElem.getChildren().addAll(clearedGradedArea, runStopClearWay, clearedGradedLabel);
+
+        runStopClearWay.setAlignment(Pos.CENTER_LEFT);
+        right.setAlignment(Pos.CENTER_LEFT);
+        StackPane.setAlignment(clearedGradedLabel, Pos.TOP_LEFT);
+
+        wholeRunway.getChildren().addAll(overlapElem);
+        //wholeRunway.getChildren().addAll(left, runway, right);
 
         // DASHED LINE
         Line dashed = new Line(0, 0, widthChanged - 10, 0);
@@ -211,6 +236,25 @@ public class TopDownView {
 
         // LINE FOR BLAST
         Line blastDistance = new Line(0, 0, scaledBlast, 0);
+
+        //Lines for Cleared & Graded Areas
+        Line horizontalDistance = new Line(0, 0, 40, 0);
+        horizontalDistance.setStroke(PURPLE);
+        Line verticalDistance =  new Line (0, 0, 0, 50);
+        verticalDistance.setStroke(PURPLE);
+
+        //LABELS FOR CLEARED & GRADED AREA
+        VBox horizontalVBox = new VBox();
+        horizontalVBox.setAlignment(Pos.CENTER_RIGHT);
+        Label hzLabel = new Label("(60m)");
+        hzLabel.setFont(new Font("Arial", 10));
+        horizontalVBox.getChildren().addAll(horizontalDistance, hzLabel);
+
+        VBox verticalVBox = new VBox();
+        verticalVBox.setAlignment(Pos.CENTER_RIGHT);
+        Label vertLabel = new Label("(150m)");
+        vertLabel.setFont(new Font("Arial", 10));
+        verticalVBox.getChildren().addAll(verticalDistance, vertLabel);
 
         // LABEL FOR RUNWAY DISTANCE
         VBox runwayVBox = new VBox();
@@ -302,9 +346,18 @@ public class TopDownView {
         blastHBox.setPrefWidth(runwayWidth);
         blastHBox.setAlignment(Pos.CENTER_RIGHT);
 
+//        // LABEL FOR CLEARED & GRADED AREA
+//        HBox clearedGradedHBox = new HBox();
+//        Label clearedGradedLabel = new Label("Cleared and Graded Area");
+//        clearedGradedLabel.setFont(new Font("Arial", 10));
+//        clearedGradedLabel.setTextFill(WHITE);
+//        clearedGradedHBox.getChildren().add(clearedGradedLabel);
+//        clearedGradedHBox.setPrefWidth(runwayWidth);
+//        clearedGradedHBox.setAlignment(Pos.CENTER_RIGHT);
+
         group.getChildren().addAll(wholeRunway, dashed, plane, runwayVBox,
                 objectVBox, toraVBox, todaVBox, asdaVBox, ldaVBox,
-                stopwayHBox, clearwayHBox, resaHBox, blastHBox);
+                stopwayHBox, clearwayHBox, resaHBox, blastHBox, horizontalVBox, verticalVBox);
 
 //        arrowVBox.setLayoutY(-150);
 //        arrowVBox.setLayoutX(0.2 * runwayWidth);
@@ -319,22 +372,28 @@ public class TopDownView {
         float runwayPosYTop = (obstacleScaledWidth / 2) - (runwayHeight/2);
         float runwayPosYBottom = (obstacleScaledWidth / 2) + (runwayHeight/2);
 
-        clearwayHBox.setLayoutY(runwayPosYTop - 40);
-        stopwayHBox.setLayoutY(runwayPosYTop - 20);
+        clearwayHBox.setLayoutY(runwayPosYTop + 15);
+        stopwayHBox.setLayoutY(runwayPosYTop + 35);
         stopwayHBox.setLayoutX(-rightClearwayScaled);
 
-        blastHBox.setLayoutY(runwayPosYTop - 20);
+        blastHBox.setLayoutY(runwayPosYTop + 35);
         blastHBox.setPrefWidth(obstacleScaledDistance - scaledRESA);
 
         wholeRunway.setLayoutY(runwayPosYTop);
-        dashed.setLayoutY((obstacleScaledWidth / 2));
+        dashed.setLayoutY((obstacleScaledWidth / 2 + 50));
         dashed.setLayoutX(leftClearwayScaled + leftStopwayScaled + 5);
         plane.setLayoutX(obstacleScaledDistance);
+        plane.setLayoutY(obstacleScaledWidth / 2 + 5);
 
-        resaHBox.setLayoutY(runwayPosYBottom + 5);
+        resaHBox.setLayoutY(runwayPosYBottom + 55);
         resaHBox.setPrefWidth(obstacleScaledDistance);
 
-        runwayVBox.setLayoutY(runwayPosYBottom + 25);
+        runwayVBox.setLayoutY(runwayPosYBottom + 75);
+
+        horizontalVBox.setLayoutY(obstacleScaledWidth / 2 + 50);
+        horizontalVBox.setLayoutX(600);
+        verticalVBox.setLayoutY(runwayPosYTop);
+        verticalVBox.setLayoutX(180);
 
         borderPane.setLayoutX(152.0);
         borderPane.setLayoutY(88.0);

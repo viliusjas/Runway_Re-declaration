@@ -334,8 +334,8 @@ public class Controller {
         if(!currentRunway.getAlreadyCalculated()) {
             calc.calculate(currentRunway.getObstacle(), currentRunway);
             calculationsLabel.setText(calc.getCalculationBreakdown());
-            setUpRunwayTab();
             resetView();
+            setUpRunwayTab();
             currentRunway.calculationsMade();
         }
 
@@ -347,8 +347,9 @@ public class Controller {
         currentRunway.resetRunwayValues();
         currentRunway.calculationsReverted();
         calculationsLabel.setText("");
-        setUpRunwayTab();
         resetView();
+        setUpRunwayTab();
+
         resetCalcButton.setDisable(true);
     }
 

@@ -107,7 +107,7 @@
                                                 <Label text="Runway End" />
                                                 <Label text="Approach Land Surface" />
                                                 <Label text="Takeoff Climb Surface" />
-                                    <Label text="Obstacle" />
+                                                <Label text="Obstacle" />
                                             </children>
                                         </VBox>
                                         <VBox layoutX="164.0" layoutY="37.0" prefHeight="351.0" prefWidth="181.0">
@@ -124,7 +124,7 @@
                                                 <Label fx:id="runwayEnd" />
                                                 <Label fx:id="runwayTCS" />
                                                 <Label fx:id="runwayALS" />
-                                    <Label fx:id="runwayObstacle" />
+                                                <Label fx:id="runwayObstacle" />
                                             </children>
                                         </VBox>
                                     </children>
@@ -158,17 +158,17 @@
                                         <TextField fx:id="obstacleLengthInput" layoutX="214.0" layoutY="341.0" prefHeight="25.0" prefWidth="60.0" />
                                         <Button fx:id="createObstacleButton" layoutX="111.0" layoutY="372.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="163.0" text="Create" />
                                         <Button fx:id="addObstacleToRunwayButton" layoutX="109.0" layoutY="224.0" mnemonicParsing="false" onAction="#addObstacleToRunwayButtonClicked" prefHeight="26.0" prefWidth="166.0" text="Add" />
-                              <Label layoutX="107.0" layoutY="101.0" prefHeight="30.0" prefWidth="167.0" text="Add obstacle to runway">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="97.0" layoutY="36.0" prefHeight="30.0" prefWidth="190.0" text="Remove current obstacle">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Button fx:id="remObstacleButton" layoutX="100.0" layoutY="67.0" mnemonicParsing="false" onAction="#remObstacleButtonClicked" prefHeight="26.0" prefWidth="166.0" text="Remove" />
+                                        <Label layoutX="107.0" layoutY="101.0" prefHeight="30.0" prefWidth="167.0" text="Add obstacle to runway">
+                                            <font>
+                                                <Font size="16.0" />
+                                            </font>
+                                        </Label>
+                                        <Label layoutX="97.0" layoutY="36.0" prefHeight="30.0" prefWidth="190.0" text="Remove current obstacle">
+                                            <font>
+                                                <Font size="16.0" />
+                                            </font>
+                                        </Label>
+                                        <Button fx:id="remObstacleButton" layoutX="100.0" layoutY="67.0" mnemonicParsing="false" onAction="#remObstacleButtonClicked" prefHeight="26.0" prefWidth="166.0" text="Remove" />
                                     </children>
                                 </AnchorPane>
                             </content>
@@ -185,13 +185,16 @@
                         </Tab>
                     </tabs>
                 </TabPane>
+                <VBox layoutX="7.0" layoutY="5.0" prefHeight="20.0" prefWidth="769.0">
+                    <children>
+                        <Label fx:id="actionConfirmation" prefHeight="16.0" prefWidth="769.0" />
+                    </children>
+                </VBox>
                 <!-- Side View GridPane -->
                 <!--<BorderPane fx:id="sideViewPane" visible="true">
-
                 </BorderPane>
                 &lt;!&ndash; Top-down View GridPane &ndash;&gt;
                 <BorderPane fx:id="topdownViewPane" visible="false">
-
                 </BorderPane>-->
             </children>
         </AnchorPane>

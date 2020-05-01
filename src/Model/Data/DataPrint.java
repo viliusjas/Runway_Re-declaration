@@ -2,8 +2,17 @@ package Model.Data;
 
 import Model.Objects.Airport;
 import Model.Objects.Runway;
+import Desktop.*;
+import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.image.WritableImage;
 
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -46,6 +55,28 @@ public class DataPrint {
             return true;
         } catch (IOException ex) { }
 
+        return false;
+    }
+    /*
+public static boolean exportJpegTopDownViewData(File file, Airport airport){
+try{ WritableImage TDVimg = new WritableImage(900, 800);
+TopDownView.TDVscene.snapshot(TDVimg);
+RenderedImage TDVImage = SwingFXUtils.fromFXImage(TDVimg, null);
+ImageIO.write(TDVImage,"PNG",new FileOutputStream(file));
+return true;
+} catch (Exception ex) { }
+return false;
+}
+*/
+
+    public static boolean exportJpegSideOnViewData(File file, Airport airport){
+        try{
+            WritableImage SOVimg = new WritableImage(900, 500);
+            SideOnView.SOVscene.snapshot(SOVimg);
+            RenderedImage SOVImage = SwingFXUtils.fromFXImage(SOVimg, null);
+            ImageIO.write(SOVImage,"PNG",new FileOutputStream(file));
+            return true;
+        } catch (Exception ex) { }
         return false;
     }
 }

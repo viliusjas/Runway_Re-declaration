@@ -33,6 +33,7 @@ public class SideOnView {
     private int stopwayRightDistance = 40;
     private int clearwayRightDistance = 100;
 
+
     private String LandingDirection = "RIGHT";
 
     private int TORA;
@@ -45,6 +46,9 @@ public class SideOnView {
     private int BLAST = 300;
 
     private float runwayHeight = 15;
+
+    public static Scene SOVscene;
+
 
     public BorderPane setUpSideOnView(Runway runwayObject) throws Exception {
 
@@ -340,7 +344,9 @@ public class SideOnView {
         borderPane.setPrefWidth(629.0);
 
         borderPane.setCenter(group);
+        SOVscene = scene;
 
         return borderPane;
     }
+
 }

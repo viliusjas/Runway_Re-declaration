@@ -47,6 +47,7 @@ public class TopDownView {
 
     private float runwayHeight = 50;
 
+    public static Scene TDVscene;
     public BorderPane setUpSideOnView(Runway runwayObject) throws Exception {
 
         // SETUP VALUES
@@ -402,6 +403,8 @@ public class TopDownView {
         borderPane.setPrefWidth(629.0);
 
         borderPane.setCenter(group);
+
+        TDVscene = scene;
 
         return borderPane;
     }

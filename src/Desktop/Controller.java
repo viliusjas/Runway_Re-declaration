@@ -32,6 +32,8 @@ public class Controller {
     private BorderPane topdownViewPane;
     private BorderPane sideViewPane;
 
+    private String actionTextHelper = "";
+
     @FXML
     private AnchorPane anchorPane;
     @FXML
@@ -82,6 +84,9 @@ public class Controller {
     private Label calculationsLabel;
     @FXML
     private Label runwayObstacleLabel;
+    @FXML
+    private Label actionConfirmation;
+
 
 
     /**
@@ -116,8 +121,13 @@ public class Controller {
         try {
             setCurrentAirport(XMLImport.importAirportXML(file));
 
-            if (currentAirport != null)
+            if (currentAirport != null) {
+                actionTextHelper = actionTextHelper.replace(" Airport Imported! ", "");
+                actionTextHelper = actionTextHelper +  " Airport Imported! ";
+                actionConfirmation.setText(actionTextHelper);
                 System.out.println("Airport " + currentAirport.getAirportName() + " loaded successfully");
+            }
+
             setupRunwayComboBox();
         } catch (Exception e ) {
             e.printStackTrace();
@@ -140,8 +150,12 @@ public class Controller {
 
             obstacles = newList;
 
-            if (importResult != null)
+            if (importResult != null) {
+                actionTextHelper = actionTextHelper.replace(" Obstacles Imported! ", "");
+                actionTextHelper = actionTextHelper +  " Obstacles Imported! ";
+                actionConfirmation.setText(actionTextHelper);
                 System.out.println(importResult.size() + " obstacles loaded successfully");
+            }
             setupObstaclesComboBox();
         }  catch (Exception e ) {
             e.printStackTrace();
@@ -165,8 +179,12 @@ public class Controller {
 
             aircrafts = newList;
 
-            if (aircrafts != null)
+            if (aircrafts != null) {
+                actionTextHelper = actionTextHelper.replace(" Aircrafts Imported! ", "");
+                actionTextHelper = actionTextHelper +  " Aircrafts Imported! ";
+                actionConfirmation.setText(actionTextHelper);
                 System.out.println(aircrafts.size() + " aircraft loaded successfully");
+            }
         }  catch (Exception e ) {
             e.printStackTrace();
             if(file != null)
@@ -174,6 +192,7 @@ public class Controller {
         }
     }
 
+    /*
     public void exportMenuButtonClicked() {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
@@ -184,6 +203,8 @@ public class Controller {
             if(Model.Data.DataPrint.exportData(file, currentAirport))
                 System.out.println("Saving to " + file + "...");
     }
+    */
+
 
     public void settingsMenuButtonClicked()  throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("Settings.fxml"));
@@ -298,14 +319,21 @@ public class Controller {
     public void addObstacleToRunwayButtonClicked() {
         int obstIndex = addObstacleButton.getSelectionModel().getSelectedIndex();
         Obstacle selectedObstacle = obstacles.get(obstIndex);
-
+        actionTextHelper = actionTextHelper.replace(" Obstacle Added! ", "");
+        actionTextHelper = actionTextHelper.replace(" Obstacle Removed! ", "");
+        actionTextHelper = actionTextHelper +  " Obstacle Added! ";
+        actionConfirmation.setText(actionTextHelper);
         System.out.println("Adding " + selectedObstacle.getName()+ " to " + currentRunway.getRunwayName());
         currentRunway.setObstacle(selectedObstacle);
     }
 
     public void remObstacleButtonClicked() {
-        if(currentRunway.getObstacle() != null)
+        if(currentRunway.getObstacle() != null){
+            actionTextHelper = actionTextHelper.replace(" Obstacle Added! ", "");
+            actionTextHelper = actionTextHelper +  " Obstacle Removed! ";
+            actionConfirmation.setText(actionTextHelper);
             currentRunway.setObstacle(null);
+        }
     }
 
     public void changeRunwayButtonClicked() {
@@ -347,6 +375,7 @@ public class Controller {
         currentRunway.resetRunwayValues();
         currentRunway.calculationsReverted();
         calculationsLabel.setText("");
+        actionConfirmation.setText("");
         resetView();
         setUpRunwayTab();
 
@@ -539,5 +568,32 @@ public class Controller {
                 runwayObstacleLabel.setText(currentRunway.getObstacle().getName());
             }
         }
+    }
+    public void exportMenuButtonClicked() {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extTxtFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        FileChooser.ExtensionFilter extJpegSOVFilter = new FileChooser.ExtensionFilter("JPEG SOV files (*.jpeg)", "*.jpeg");
+        FileChooser.ExtensionFilter extJpegTDVFilter = new FileChooser.ExtensionFilter("JPEG TDV files (*.jpeg)", "*.jpeg");
+//FileChooser.ExtensionFilter extPngFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
+//FileChooser.ExtensionFilter extGifFilter = new FileChooser.ExtensionFilter("GIF files (*.gif)", "*.gif");
+        fileChooser.getExtensionFilters().add(extTxtFilter);
+        fileChooser.getExtensionFilters().add(extJpegSOVFilter);
+        fileChooser.getExtensionFilters().add(extJpegTDVFilter);
+//fileChooser.getExtensionFilters().add(extPngFilter);
+//fileChooser.getExtensionFilters().add(extGifFilter);
+        File file = fileChooser.showSaveDialog(root.getScene().getWindow());
+
+        //if(file != null && currentAirport != null){
+         //   if(Model.Data.DataPrint.exportTxtData(file, currentAirport)){
+         //       System.out.println("Saving to " + file + "...");}}
+
+        if(file != null && currentAirport != null){
+            if(Model.Data.DataPrint.exportJpegSideOnViewData(file, currentAirport)){
+                System.out.println("Saving to " + file + "...");}}
+
+/*if(file != null && currentAirport != null){
+if(Model.Data.DataPrint.exportJpegTopDownViewData(file, currentAirport)){
+System.out.println("Saving to " + file + "...");}}
+*/
     }
 }

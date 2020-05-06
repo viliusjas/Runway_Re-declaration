@@ -185,11 +185,6 @@
                         </Tab>
                     </tabs>
                 </TabPane>
-                <VBox layoutX="7.0" layoutY="5.0" prefHeight="20.0" prefWidth="769.0">
-                    <children>
-                        <Label fx:id="actionConfirmation" prefHeight="16.0" prefWidth="769.0" />
-                    </children>
-                </VBox>
                 <!-- Side View GridPane -->
                 <!--<BorderPane fx:id="sideViewPane" visible="true">
                 </BorderPane>

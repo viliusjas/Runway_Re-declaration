@@ -32,8 +32,6 @@ public class Controller {
     private BorderPane topdownViewPane;
     private BorderPane sideViewPane;
 
-    private String actionTextHelper = "";
-
     @FXML
     private AnchorPane anchorPane;
     @FXML
@@ -84,8 +82,7 @@ public class Controller {
     private Label calculationsLabel;
     @FXML
     private Label runwayObstacleLabel;
-    @FXML
-    private Label actionConfirmation;
+
 
 
 
@@ -122,9 +119,6 @@ public class Controller {
             setCurrentAirport(XMLImport.importAirportXML(file));
 
             if (currentAirport != null) {
-                actionTextHelper = actionTextHelper.replace(" Airport Imported! ", "");
-                actionTextHelper = actionTextHelper +  " Airport Imported! ";
-                actionConfirmation.setText(actionTextHelper);
                 System.out.println("Airport " + currentAirport.getAirportName() + " loaded successfully");
             }
 
@@ -151,9 +145,6 @@ public class Controller {
             obstacles = newList;
 
             if (importResult != null) {
-                actionTextHelper = actionTextHelper.replace(" Obstacles Imported! ", "");
-                actionTextHelper = actionTextHelper +  " Obstacles Imported! ";
-                actionConfirmation.setText(actionTextHelper);
                 System.out.println(importResult.size() + " obstacles loaded successfully");
             }
             setupObstaclesComboBox();
@@ -180,9 +171,6 @@ public class Controller {
             aircrafts = newList;
 
             if (aircrafts != null) {
-                actionTextHelper = actionTextHelper.replace(" Aircrafts Imported! ", "");
-                actionTextHelper = actionTextHelper +  " Aircrafts Imported! ";
-                actionConfirmation.setText(actionTextHelper);
                 System.out.println(aircrafts.size() + " aircraft loaded successfully");
             }
         }  catch (Exception e ) {
@@ -319,19 +307,12 @@ public class Controller {
     public void addObstacleToRunwayButtonClicked() {
         int obstIndex = addObstacleButton.getSelectionModel().getSelectedIndex();
         Obstacle selectedObstacle = obstacles.get(obstIndex);
-        actionTextHelper = actionTextHelper.replace(" Obstacle Added! ", "");
-        actionTextHelper = actionTextHelper.replace(" Obstacle Removed! ", "");
-        actionTextHelper = actionTextHelper +  " Obstacle Added! ";
-        actionConfirmation.setText(actionTextHelper);
         System.out.println("Adding " + selectedObstacle.getName()+ " to " + currentRunway.getRunwayName());
         currentRunway.setObstacle(selectedObstacle);
     }
 
     public void remObstacleButtonClicked() {
         if(currentRunway.getObstacle() != null){
-            actionTextHelper = actionTextHelper.replace(" Obstacle Added! ", "");
-            actionTextHelper = actionTextHelper +  " Obstacle Removed! ";
-            actionConfirmation.setText(actionTextHelper);
             currentRunway.setObstacle(null);
         }
     }
@@ -375,7 +356,6 @@ public class Controller {
         currentRunway.resetRunwayValues();
         currentRunway.calculationsReverted();
         calculationsLabel.setText("");
-        actionConfirmation.setText("");
         resetView();
         setUpRunwayTab();
 

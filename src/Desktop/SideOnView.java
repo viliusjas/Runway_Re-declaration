@@ -44,6 +44,8 @@ public class SideOnView {
     private int runwayWidth = 600;
     private int BLAST = 300;
 
+    private int TOCS = 50 * obstacleHeight;
+
     private float runwayHeight = 15;
 
     public static Scene SOVscene;
@@ -72,6 +74,7 @@ public class SideOnView {
         float scaledStopway = scale * stopwayRightDistance;
         float scaledRESA = scale * RESA;
         float scaledBlast = scale * BLAST;
+        float scaledTOCS = scale * TOCS;
 
         BorderPane borderPane = new BorderPane();
         Scene scene = new Scene(borderPane, 600, 400);
@@ -215,6 +218,10 @@ public class SideOnView {
         // LINE FOR BLAST
         Line blastDistance = new Line(0, 0, scaledBlast, 0);
 
+        // LINE FOR TOCS
+        Line tocsDistance = new Line(obstacleScaledDistance + obstacleScaledLength - scaledTOCS,
+                obstacleScaledHeight, obstacleScaledDistance + obstacleScaledLength, 0);
+
         // LABEL FOR RUNWAY DISTANCE
         VBox runwayVBox = new VBox();
         runwayVBox.setAlignment(Pos.CENTER_RIGHT);
@@ -305,10 +312,15 @@ public class SideOnView {
         blastHBox.setPrefWidth(runwayWidth);
         blastHBox.setAlignment(Pos.CENTER_RIGHT);
 
+        // LABEL FOR TOCS
+        Label tocsLabel = new Label("(TOCS = " + TOCS + "M)");
+        tocsLabel.setFont(new Font("Arial", 10));
+
+
         group.getChildren().addAll(wholeRunway, dashed, plane, runwayVBox,
                 objectVBox, toraVBox, todaVBox, asdaVBox, ldaVBox,
-                stopwayHBox, clearwayHBox, resaHBox, blastHBox, arrowVBox);
-
+                stopwayHBox, clearwayHBox, resaHBox, blastHBox, arrowVBox,
+                tocsDistance, tocsLabel);
         arrowVBox.setLayoutY(-150);
         arrowVBox.setLayoutX(0.2 * runwayWidth);
 
@@ -325,6 +337,8 @@ public class SideOnView {
 
         blastHBox.setLayoutY(obstacleScaledHeight - 25);
         blastHBox.setPrefWidth(obstacleScaledDistance - scaledRESA);
+
+        tocsLabel.setLayoutX(obstacleScaledDistance + obstacleScaledLength);
 
         wholeRunway.setLayoutY(obstacleScaledHeight - (runwayHeight/2));
         dashed.setLayoutY(obstacleScaledHeight);

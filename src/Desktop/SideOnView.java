@@ -321,21 +321,21 @@ public class SideOnView {
                 objectVBox, toraVBox, todaVBox, asdaVBox, ldaVBox,
                 stopwayHBox, clearwayHBox, resaHBox, blastHBox, arrowVBox,
                 tocsDistance, tocsLabel);
-        arrowVBox.setLayoutY(-150);
+        arrowVBox.setLayoutY(-210);
         arrowVBox.setLayoutX(0.2 * runwayWidth);
 
-        todaVBox.setLayoutY(-100);
-        asdaVBox.setLayoutY(-80);
-        toraVBox.setLayoutY(-60);
-        ldaVBox.setLayoutY(-40);
+        todaVBox.setLayoutY(-170);
+        asdaVBox.setLayoutY(-140);
+        toraVBox.setLayoutY(-110);
+        ldaVBox.setLayoutY(-80);
 
-        objectVBox.setLayoutY(-20);
+        objectVBox.setLayoutY(-50);
 
-        clearwayHBox.setLayoutY(obstacleScaledHeight - 40);
-        stopwayHBox.setLayoutY(obstacleScaledHeight - 25);
+        clearwayHBox.setLayoutY(obstacleScaledHeight - 57.5);
+        stopwayHBox.setLayoutY(obstacleScaledHeight - 40);
         stopwayHBox.setLayoutX(-rightClearwayScaled);
 
-        blastHBox.setLayoutY(obstacleScaledHeight - 25);
+        blastHBox.setLayoutY(obstacleScaledHeight - 40);
         blastHBox.setPrefWidth(obstacleScaledDistance - scaledRESA);
 
         tocsLabel.setLayoutX(obstacleScaledDistance + obstacleScaledLength);
@@ -345,16 +345,16 @@ public class SideOnView {
         dashed.setLayoutX(leftClearwayScaled + leftStopwayScaled + 5);
         plane.setLayoutX(obstacleScaledDistance);
 
-        resaHBox.setLayoutY(obstacleScaledHeight + 15);
+        resaHBox.setLayoutY(obstacleScaledHeight + 25);
         resaHBox.setPrefWidth(obstacleScaledDistance);
 
-        runwayVBox.setLayoutY(obstacleScaledHeight + 35);
+        runwayVBox.setLayoutY(obstacleScaledHeight + 82.5);
 
-        borderPane.setLayoutX(152.0);
-        borderPane.setLayoutY(88.0);
+        borderPane.setLayoutX(75);
+        borderPane.setLayoutY(50);
         
-        borderPane.setPrefHeight(408.0);
-        borderPane.setPrefWidth(629.0);
+        borderPane.setPrefHeight(500);
+        borderPane.setPrefWidth(630);
 
         borderPane.setCenter(group);
         SOVscene = scene;

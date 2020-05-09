@@ -361,24 +361,24 @@ public class TopDownView {
                 stopwayHBox, clearwayHBox, resaHBox, blastHBox, horizontalVBox, verticalVBox,
                 arrowVBox);
 
-        arrowVBox.setLayoutY(-150);
+        arrowVBox.setLayoutY(-180);
         arrowVBox.setLayoutX(0.2 * runwayWidth);
 
-        todaVBox.setLayoutY(-100);
-        asdaVBox.setLayoutY(-80);
-        toraVBox.setLayoutY(-60);
-        ldaVBox.setLayoutY(-40);
+        todaVBox.setLayoutY(-140);
+        asdaVBox.setLayoutY(-110);
+        toraVBox.setLayoutY(-80);
+        ldaVBox.setLayoutY(-50);
 
         objectVBox.setLayoutY(-20);
 
         float runwayPosYTop = (obstacleScaledWidth / 2) - (runwayHeight/2);
         float runwayPosYBottom = (obstacleScaledWidth / 2) + (runwayHeight/2);
 
-        clearwayHBox.setLayoutY(runwayPosYTop + 15);
-        stopwayHBox.setLayoutY(runwayPosYTop + 35);
+        clearwayHBox.setLayoutY(runwayPosYTop);
+        stopwayHBox.setLayoutY(runwayPosYTop + 17.5);
         stopwayHBox.setLayoutX(-rightClearwayScaled);
 
-        blastHBox.setLayoutY(runwayPosYTop + 35);
+        blastHBox.setLayoutY(runwayPosYTop + 17.5);
         blastHBox.setPrefWidth(obstacleScaledDistance - scaledRESA);
 
         wholeRunway.setLayoutY(runwayPosYTop);
@@ -387,21 +387,21 @@ public class TopDownView {
         plane.setLayoutX(obstacleScaledDistance);
         plane.setLayoutY(obstacleScaledWidth / 2 + 5);
 
-        resaHBox.setLayoutY(runwayPosYBottom + 55);
+        resaHBox.setLayoutY(runwayPosYBottom + 67.5);
         resaHBox.setPrefWidth(obstacleScaledDistance);
 
-        runwayVBox.setLayoutY(runwayPosYBottom + 75);
+        runwayVBox.setLayoutY(runwayPosYBottom + 125);
 
         horizontalVBox.setLayoutY(obstacleScaledWidth / 2 + 50);
         horizontalVBox.setLayoutX(600);
         verticalVBox.setLayoutY(runwayPosYTop);
         verticalVBox.setLayoutX(180);
 
-        borderPane.setLayoutX(152.0);
-        borderPane.setLayoutY(88.0);
+        borderPane.setLayoutX(75);
+        borderPane.setLayoutY(50);
 
-        borderPane.setPrefHeight(408.0);
-        borderPane.setPrefWidth(629.0);
+        borderPane.setPrefHeight(500);
+        borderPane.setPrefWidth(630);
 
         borderPane.setCenter(group);
 

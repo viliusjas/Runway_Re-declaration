@@ -347,7 +347,7 @@ public class Controller {
             setUpRunwayTab();
             currentRunway.calculationsMade();
         }
-
+        redeclareButton.setDisable(true);
         resetCalcButton.setDisable(false);
 
     }
@@ -359,6 +359,7 @@ public class Controller {
         resetView();
         setUpRunwayTab();
 
+        redeclareButton.setDisable(false);
         resetCalcButton.setDisable(true);
     }
 
@@ -554,26 +555,26 @@ public class Controller {
         FileChooser.ExtensionFilter extTxtFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         FileChooser.ExtensionFilter extJpegSOVFilter = new FileChooser.ExtensionFilter("JPEG SOV files (*.jpeg)", "*.jpeg");
         FileChooser.ExtensionFilter extJpegTDVFilter = new FileChooser.ExtensionFilter("JPEG TDV files (*.jpeg)", "*.jpeg");
-//FileChooser.ExtensionFilter extPngFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
-//FileChooser.ExtensionFilter extGifFilter = new FileChooser.ExtensionFilter("GIF files (*.gif)", "*.gif");
+        //FileChooser.ExtensionFilter extPngFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
+        //FileChooser.ExtensionFilter extGifFilter = new FileChooser.ExtensionFilter("GIF files (*.gif)", "*.gif");
         fileChooser.getExtensionFilters().add(extTxtFilter);
         fileChooser.getExtensionFilters().add(extJpegSOVFilter);
         fileChooser.getExtensionFilters().add(extJpegTDVFilter);
-//fileChooser.getExtensionFilters().add(extPngFilter);
-//fileChooser.getExtensionFilters().add(extGifFilter);
+        //fileChooser.getExtensionFilters().add(extPngFilter);
+        //fileChooser.getExtensionFilters().add(extGifFilter);
         File file = fileChooser.showSaveDialog(root.getScene().getWindow());
 
         //if(file != null && currentAirport != null){
-         //   if(Model.Data.DataPrint.exportTxtData(file, currentAirport)){
-         //       System.out.println("Saving to " + file + "...");}}
+        //   if(Model.Data.DataPrint.exportTxtData(file, currentAirport)){
+        //       System.out.println("Saving to " + file + "...");}}
 
         if(file != null && currentAirport != null){
             if(Model.Data.DataPrint.exportJpegSideOnViewData(file, currentAirport)){
                 System.out.println("Saving to " + file + "...");}}
 
-/*if(file != null && currentAirport != null){
-if(Model.Data.DataPrint.exportJpegTopDownViewData(file, currentAirport)){
-System.out.println("Saving to " + file + "...");}}
-*/
+        /*if(file != null && currentAirport != null){
+        if(Model.Data.DataPrint.exportJpegTopDownViewData(file, currentAirport)){
+        System.out.println("Saving to " + file + "...");}}
+        */
     }
 }

@@ -11,8 +11,7 @@ public class Obstacle {
 
     private int length;
     private int height;
-    private int leftPos;
-    private int rightPos;
+
 
     private int leftThreshold;
     private int rightThreshold;
@@ -61,6 +60,7 @@ public class Obstacle {
     public String getName() {
         return this.name;
     }
+
     public void setLeftThreshold(int leftThreshold) {
         this.leftThreshold = leftThreshold;
     }

@@ -60,6 +60,16 @@ public class SideOnView {
         this.ASDA = runwayObject.getAccStopDistAvail();
         this.LDA = runwayObject.getLandDistAvail();
 
+        if(runwayObject.getObstacle() != null){
+            this.obstacleHeight = runwayObject.getObstacle().getObstacleHeight();
+            this.obstacleLength = runwayObject.getObstacle().getObstacleLength();
+            this.obstaclePosition = runwayObject.getObstacle().getObstacleLeftPos() + runwayObject.getObstacle().getObstacleLength()/2;
+
+            this.RESA = runwayObject.getRunwayEndSafeArea();
+            this.stopwayRightDistance = runwayObject.getStopwayLength();
+            this.clearwayRightDistance = runwayObject.getClearwayLength();
+        }
+
 //        // CALCULATIONS FOR SCALE
         float scale = (float) runwayWidth / RUNWAY_LENGTH;
         System.out.println(scale);
@@ -92,7 +102,7 @@ public class SideOnView {
 
         HBox keyHBox = new HBox();
         keyHBox.prefHeight(27);
-        keyHBox.setAlignment(Pos.CENTER_RIGHT);
+            keyHBox.setAlignment(Pos.CENTER_RIGHT);
         Label key = new Label("KEY:    ");
         Rectangle stopwayKey = new Rectangle(10,10);
         stopwayKey.setFill(DARKBLUE);

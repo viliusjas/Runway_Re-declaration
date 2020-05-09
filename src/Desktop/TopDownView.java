@@ -57,6 +57,15 @@ public class TopDownView {
         this.ASDA = runwayObject.getAccStopDistAvail();
         this.LDA = runwayObject.getLandDistAvail();
 
+        if(runwayObject.getObstacle() != null){
+            this.obstacleLength = runwayObject.getObstacle().getObstacleLength();
+            this.obstaclePosition = runwayObject.getObstacle().getObstacleLeftPos() + runwayObject.getObstacle().getObstacleLength()/2;
+
+            this.RESA = runwayObject.getRunwayEndSafeArea();
+            this.stopwayRightDistance = runwayObject.getStopwayLength();
+            this.clearwayRightDistance = runwayObject.getClearwayLength();
+        }
+
 //        // CALCULATIONS FOR SCALE
         float scale = (float) runwayWidth / RUNWAY_LENGTH;
         System.out.println(scale);

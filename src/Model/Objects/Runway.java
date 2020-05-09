@@ -36,6 +36,8 @@ public class Runway {
     int todaOG = 0;
     int asdaOG = 0;
     int ldaOG = 0;
+    int clearwayOG = 40;
+    int stopwayOG = 100;
 
     private int runwayNumber;
     private RunwayPosition runwayPos;
@@ -214,6 +216,8 @@ public class Runway {
         takeOffDistAvail = todaOG;
         accStopDistAvail = asdaOG;
         landDistAvail = ldaOG;
+        stopwayLength = stopwayOG;
+        clearwayLength = clearwayOG;
     }
 
 

@@ -34,7 +34,7 @@ public class TopDownView {
     private int stopwayRightDistance = 40;
     private int clearwayRightDistance = 100;
 
-    private String LandingDirection = "RIGHT";
+    private String LandingDirection = "LEFT";
 
     private int TORA;
     private int TODA;
@@ -48,7 +48,7 @@ public class TopDownView {
     private float runwayHeight = 50;
 
     public static Scene TDVscene;
-    public BorderPane setUpSideOnView(Runway runwayObject) throws Exception {
+    public BorderPane setUpTopDownView(Runway runwayObject) throws Exception {
 
         // SETUP VALUES
 
@@ -195,18 +195,18 @@ public class TopDownView {
         plane.setFitHeight(obstacleScaledWidth);
         plane.setFitWidth(obstacleScaledLength);
 
-//        // ARROW
-//        FileInputStream arrowFile = new FileInputStream("arrow.png");
-//        Image arrowImage = new Image(arrowFile);
-//        ImageView arrow = new ImageView(arrowImage);
-//        arrow.setFitWidth(50);
-//        arrow.setFitHeight(15);
-//        VBox arrowVBox = new VBox();
-//        arrowVBox.getChildren().addAll(arrow, new Label("Landing Direction"));
-//        arrowVBox.setAlignment(Pos.CENTER);
-//        if (LandingDirection.equals("LEFT")) {
-//            arrow.setRotate(180);
-//        }
+        // ARROW
+        FileInputStream arrowFile = new FileInputStream("arrow.png");
+        Image arrowImage = new Image(arrowFile);
+        ImageView arrow = new ImageView(arrowImage);
+        arrow.setFitWidth(50);
+        arrow.setFitHeight(15);
+        VBox arrowVBox = new VBox();
+        arrowVBox.getChildren().addAll(arrow, new Label("Landing Direction"));
+        arrowVBox.setAlignment(Pos.CENTER);
+        if (LandingDirection.equals("LEFT")) {
+            arrow.setRotate(180);
+        }
 
         // LINE FOR RUNWAY DISTANCE
         Line runwayDistance = new Line(0, 0, runwayWidth, 0);
@@ -358,10 +358,11 @@ public class TopDownView {
 
         group.getChildren().addAll(wholeRunway, dashed, plane, runwayVBox,
                 objectVBox, toraVBox, todaVBox, asdaVBox, ldaVBox,
-                stopwayHBox, clearwayHBox, resaHBox, blastHBox, horizontalVBox, verticalVBox);
+                stopwayHBox, clearwayHBox, resaHBox, blastHBox, horizontalVBox, verticalVBox,
+                arrowVBox);
 
-//        arrowVBox.setLayoutY(-150);
-//        arrowVBox.setLayoutX(0.2 * runwayWidth);
+        arrowVBox.setLayoutY(-150);
+        arrowVBox.setLayoutX(0.2 * runwayWidth);
 
         todaVBox.setLayoutY(-100);
         asdaVBox.setLayoutY(-80);

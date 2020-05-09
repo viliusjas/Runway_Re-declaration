@@ -506,7 +506,7 @@ public class Controller {
             SideOnView sideOn = new SideOnView();
 
             try {
-                topdownViewPane = topDown.setUpSideOnView(currentRunway);
+                topdownViewPane = topDown.setUpTopDownView(currentRunway);
                 sideViewPane = sideOn.setUpSideOnView(currentRunway);
 
                 topdownViewPane.setVisible(topDownVis);

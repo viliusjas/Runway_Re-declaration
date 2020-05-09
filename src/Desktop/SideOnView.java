@@ -33,7 +33,6 @@ public class SideOnView {
     private int stopwayRightDistance = 40;
     private int clearwayRightDistance = 100;
 
-
     private String LandingDirection = "RIGHT";
 
     private int TORA;
@@ -308,10 +307,10 @@ public class SideOnView {
 
         group.getChildren().addAll(wholeRunway, dashed, plane, runwayVBox,
                 objectVBox, toraVBox, todaVBox, asdaVBox, ldaVBox,
-                stopwayHBox, clearwayHBox, resaHBox, blastHBox);
+                stopwayHBox, clearwayHBox, resaHBox, blastHBox, arrowVBox);
 
-//        arrowVBox.setLayoutY(-150);
-//        arrowVBox.setLayoutX(0.2 * runwayWidth);
+        arrowVBox.setLayoutY(-150);
+        arrowVBox.setLayoutX(0.2 * runwayWidth);
 
         todaVBox.setLayoutY(-100);
         asdaVBox.setLayoutY(-80);

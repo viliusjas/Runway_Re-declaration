@@ -332,6 +332,8 @@ public class Controller {
 
 
     public void redeclareButtonClicked() {
+        redeclareButton.setDisable(true);
+        resetCalcButton.setDisable(false);
 
         Calculator calc = new Calculator();
 
@@ -353,14 +355,14 @@ public class Controller {
     }
 
     public void resetCalcButtonClicked() {
+        redeclareButton.setDisable(false);
+        resetCalcButton.setDisable(true);
         currentRunway.resetRunwayValues();
         currentRunway.calculationsReverted();
         calculationsLabel.setText("");
         resetView();
         setUpRunwayTab();
 
-        redeclareButton.setDisable(false);
-        resetCalcButton.setDisable(true);
     }
 
     public void showCalculationsButtonClicked() {

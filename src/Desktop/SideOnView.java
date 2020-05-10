@@ -1,5 +1,6 @@
 package Desktop;
 
+import Model.Objects.Obstacle;
 import Model.Objects.Runway;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -13,6 +14,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeType;
 import javafx.scene.text.Font;
+import java.lang.Math;
 
 import java.io.FileInputStream;
 
@@ -33,14 +35,14 @@ public class SideOnView {
     private int stopwayRightDistance = 40;
     private int clearwayRightDistance = 100;
 
-    private String LandingDirection = "RIGHT";
+    private String landingDirection = "RIGHT";
 
     private int TORA;
     private int TODA;
     private int ASDA;
     private int LDA;
 
-    private int RUNWAY_LENGTH = 3902;
+    private int RUNWAY_LENGTH = 3903;
     private int runwayWidth = 600;
     private int BLAST = 300;
 
@@ -53,22 +55,7 @@ public class SideOnView {
 
     public BorderPane setUpSideOnView(Runway runwayObject) throws Exception {
 
-        // SETUP VALUES
-
-        this.TORA = runwayObject.getTakeOffRunAvail();
-        this.TODA = runwayObject.getTakeOffDistAvail();
-        this.ASDA = runwayObject.getAccStopDistAvail();
-        this.LDA = runwayObject.getLandDistAvail();
-
-        if(runwayObject.getObstacle() != null){
-            this.obstacleHeight = runwayObject.getObstacle().getObstacleHeight();
-            this.obstacleLength = runwayObject.getObstacle().getObstacleLength();
-            this.obstaclePosition = runwayObject.getObstacle().getObstacleLeftPos() + runwayObject.getObstacle().getObstacleLength()/2;
-
-            this.RESA = runwayObject.getRunwayEndSafeArea();
-            this.stopwayRightDistance = runwayObject.getStopwayLength();
-            this.clearwayRightDistance = runwayObject.getClearwayLength();
-        }
+        this.setUpRunwayUI(runwayObject);
 
 //        // CALCULATIONS FOR SCALE
         float scale = (float) runwayWidth / RUNWAY_LENGTH;
@@ -194,7 +181,7 @@ public class SideOnView {
         VBox arrowVBox = new VBox();
         arrowVBox.getChildren().addAll(arrow, new Label("Landing Direction"));
         arrowVBox.setAlignment(Pos.CENTER);
-        if (LandingDirection.equals("LEFT")) {
+        if (landingDirection.equals("left")) {
             arrow.setRotate(180);
         }
 
@@ -372,4 +359,47 @@ public class SideOnView {
         return borderPane;
     }
 
+    public void setUpRunwayUI (Runway runwayObject){
+        this.TORA = runwayObject.getTakeOffRunAvail();
+        this.TODA = runwayObject.getTakeOffDistAvail();
+        this.ASDA = runwayObject.getAccStopDistAvail();
+        this.LDA = runwayObject.getLandDistAvail();
+
+        this.landingDirection = runwayObject.getDirection();
+
+
+
+        if(runwayObject.getTakeOffRunAvail() < runwayObject.getToraOG())
+            this.RUNWAY_LENGTH = runwayObject.getToraOG();
+        else this.RUNWAY_LENGTH = runwayObject.getTakeOffRunAvail();
+
+
+        if(runwayObject.getDirection().equals("left")){
+
+        }
+        else if(runwayObject.getDirection().equals("right")){
+
+        }
+
+        if(runwayObject.getObstacle() != null){
+            this.obstacleHeight = runwayObject.getObstacle().getObstacleHeight();
+            this.obstacleLength = runwayObject.getObstacle().getObstacleLength();
+            this.obstaclePosition = runwayObject.getObstacle().getObstacleLeftPos() + runwayObject.getObstacle().getObstacleLength()/2;
+            //int tocsCalculation = obstacleHeight^2 + (50*obstacleHeight)^2;
+            //this.TOCS = (int) (Math.sqrt(tocsCalculation));
+            this.TOCS = obstacleHeight * 50;
+            this.RESA = runwayObject.getRunwayEndSafeArea();
+            this.stopwayRightDistance = runwayObject.getStopwayLength();
+            this.clearwayRightDistance = runwayObject.getClearwayLength();
+        }
+    }
+
+    public void setUpObstacleUI(Obstacle obstacle){
+
+    }
+
+
+    public void setRUNWAY_LENGTH(int RUNWAY_LENGTH) {
+        this.RUNWAY_LENGTH = RUNWAY_LENGTH;
+    }
 }

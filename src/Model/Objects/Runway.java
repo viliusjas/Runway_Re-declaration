@@ -50,13 +50,15 @@ public class Runway {
     private int stopwayLength;
     private int clearwayLength;
 
-    private int runwayEndSafeArea;
+    private int runwayEndSafeArea = 240;
     private int stripEnd;
 
     private int visualStripWidth;
 
     private int approchLandSurf;
     private int takeoffClimbSurf;
+
+    private String direction = "";
 
    // private List<Obstacle> obstacles;
 
@@ -211,6 +213,9 @@ public class Runway {
         asdaOG = asda;
         ldaOG = lda;
     }
+    public int getToraOG(){
+        return toraOG;
+    }
     public void resetRunwayValues(){
         takeOffRunAvail = toraOG;
         takeOffDistAvail = todaOG;
@@ -220,9 +225,11 @@ public class Runway {
         clearwayLength = clearwayOG;
     }
 
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
 
-
-
-
-
+    public String getDirection(){
+        return direction;
+    }
 }

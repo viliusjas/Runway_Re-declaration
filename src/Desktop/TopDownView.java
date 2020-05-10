@@ -41,7 +41,7 @@ public class TopDownView {
     private int ASDA;
     private int LDA;
 
-    private int RUNWAY_LENGTH = 3902;
+    private int RUNWAY_LENGTH = 3903;
     private int runwayWidth = 600;
     private int BLAST = 300;
 
@@ -56,6 +56,10 @@ public class TopDownView {
         this.TODA = runwayObject.getTakeOffDistAvail();
         this.ASDA = runwayObject.getAccStopDistAvail();
         this.LDA = runwayObject.getLandDistAvail();
+
+        if(runwayObject.getTakeOffRunAvail() < runwayObject.getToraOG())
+            this.RUNWAY_LENGTH = runwayObject.getToraOG();
+        else this.RUNWAY_LENGTH = runwayObject.getTakeOffRunAvail();
 
         if(runwayObject.getObstacle() != null){
             this.obstacleLength = runwayObject.getObstacle().getObstacleLength();

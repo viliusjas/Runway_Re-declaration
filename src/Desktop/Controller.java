@@ -1,4 +1,5 @@
 package Desktop;
+import com.sun.org.apache.regexp.internal.RE;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +24,7 @@ import java.util.stream.Stream;
 import Model.Data.*;
 import Model.Objects.*;
 import javafx.util.Pair;
+import org.omg.CORBA.OBJ_ADAPTER;
 
 import javax.print.DocFlavor;
 import javax.swing.text.html.ImageView;
@@ -32,6 +34,10 @@ public class Controller {
     private BorderPane topdownViewPane;
     private BorderPane sideViewPane;
 
+    @FXML
+    private TextField rightThreshInput;
+    @FXML
+    private TextField leftThreshInput;
     @FXML
     private AnchorPane anchorPane;
     @FXML
@@ -82,6 +88,8 @@ public class Controller {
     private Label calculationsLabel;
     @FXML
     private Label runwayObstacleLabel;
+    @FXML
+    private Button createObstacleButton;
 
 
 
@@ -307,8 +315,24 @@ public class Controller {
     public void addObstacleToRunwayButtonClicked() {
         int obstIndex = addObstacleButton.getSelectionModel().getSelectedIndex();
         Obstacle selectedObstacle = obstacles.get(obstIndex);
+
+        try {
+            int rightThresh = Integer.parseInt(rightThreshInput.getText());
+            int leftThresh = Integer.parseInt(leftThreshInput.getText());
+
+            selectedObstacle.setRightThreshold(rightThresh);
+            selectedObstacle.setLeftThreshold(leftThresh);
+
+        } catch (Exception e) {
+            showPopupMessage("Invalid input", Alert.AlertType.ERROR);
+            return;
+        }
+
+
+
         System.out.println("Adding " + selectedObstacle.getName()+ " to " + currentRunway.getRunwayName());
         currentRunway.setObstacle(selectedObstacle);
+
     }
 
     public void remObstacleButtonClicked() {
@@ -470,7 +494,7 @@ public class Controller {
 
     void setupPredefinedObstacles() {
 
-        File predefinedObstacles = new File("src/obstacle.xml");
+        /*File predefinedObstacles = new File("src/obstacle.xml");
 
         try {
 
@@ -484,7 +508,28 @@ public class Controller {
             setupObstaclesComboBox();
         }  catch (Exception e ) {
             e.printStackTrace();
-        }
+        }*/
+
+        List<Obstacle> predefinedObstacles = new ArrayList<>();
+
+        Obstacle obstacle1 = new Obstacle(15, 12, 11, 125);
+        Obstacle obstacle2 = new Obstacle(15, 12, 350, 1000);
+        Obstacle obstacle3 = new Obstacle(8,12,123,247);
+        Obstacle obstacle4= new Obstacle(255, 20, 13, 150);
+
+        obstacle1.setName("Obstacle1");
+        obstacle2.setName("Obstacle2");
+        obstacle3.setName("Obstacle3");
+        obstacle4.setName("Obstacle4");
+
+
+        predefinedObstacles.add(obstacle1);
+        predefinedObstacles.add(obstacle2);
+        predefinedObstacles.add(obstacle3);
+        predefinedObstacles.add(obstacle4);
+
+        obstacles = predefinedObstacles;
+        setupObstaclesComboBox();
     }
 
     private void setupRunwayViews() {
@@ -577,4 +622,36 @@ public class Controller {
         System.out.println("Saving to " + file + "...");}}
         */
     }
-}
+
+    public void createObstacleButtonClicked() {
+
+        if (obstacleNameInput.getText() == null
+                || obstacleLengthInput.getText() == null || obstacleHeightInput.getText() == null) {
+            showPopupMessage("Please enter all values for the obstacle", Alert.AlertType.ERROR);
+            return;
+        }
+
+
+        try {
+            String obstacleName = obstacleNameInput.getText();
+            int height = Integer.parseInt(obstacleHeightInput.getText());
+            int length = Integer.parseInt(obstacleLengthInput.getText());
+
+            if (length <= 0 || height <= 0)
+                throw new Exception();
+
+            Obstacle obstacle = new Obstacle(height, length, -1, -1);
+            obstacle.setName(obstacleName);
+            obstacles.add(obstacle);
+            setupObstaclesComboBox();
+
+
+        } catch (Exception e) {
+            showPopupMessage("Invalid input", Alert.AlertType.ERROR);
+            return;
+        }
+    }
+
+
+    }
+

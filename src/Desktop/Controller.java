@@ -311,16 +311,17 @@ public class Controller {
         Obstacle selectedObstacle = obstacles.get(obstIndex);
         System.out.println("Adding " + selectedObstacle.getName()+ " to " + currentRunway.getRunwayName());
         currentRunway.setObstacle(selectedObstacle);
-        topDown.setObstacleVisibility(true);
-        sideOn.setObstacleVisibility(true);
         resetView();
+        topDown.setObstacleVisibility(true);topDown.arrowVisibility(false);
+        sideOn.setObstacleVisibility(true);sideOn.arrowVisibility(false);
+
     }
 
     public void remObstacleButtonClicked() {
         if(currentRunway.getObstacle() != null){
             currentRunway.setObstacle(null);
-            topDown.setObstacleVisibility(false);
-            sideOn.setObstacleVisibility(false);
+            topDown.setObstacleVisibility(false); topDown.arrowVisibility(false);
+            sideOn.setObstacleVisibility(false); sideOn.arrowVisibility(false);
         }
     }
 
@@ -335,8 +336,8 @@ public class Controller {
         this.setCurrentRunway(runwayChosen);
         resetView();
         if(runwayChosen.getObstacle() == null){
-            topDown.setObstacleVisibility(false);
-            sideOn.setObstacleVisibility(false);
+            topDown.setObstacleVisibility(false); topDown.arrowVisibility(false);
+            sideOn.setObstacleVisibility(false); sideOn.arrowVisibility(false);
         }
     }
 
@@ -355,6 +356,8 @@ public class Controller {
         if(!currentRunway.getAlreadyCalculated()) {
             redeclareButton.setDisable(true);
             resetCalcButton.setDisable(false);
+            topDown.arrowVisibility(true);
+            sideOn.arrowVisibility(true);
             calc.calculate(currentRunway.getObstacle(), currentRunway);
             calculationsLabel.setText(calc.getCalculationBreakdown());
             resetView();
@@ -367,8 +370,8 @@ public class Controller {
     public void resetCalcButtonClicked() {
         redeclareButton.setDisable(false);
         resetCalcButton.setDisable(true);
-        topDown.setObstacleVisibility(false);
-        sideOn.setObstacleVisibility(false);
+        topDown.setObstacleVisibility(false);topDown.arrowVisibility(false);
+        sideOn.setObstacleVisibility(false);sideOn.arrowVisibility(false);
         currentRunway.resetRunwayValues();
         currentRunway.calculationsReverted();
         calculationsLabel.setText("");

@@ -405,16 +405,19 @@ public class SideOnView {
     }
 
     public void setObstacleVisibility (boolean bool) {
-        arrowVBox.setVisible(bool);
         plane.setVisible(bool);
-        resaVBox.setVisible(bool);
-        blastVBox.setVisible(bool);
+
         objectDistance.setVisible(bool);
         objectDistanceLabel.setVisible(bool);
+        }
 
+    public void arrowVisibility(boolean bool){
+        arrowVBox.setVisible(bool);
         tocsDistance.setVisible(bool);
         tocsLabel.setVisible(bool);
-        }
+        resaVBox.setVisible(bool);
+        blastVBox.setVisible(bool);
+    }
 
 
     public void setRUNWAY_LENGTH(int RUNWAY_LENGTH) {

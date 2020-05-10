@@ -440,10 +440,14 @@ public class TopDownView {
     public void setObstacleVisibility (boolean bool) {
         arrowVBox.setVisible(bool);
         plane.setVisible(bool);
-        resaVBox.setVisible(bool);
-        blastVBox.setVisible(bool);
+
         objectDistance.setVisible(bool);
         objectDistanceLabel.setVisible(bool);
+    }
+    public void arrowVisibility(boolean bool){
+        arrowVBox.setVisible(bool);
+        resaVBox.setVisible(bool);
+        blastVBox.setVisible(bool);
     }
 
 

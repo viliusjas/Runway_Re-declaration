@@ -64,7 +64,7 @@ public class Runway {
 
     private boolean alreadyCalculated = false;
 
-    private Obstacle obstacle;
+    private Obstacle obstacle = null;
 
 
     public Runway(int runwayNumber, RunwayPosition runwayPos) {

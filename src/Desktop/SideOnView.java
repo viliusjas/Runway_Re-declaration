@@ -52,6 +52,16 @@ public class SideOnView {
 
     public static Scene SOVscene;
 
+    //Visible/invisible values
+    VBox arrowVBox;
+    ImageView plane;
+    VBox resaVBox;
+    VBox blastVBox;
+    Line objectDistance;
+    Label objectDistanceLabel;
+    Line tocsDistance;
+    Label tocsLabel;
+
 
     public BorderPane setUpSideOnView(Runway runwayObject) throws Exception {
 
@@ -168,7 +178,7 @@ public class SideOnView {
         // PLANE OBSTACLE
         FileInputStream input = new FileInputStream("2Dplane.png");
         Image image = new Image(input);
-        ImageView plane = new ImageView(image);
+        plane = new ImageView(image);
         plane.setFitHeight(obstacleScaledHeight);
         plane.setFitWidth(obstacleScaledLength);
 
@@ -178,7 +188,7 @@ public class SideOnView {
         ImageView arrow = new ImageView(arrowImage);
         arrow.setFitWidth(50);
         arrow.setFitHeight(15);
-        VBox arrowVBox = new VBox();
+        arrowVBox = new VBox();
         arrowVBox.getChildren().addAll(arrow, new Label("Landing Direction"));
         arrowVBox.setAlignment(Pos.CENTER);
         if (landingDirection.equals("left")) {
@@ -189,7 +199,7 @@ public class SideOnView {
         Line runwayDistance = new Line(0, 0, runwayWidth, 0);
 
         // LINE FOR OBJECT DISTANCE
-        Line objectDistance = new Line(0, 0, obstacleScaledDistance, 0);
+        objectDistance = new Line(0, 0, obstacleScaledDistance, 0);
 
         // LINE FOR TORA
         Line toraDistance = new Line(0, 0, scaledTORA, 0);
@@ -216,7 +226,7 @@ public class SideOnView {
         Line blastDistance = new Line(0, 0, scaledBlast, 0);
 
         // LINE FOR TOCS
-        Line tocsDistance = new Line(obstacleScaledDistance + obstacleScaledLength - scaledTOCS,
+        tocsDistance = new Line(obstacleScaledDistance + obstacleScaledLength - scaledTOCS,
                 obstacleScaledHeight, obstacleScaledDistance + obstacleScaledLength, 0);
 
         // LABEL FOR RUNWAY DISTANCE
@@ -229,7 +239,7 @@ public class SideOnView {
         // LABEL FOR OBJECT DISTANCE
         VBox objectVBox = new VBox();
         objectVBox.setAlignment(Pos.CENTER_RIGHT);
-        Label objectDistanceLabel = new Label("(Object Distance = " + obstaclePosition + "m)");
+        objectDistanceLabel = new Label("(Object Distance = " + obstaclePosition + "m)");
         objectDistanceLabel.setFont(new Font("Arial", 10));
         objectVBox.getChildren().addAll(objectDistanceLabel, objectDistance);
 
@@ -286,7 +296,7 @@ public class SideOnView {
         stopwayHBox.setAlignment(Pos.CENTER_RIGHT);
 
         // LABEL FOR RESA
-        VBox resaVBox = new VBox();
+        resaVBox = new VBox();
         resaVBox.setAlignment(Pos.CENTER_RIGHT);
         Label resaLabel = new Label("(RESA = " + RESA + "m)");
         resaLabel.setFont(new Font("Arial", 10));
@@ -298,7 +308,7 @@ public class SideOnView {
         resaHBox.setAlignment(Pos.CENTER_RIGHT);
 
         // LABEL FOR BLAST
-        VBox blastVBox = new VBox();
+        blastVBox = new VBox();
         blastVBox.setAlignment(Pos.CENTER_RIGHT);
         Label blastLabel = new Label("(BLAST = " + BLAST + "M)");
         blastLabel.setFont(new Font("Arial", 10));
@@ -310,7 +320,7 @@ public class SideOnView {
         blastHBox.setAlignment(Pos.CENTER_RIGHT);
 
         // LABEL FOR TOCS
-        Label tocsLabel = new Label("(TOCS = " + TOCS + "M)");
+        tocsLabel = new Label("(TOCS = " + TOCS + "M)");
         tocsLabel.setFont(new Font("Arial", 10));
 
 
@@ -394,9 +404,17 @@ public class SideOnView {
         }
     }
 
-    public void setUpObstacleUI(Obstacle obstacle){
+    public void setObstacleVisibility (boolean bool) {
+        arrowVBox.setVisible(bool);
+        plane.setVisible(bool);
+        resaVBox.setVisible(bool);
+        blastVBox.setVisible(bool);
+        objectDistance.setVisible(bool);
+        objectDistanceLabel.setVisible(bool);
 
-    }
+        tocsDistance.setVisible(bool);
+        tocsLabel.setVisible(bool);
+        }
 
 
     public void setRUNWAY_LENGTH(int RUNWAY_LENGTH) {

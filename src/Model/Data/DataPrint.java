@@ -25,7 +25,7 @@ public class DataPrint {
      * @return true if write is successful
      */
 
-    public static boolean exportData(File file, Airport airport) {
+    public static boolean exportTxtData(File file, Airport airport) {
 
         try {
             PrintWriter writer;
@@ -57,19 +57,30 @@ public class DataPrint {
 
         return false;
     }
-    /*
-public static boolean exportJpegTopDownViewData(File file, Airport airport){
-try{ WritableImage TDVimg = new WritableImage(900, 800);
-TopDownView.TDVscene.snapshot(TDVimg);
-RenderedImage TDVImage = SwingFXUtils.fromFXImage(TDVimg, null);
-ImageIO.write(TDVImage,"PNG",new FileOutputStream(file));
-return true;
-} catch (Exception ex) { }
-return false;
-}
-*/
+
+    public static boolean exportJpegTopDownViewData(File file, Airport airport){
+        try{ WritableImage TDVimg = new WritableImage(900, 800);
+            TopDownView.TDVscene.snapshot(TDVimg);
+            RenderedImage TDVImage = SwingFXUtils.fromFXImage(TDVimg, null);
+            ImageIO.write(TDVImage,"PNG",new FileOutputStream(file));
+            return true;
+    } catch (Exception ex) { }
+        return false;
+    }
+
 
     public static boolean exportJpegSideOnViewData(File file, Airport airport){
+        try{
+            WritableImage SOVimg = new WritableImage(900, 500);
+            SideOnView.SOVscene.snapshot(SOVimg);
+            RenderedImage SOVImage = SwingFXUtils.fromFXImage(SOVimg, null);
+            ImageIO.write(SOVImage,"PNG",new FileOutputStream(file));
+            return true;
+        } catch (Exception ex) { }
+        return false;
+    }
+
+    public static boolean exportPngSideOnViewData(File file, Airport airport){
         try{
             WritableImage SOVimg = new WritableImage(900, 500);
             SideOnView.SOVscene.snapshot(SOVimg);

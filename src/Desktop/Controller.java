@@ -1,5 +1,4 @@
 package Desktop;
-import com.sun.org.apache.regexp.internal.RE;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +23,6 @@ import java.util.stream.Stream;
 import Model.Data.*;
 import Model.Objects.*;
 import javafx.util.Pair;
-import org.omg.CORBA.OBJ_ADAPTER;
 
 import javax.print.DocFlavor;
 import javax.swing.text.html.ImageView;

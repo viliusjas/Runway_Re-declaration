@@ -48,6 +48,7 @@ public class SideOnView {
     private int BLAST;
     private int RESA;
     private int TOCS;
+    private int obstaclePosition;
 
     private float runwayHeight = 15;
 
@@ -64,17 +65,17 @@ public class SideOnView {
     private Label tocsLabel;
 
     public BorderPane setUpSideOnView(Runway runwayObject) throws Exception {
-        setUpRunway(runwayObject);
+        this.setUpRunwayUI(runwayObject);
         return getSideOnView();
     }
 
     public BorderPane setUpSideOnView(Runway runwayObject, Obstacle obstacle) throws Exception {
-        setUpRunway(runwayObject);
+        this.setUpRunwayUI(runwayObject);
         setUpObstacle(runwayObject, obstacle);
         return getSideOnView();
     }
 
-    private void setUpRunway(Runway runwayObject) {
+    private void setUpRunwayUI(Runway runwayObject) {
         this.runwayName = runwayObject.getRunwayName();
 
         this.TORA = runwayObject.getTakeOffRunAvail();
@@ -95,6 +96,15 @@ public class SideOnView {
         }
         else if(runwayObject.getDirection().equals("right")) {
 
+        }
+        if(runwayObject.getObstacle() != null){
+            this.obstacleLength = runwayObject.getObstacle().getObstacleLength();
+            this.obstaclePosition = runwayObject.getObstacle().getObstacleLeftPos() + runwayObject.getObstacle().getObstacleLength()/2;
+
+            this.RESA = runwayObject.getRunwayEndSafeArea();
+            this.stopwayRightDistance = runwayObject.getStopwayLength();
+            this.clearwayRightDistance = runwayObject.getClearwayLength();
+            this.TOCS = 50 * this.obstacleHeight;
         }
 
         // Need to add these:
@@ -140,10 +150,11 @@ public class SideOnView {
     public BorderPane getSideOnView() throws Exception {
 
 //        // CALCULATIONS FOR SCALE
+
         float scale = (float) runwayPixelWidth / runwayLength;
         float obstacleScaledHeight = scale * obstacleHeight * 10;
         float obstacleScaledLength = scale * obstacleLength * 10;
-        float obstacleScaledDistance = scale * obstacleLeftThreshold;
+        float obstacleScaledDistance = scale * obstaclePosition;
         float scaledTORA = scale * TORA;
         float scaledTODA = scale * TODA;
         float scaledASDA = scale * ASDA;

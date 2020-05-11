@@ -25,6 +25,7 @@
                     <items>
                         <Menu mnemonicParsing="false" text="Import..">
                             <items>
+                                <MenuItem fx:id="importConfigButton" mnemonicParsing="false" onAction="#importConfigButtonClicked" text="Airport" />
                                 <MenuItem fx:id="importAirportButton" mnemonicParsing="false" onAction="#importAirportButtonClicked" text="Airport" />
                                 <MenuItem fx:id="importObstaclesButton" mnemonicParsing="false" onAction="#importObstaclesButtonClicked" text="Obstacles" />
                                 <MenuItem fx:id="importAircraftButton" mnemonicParsing="false" onAction="#importAircraftButtonClicked" text="Aircraft" />
@@ -37,8 +38,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="Undo" />
-                        <MenuItem mnemonicParsing="false" text="Redo" />
+                        <MenuItem mnemonicParsing="false" onAction="#darkModeToggle" text="Dark Theme (Toggle)" />
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

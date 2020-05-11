@@ -88,6 +88,11 @@ public class Controller {
     private Label runwayObstacleLabel;
     @FXML
     private Button createObstacleButton;
+    @FXML
+    private Button darkThemeButton;
+
+    private boolean darkMode = false;
+    private Scene scene;
 
     TopDownView topDown = new TopDownView();
     SideOnView sideOn = new SideOnView();
@@ -114,6 +119,21 @@ public class Controller {
     public void setCurrentAirport(Airport airport) {
         this.currentAirport = airport;
         setUpAirportTab();
+    }
+
+    public void importConfigButtonClicked () {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
+        fileChooser.getExtensionFilters().add(extFilter);
+        File file = fileChooser.showOpenDialog(root.getScene().getWindow());
+        System.out.println("Opened " + file);
+        try {
+
+        } catch (Exception e ) {
+            e.printStackTrace();
+            if(file != null)
+                showPopupMessage(file + " is not a valid config xml file", Alert.AlertType.ERROR);
+        }
     }
 
     public void importAirportButtonClicked() {
@@ -663,6 +683,22 @@ public class Controller {
         }
     }
 
-
+    public void setScene(Scene scene) {
+        this.scene = scene;
     }
+
+    public void darkModeToggle() {
+        System.out.println("Toggle");
+
+            if (!darkMode) {
+                scene.getStylesheets().add("darktheme.css");
+                darkMode = true;
+            } else {
+                scene.getStylesheets().remove("darktheme.css");
+                darkMode = false;
+            }
+    }
+
+
+}
 

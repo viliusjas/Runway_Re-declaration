@@ -91,7 +91,8 @@ public class Controller {
     @FXML
     private Button createObstacleButton;
 
-
+    TopDownView topDown = new TopDownView();
+    SideOnView sideOn = new SideOnView();
 
 
     /**
@@ -313,6 +314,7 @@ public class Controller {
     }
 
     public void addObstacleToRunwayButtonClicked() {
+
         int obstIndex = addObstacleButton.getSelectionModel().getSelectedIndex();
         Obstacle selectedObstacle = obstacles.get(obstIndex);
 
@@ -332,12 +334,17 @@ public class Controller {
 
         System.out.println("Adding " + selectedObstacle.getName()+ " to " + currentRunway.getRunwayName());
         currentRunway.setObstacle(selectedObstacle);
+        resetView();
+        topDown.setObstacleVisibility(true);topDown.arrowVisibility(false);
+        sideOn.setObstacleVisibility(true);sideOn.arrowVisibility(false);
 
     }
 
     public void remObstacleButtonClicked() {
         if(currentRunway.getObstacle() != null){
             currentRunway.setObstacle(null);
+            topDown.setObstacleVisibility(false); topDown.arrowVisibility(false);
+            sideOn.setObstacleVisibility(false); sideOn.arrowVisibility(false);
         }
     }
 
@@ -348,14 +355,19 @@ public class Controller {
 
         int runwayIndex = changeRunwaysMenu.getSelectionModel().getSelectedIndex();
 
-        this.setCurrentRunway(this.currentAirport.getAirportRunways().get(runwayIndex));
-
-        setupRunwayViews();
+        Runway runwayChosen = this.currentAirport.getAirportRunways().get(runwayIndex);
+        this.setCurrentRunway(runwayChosen);
+        resetView();
+        if(runwayChosen.getObstacle() == null){
+            topDown.setObstacleVisibility(false); topDown.arrowVisibility(false);
+            sideOn.setObstacleVisibility(false); sideOn.arrowVisibility(false);
+        }
     }
 
 
 
     public void redeclareButtonClicked() {
+
 
         Calculator calc = new Calculator();
 
@@ -365,26 +377,30 @@ public class Controller {
         }
 
         if(!currentRunway.getAlreadyCalculated()) {
+            redeclareButton.setDisable(true);
+            resetCalcButton.setDisable(false);
+            topDown.arrowVisibility(true);
+            sideOn.arrowVisibility(true);
             calc.calculate(currentRunway.getObstacle(), currentRunway);
             calculationsLabel.setText(calc.getCalculationBreakdown());
             resetView();
             setUpRunwayTab();
             currentRunway.calculationsMade();
         }
-        redeclareButton.setDisable(true);
-        resetCalcButton.setDisable(false);
 
     }
 
     public void resetCalcButtonClicked() {
+        redeclareButton.setDisable(false);
+        resetCalcButton.setDisable(true);
+        topDown.setObstacleVisibility(false);topDown.arrowVisibility(false);
+        sideOn.setObstacleVisibility(false);sideOn.arrowVisibility(false);
         currentRunway.resetRunwayValues();
         currentRunway.calculationsReverted();
         calculationsLabel.setText("");
         resetView();
         setUpRunwayTab();
 
-        redeclareButton.setDisable(false);
-        resetCalcButton.setDisable(true);
     }
 
     public void showCalculationsButtonClicked() {
@@ -547,9 +563,6 @@ public class Controller {
                 sideViewVis = sideViewPane.isVisible();
                 anchorPane.getChildren().remove(sideViewPane);
             }
-
-            TopDownView topDown = new TopDownView();
-            SideOnView sideOn = new SideOnView();
 
             try {
                 topdownViewPane = topDown.setUpTopDownView(currentRunway);

@@ -66,13 +66,12 @@ public class SideOnView {
 
     public BorderPane setUpSideOnView(Runway runwayObject) throws Exception {
         this.setUpRunwayUI(runwayObject);
-        return getSideOnView();
+        return getSideOnView(runwayObject);
     }
 
     public BorderPane setUpSideOnView(Runway runwayObject, Obstacle obstacle) throws Exception {
         this.setUpRunwayUI(runwayObject);
-        setUpObstacle(runwayObject, obstacle);
-        return getSideOnView();
+        return getSideOnView(runwayObject);
     }
 
     private void setUpRunwayUI(Runway runwayObject) {
@@ -99,8 +98,8 @@ public class SideOnView {
         }
         if(runwayObject.getObstacle() != null){
             this.obstacleLength = runwayObject.getObstacle().getObstacleLength();
-            this.obstaclePosition = runwayObject.getObstacle().getObstacleLeftPos() + runwayObject.getObstacle().getObstacleLength()/2;
-
+            this.obstaclePosition = runwayObject.getObstacle().getObstacleLeftPos();
+            this.obstacleHeight = runwayObject.getObstacle().getObstacleHeight();
             this.RESA = runwayObject.getRunwayEndSafeArea();
             this.stopwayRightDistance = runwayObject.getStopwayLength();
             this.clearwayRightDistance = runwayObject.getClearwayLength();
@@ -111,23 +110,7 @@ public class SideOnView {
 //        this.distancesFromLeft = runwayObject.getDistanceDirection();
     }
 
-    private void setUpObstacle(Runway runwayObject, Obstacle obstacle) {
-        this.obstacleLength = obstacle.getObstacleLength();
-        this.obstacleHeight = obstacle.getObstacleHeight();
-        this.obstacleLeftThreshold = obstacle.getObstacleLeftPos();
-        this.obstacleRightThreshold = obstacle.getObstacleRightPos();
-        this.RESA = runwayObject.getRunwayEndSafeArea();
-        // Need to add these:
-//        this.BLAST = runwayObject.getBlast();
-//        this.stopwayLeftDistance = runwayObject.getStopwayLeftLength();
-//        this.clearwayLeftDistance = runwayObject.getClearwayLeftLength();
 
-        //int tocsCalculation = obstacleHeight^2 + (50*obstacleHeight)^2;
-        //this.TOCS = (int) (Math.sqrt(tocsCalculation));
-        this.TOCS = 50 * this.obstacleHeight;
-        this.stopwayRightDistance = runwayObject.getStopwayLength();
-        this.clearwayRightDistance = runwayObject.getClearwayLength();
-    }
 
     public void setObstacleVisibility (boolean bool) {
         this.plane.setVisible(bool);
@@ -147,9 +130,10 @@ public class SideOnView {
         this.runwayLength = runwayLength;
     }
 
-    public BorderPane getSideOnView() throws Exception {
+    public BorderPane getSideOnView(Runway runwayObject) throws Exception {
 
 //        // CALCULATIONS FOR SCALE
+        this.setUpRunwayUI(runwayObject);
 
         float scale = (float) runwayPixelWidth / runwayLength;
         float obstacleScaledHeight = scale * obstacleHeight * 10;

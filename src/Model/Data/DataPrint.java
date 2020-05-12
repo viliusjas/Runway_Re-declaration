@@ -4,6 +4,7 @@ import Model.Objects.Airport;
 import Model.Objects.Runway;
 import Desktop.*;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.Scene;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.WritableImage;
 
@@ -19,13 +20,14 @@ import java.io.PrintWriter;
 public class DataPrint {
 
     /**
-     * Export data to a .txt file
+     * Export data to a .txt/.jpeg/.png file
      * @param file to be written to
      * @param airport presents the current airport and data to be written to the file
      * @return true if write is successful
      */
 
-    public static boolean exportData(File file, Airport airport) {
+
+    public static boolean exportTxtData(File file, Airport airport) {
 
         try {
             PrintWriter writer;
@@ -57,26 +59,48 @@ public class DataPrint {
 
         return false;
     }
-    /*
-public static boolean exportJpegTopDownViewData(File file, Airport airport){
-try{ WritableImage TDVimg = new WritableImage(900, 800);
-TopDownView.TDVscene.snapshot(TDVimg);
-RenderedImage TDVImage = SwingFXUtils.fromFXImage(TDVimg, null);
-ImageIO.write(TDVImage,"PNG",new FileOutputStream(file));
-return true;
-} catch (Exception ex) { }
-return false;
-}
-*/
 
-    public static boolean exportJpegSideOnViewData(File file, Airport airport){
-        try{
-            WritableImage SOVimg = new WritableImage(900, 500);
-            SideOnView.SOVscene.snapshot(SOVimg);
-            RenderedImage SOVImage = SwingFXUtils.fromFXImage(SOVimg, null);
-            ImageIO.write(SOVImage,"PNG",new FileOutputStream(file));
+    public static boolean exportJpegTopDownViewData(File file){
+        try{ WritableImage TDVimg = new WritableImage(900, 800);
+            TopDownView.TDVscene.snapshot(TDVimg);
+            RenderedImage TDVImage = SwingFXUtils.fromFXImage(TDVimg, null);
+            ImageIO.write(TDVImage,"JPEG",new FileOutputStream(file));
             return true;
         } catch (Exception ex) { }
         return false;
     }
+
+
+    /*public static boolean exportJpegSideOnViewData(File file){
+        try{
+            WritableImage SOVimg = new WritableImage(900, 500);
+            SideOnView.SOVscene.snapshot(SOVimg);
+            RenderedImage SOVImage = SwingFXUtils.fromFXImage(SOVimg, null);
+            ImageIO.write(SOVImage,"jpeg",new FileOutputStream(file));
+            return true;
+        } catch (Exception ex) { }
+        return false;
+    }
+
+    public static boolean exportPngSideOnViewData(File file){
+        try{
+            WritableImage SOVimg = new WritableImage(900, 500);
+            SideOnView.SOVscene.snapshot(SOVimg);
+            RenderedImage SOVImage = SwingFXUtils.fromFXImage(SOVimg, null);
+            ImageIO.write(SOVImage,"png",new FileOutputStream(file));
+            return true;
+        } catch (Exception ex) { }
+        return false;
+    }
+
+    public static boolean exportPngTopDownViewData(File file){
+        try{
+            WritableImage TDVimg = new WritableImage(900, 500);
+            TopDownView.TDVscene.snapshot(TDVimg);
+            RenderedImage TDVImage = SwingFXUtils.fromFXImage(TDVimg, null);
+            ImageIO.write(TDVImage,"png",new FileOutputStream(file));
+            return true;
+        } catch (Exception ex) { }
+        return false;
+    }*/
 }

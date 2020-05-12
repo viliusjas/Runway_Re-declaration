@@ -430,7 +430,7 @@ public class TopDownView {
 
         if(runwayObject.getObstacle() != null){
             this.obstacleLength = runwayObject.getObstacle().getObstacleLength();
-            this.obstaclePosition = runwayObject.getObstacle().getObstacleLeftPos() + runwayObject.getObstacle().getObstacleLength()/2;
+            this.obstaclePosition = runwayObject.getObstacle().getObstacleLeftPos();
 
             this.RESA = runwayObject.getRunwayEndSafeArea();
             this.stopwayRightDistance = runwayObject.getStopwayLength();

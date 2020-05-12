@@ -89,9 +89,10 @@ public class Controller {
     @FXML
     private Button createObstacleButton;
 
-    TopDownView topDown = new TopDownView();
-    SideOnView sideOn = new SideOnView();
-
+    private TopDownView topDown = new TopDownView();
+    private SideOnView sideOn = new SideOnView();
+    private boolean darkMode = false;
+    private Scene scene;
 
     /**
      * @currentAirport the currently imported airport
@@ -317,10 +318,10 @@ public class Controller {
         Obstacle selectedObstacle = obstacles.get(obstIndex);
 
         try {
-            int rightThresh = Integer.parseInt(rightThreshInput.getText());
             int leftThresh = Integer.parseInt(leftThreshInput.getText());
-
-            selectedObstacle.setRightThreshold(rightThresh);
+            int runwayIndex = changeRunwaysMenu.getSelectionModel().getSelectedIndex();
+            Runway runwayChosen = this.currentAirport.getAirportRunways().get(runwayIndex);
+            selectedObstacle.setRightThreshold(runwayChosen.getTakeOffRunAvail() - selectedObstacle.getObstacleLength() - leftThresh);
             selectedObstacle.setLeftThreshold(leftThresh);
 
         } catch (Exception e) {
@@ -664,6 +665,21 @@ public class Controller {
         }
     }
 
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+
+    public void darkModeToggle() {
+        System.out.println("Toggle");
+
+        if (!darkMode) {
+            scene.getStylesheets().add("darktheme.css");
+            darkMode = true;
+        } else {
+            scene.getStylesheets().remove("darktheme.css");
+            darkMode = false;
+        }
+    }
 
     }
 

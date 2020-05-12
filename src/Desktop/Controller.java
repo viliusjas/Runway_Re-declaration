@@ -89,9 +89,10 @@ public class Controller {
     @FXML
     private Button createObstacleButton;
 
-    TopDownView topDown = new TopDownView();
-    SideOnView sideOn = new SideOnView();
-
+    private TopDownView topDown = new TopDownView();
+    private SideOnView sideOn = new SideOnView();
+    private boolean darkMode = false;
+    private Scene scene;
 
     /**
      * @currentAirport the currently imported airport
@@ -663,6 +664,21 @@ public class Controller {
         }
     }
 
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+
+    public void darkModeToggle() {
+        System.out.println("Toggle");
+
+        if (!darkMode) {
+            scene.getStylesheets().add("darktheme.css");
+            darkMode = true;
+        } else {
+            scene.getStylesheets().remove("darktheme.css");
+            darkMode = false;
+        }
+    }
 
     }
 

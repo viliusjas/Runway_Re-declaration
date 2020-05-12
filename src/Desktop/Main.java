@@ -10,6 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("sample.fxml"));
         Parent root = fxmlLoader.load();
 
@@ -20,7 +21,10 @@ public class Main extends Application {
 
         primaryStage.setTitle("Runway Re-Declaration Tool");
         primaryStage.setResizable(false);
-        primaryStage.setScene(new Scene(root));
+        Scene scene = new Scene(root);
+        //scene.getStylesheets().add("darktheme.css");
+        controller.setScene(scene);
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

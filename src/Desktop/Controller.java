@@ -15,9 +15,11 @@ import javafx.geometry.Pos;
 
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Scanner;
 import java.util.stream.Stream;
 
 import Model.Data.*;
@@ -211,6 +213,37 @@ public class Controller {
         stage.setTitle("Settings");
         stage.setScene(new Scene(root1));
         stage.show();
+    }
+
+    public void aboutButtonClicked() {
+        Stage popupwindow=new Stage();
+        popupwindow.initModality(Modality.APPLICATION_MODAL);
+        popupwindow.setTitle("About");
+        TextArea aboutTextArea = new TextArea();
+
+        try {
+            Scanner s = new Scanner(new File("./src/Desktop/UserGuide.txt")).useDelimiter("\\s+");
+            while (s.hasNextLine()) {
+                String line = s.nextLine();
+                if (s.hasNextInt()) {
+                    aboutTextArea.appendText(s.nextInt() + " ");
+                } else {
+                    aboutTextArea.appendText(line + "\n");
+                }
+            }
+            aboutTextArea.setWrapText(true);
+        } catch (FileNotFoundException ex) {
+            System.err.println(ex);
+        }
+
+        Button button1= new Button("Close");
+        button1.setOnAction(e -> popupwindow.close());
+        VBox layout= new VBox(10);
+        layout.getChildren().addAll(aboutTextArea, button1);
+        layout.setAlignment(Pos.CENTER);
+        Scene scene1= new Scene(layout, 600, 250);
+        popupwindow.setScene(scene1);
+        popupwindow.showAndWait();
     }
 
     public void quitMenuButtonClicked() {

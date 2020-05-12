@@ -305,7 +305,7 @@ public class SideOnView {
         // LABEL FOR OBJECT DISTANCE
         VBox objectVBox = new VBox();
         objectVBox.setAlignment(Pos.CENTER_RIGHT);
-        this.objectDistanceLabel = new Label("(Object Distance = " + obstacleLeftThreshold + "m)");
+        this.objectDistanceLabel = new Label("(Object Distance = " + obstaclePosition + "m)");
         this.objectDistanceLabel.setFont(new Font("Arial", 10));
         objectVBox.getChildren().addAll(this.objectDistanceLabel, objectDistance);
 

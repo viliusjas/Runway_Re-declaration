@@ -318,10 +318,10 @@ public class Controller {
         Obstacle selectedObstacle = obstacles.get(obstIndex);
 
         try {
-            int rightThresh = Integer.parseInt(rightThreshInput.getText());
             int leftThresh = Integer.parseInt(leftThreshInput.getText());
-
-            selectedObstacle.setRightThreshold(rightThresh);
+            int runwayIndex = changeRunwaysMenu.getSelectionModel().getSelectedIndex();
+            Runway runwayChosen = this.currentAirport.getAirportRunways().get(runwayIndex);
+            selectedObstacle.setRightThreshold(runwayChosen.getTakeOffRunAvail() - selectedObstacle.getObstacleLength() - leftThresh);
             selectedObstacle.setLeftThreshold(leftThresh);
 
         } catch (Exception e) {

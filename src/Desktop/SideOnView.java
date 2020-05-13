@@ -502,7 +502,6 @@ public class SideOnView {
                     + obstacleScaledLength + scaledRESA);
         }
 
-
         runwayVBox.setLayoutY(obstacleScaledHeight + 82.5);
 
         borderPane.setLayoutX(75);

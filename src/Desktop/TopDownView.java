@@ -49,7 +49,6 @@ public class TopDownView {
     private int runwayPixelWidth = 600;
     private int BLAST = 300;
     private int RESA;
-    private int TOCS;
 //    private int obstaclePosition;
 
     private float runwayHeight = 50;
@@ -63,8 +62,6 @@ public class TopDownView {
     private VBox blastVBox;
     private Line objectDistance;
     private Label objectDistanceLabel;
-    private Line tocsDistance;
-    private Label tocsLabel;
 
     public BorderPane setUpTopDownView(Runway runwayObject) throws Exception {
         this.setUpRunwayUI(runwayObject);
@@ -104,7 +101,6 @@ public class TopDownView {
             this.RESA = runwayObject.getRunwayEndSafeArea();
             this.stopwayRightDistance = runwayObject.getStopwayLength();
             this.clearwayRightDistance = runwayObject.getClearwayLength();
-            this.TOCS = 50 * this.obstacleHeight;
         }
 
         // Need to add these:
@@ -119,8 +115,6 @@ public class TopDownView {
 
     public void arrowVisibility(boolean bool){
         this.arrowVBox.setVisible(bool);
-        this.tocsDistance.setVisible(bool);
-        this.tocsLabel.setVisible(bool);
         this.resaVBox.setVisible(bool);
         this.blastVBox.setVisible(bool);
     }
@@ -148,7 +142,6 @@ public class TopDownView {
         float scaledStopway = scale * stopwayRightDistance;
         float scaledRESA = scale * RESA;
         float scaledBlast = scale * BLAST;
-        float scaledTOCS = scale * TOCS;
 
         BorderPane borderPane = new BorderPane();
         Scene scene = new Scene(borderPane, 600, 400);
@@ -269,20 +262,20 @@ public class TopDownView {
         // PLANE OBSTACLE
         FileInputStream input = new FileInputStream("2Dplane2.png");
         Image image = new Image(input);
-        plane = new ImageView(image);
-        plane.setFitHeight(obstacleScaledWidth);
-        plane.setFitWidth(obstacleScaledLength);
+        this.plane = new ImageView(image);
+        this.plane.setFitHeight(obstacleScaledWidth);
+        this.plane.setFitWidth(obstacleScaledLength);
 
         // ARROW
         FileInputStream arrowFile = new FileInputStream("arrow.png");
         Image arrowImage = new Image(arrowFile);
         ImageView arrow = new ImageView(arrowImage);
-        arrow.setFitWidth(50);
-        arrow.setFitHeight(15);
-        arrowVBox = new VBox();
-        arrowVBox.getChildren().addAll(arrow, new Label("Landing Direction"));
-        arrowVBox.setAlignment(Pos.CENTER);
-        if (landingDirection.equals("LEFT")) {
+        arrow.setFitWidth(40);
+        arrow.setFitHeight(30);
+        this.arrowVBox = new VBox();
+        this.arrowVBox.getChildren().addAll(arrow, new Label("Landing Direction"));
+        this.arrowVBox.setAlignment(Pos.CENTER);
+        if (landingDirection.equals("left")) {
             arrow.setRotate(180);
         }
 
@@ -290,19 +283,62 @@ public class TopDownView {
         Line runwayDistance = new Line(0, 0, runwayPixelWidth, 0);
 
         // LINE FOR OBJECT DISTANCE
-        objectDistance = new Line(0, 0, obstacleScaledDistance, 0);
+        HBox objectDistanceHBox = new HBox();
+        if (this.distancesFromLeft) {
+            objectDistanceHBox.setAlignment(Pos.CENTER_LEFT);
+            this.objectDistance = new Line(0, 0, obstacleScaledDistanceLeft, 0);
+            this.objectDistanceLabel = new Label("(Object Distance = " + obstacleLeftDistance + "m)");
+        } else {
+            objectDistanceHBox.setAlignment(Pos.CENTER_RIGHT);
+            this.objectDistance = new Line(runwayPixelWidth - obstacleScaledDistanceRight,
+                    0, runwayPixelWidth, 0);
+            this.objectDistanceLabel = new Label("(Object Distance = " + obstacleRightDistance + "m)");
+        }
+        this.objectDistanceLabel.setFont(new Font("Arial", 10));
 
         // LINE FOR TORA
-        Line toraDistance = new Line(0, 0, scaledTORA, 0);
+        HBox toraDistanceHBox = new HBox();
+        Line toraDistance;
+        if (this.distancesFromLeft) {
+            toraDistanceHBox.setAlignment(Pos.CENTER_LEFT);
+            toraDistance = new Line(0, 0, scaledTORA, 0);
+        } else {
+            toraDistanceHBox.setAlignment(Pos.CENTER_RIGHT);
+            toraDistance = new Line(runwayPixelWidth - scaledTORA, 0, runwayPixelWidth, 0);
+        }
 
         // LINE FOR TODA
-        Line todaDistance = new Line(0, 0, scaledTODA, 0);
+        HBox todaDistanceHBox = new HBox();
+        Line todaDistance;
+        if (this.distancesFromLeft) {
+            todaDistanceHBox.setAlignment(Pos.CENTER_LEFT);
+            todaDistance = new Line(0, 0, scaledTODA, 0);
+        } else {
+            todaDistanceHBox.setAlignment(Pos.CENTER_RIGHT);
+            todaDistance = new Line(runwayPixelWidth - scaledTODA, 0, runwayPixelWidth, 0);
+        }
 
         // LINE FOR ASDA
-        Line asdaDistance = new Line(0, 0, scaledASDA, 0);
+        HBox asdaDistanceHBox = new HBox();
+        Line asdaDistance;
+        if (this.distancesFromLeft) {
+            asdaDistanceHBox.setAlignment(Pos.CENTER_LEFT);
+            asdaDistance = new Line(0, 0, scaledASDA, 0);
+        } else {
+            asdaDistanceHBox.setAlignment(Pos.CENTER_RIGHT);
+            asdaDistance = new Line(runwayPixelWidth - scaledASDA, 0, runwayPixelWidth, 0);
+        }
 
         // LINE FOR LDA
-        Line ldaDistance = new Line(0, 0, scaledLDA, 0);
+        HBox ldaDistanceHBox = new HBox();
+        Line ldaDistance;
+        if (this.distancesFromLeft) {
+            ldaDistanceHBox.setAlignment(Pos.CENTER_LEFT);
+            ldaDistance = new Line(0, 0, scaledLDA, 0);
+        } else {
+            ldaDistanceHBox.setAlignment(Pos.CENTER_RIGHT);
+            ldaDistance = new Line(runwayPixelWidth - scaledLDA, 0, runwayPixelWidth, 0);
+        }
 
         // LINE FOR CLEARWAY
         Line clearwayDistance = new Line(0, 0, scaledClearway, 0);
@@ -345,16 +381,18 @@ public class TopDownView {
         // LABEL FOR OBJECT DISTANCE
         VBox objectVBox = new VBox();
         objectVBox.setAlignment(Pos.CENTER_RIGHT);
-        objectDistanceLabel = new Label("(Object Distance = " + obstaclePosition + "m)");
-        objectDistanceLabel.setFont(new Font("Arial", 10));
-        objectVBox.getChildren().addAll(objectDistanceLabel, objectDistance);
+        objectVBox.getChildren().addAll(this.objectDistanceLabel, objectDistance);
+        objectDistanceHBox.getChildren().add(objectVBox);
+        objectDistanceHBox.setPrefWidth(runwayPixelWidth);
 
-        // LABEL FOR TORA
+// LABEL FOR TORA
         VBox toraVBox = new VBox();
         toraVBox.setAlignment(Pos.CENTER_RIGHT);
         Label toraLabel = new Label("(TORA = " + TORA + "m)");
         toraLabel.setFont(new Font("Arial", 10));
         toraVBox.getChildren().addAll(toraLabel, toraDistance);
+        toraDistanceHBox.getChildren().add(toraVBox);
+        toraDistanceHBox.setPrefWidth(runwayPixelWidth);
 
         // LABEL FOR TODA
         VBox todaVBox = new VBox();
@@ -362,6 +400,8 @@ public class TopDownView {
         Label todaLabel = new Label("(TODA = " + TODA + "m)");
         todaLabel.setFont(new Font("Arial", 10));
         todaVBox.getChildren().addAll(todaLabel, todaDistance);
+        todaDistanceHBox.getChildren().add(todaVBox);
+        todaDistanceHBox.setPrefWidth(runwayPixelWidth);
 
         // LABEL FOR ASDA
         VBox asdaVBox = new VBox();
@@ -369,6 +409,8 @@ public class TopDownView {
         Label asdaLabel = new Label("(ASDA = " + ASDA + "m)");
         asdaLabel.setFont(new Font("Arial", 10));
         asdaVBox.getChildren().addAll(asdaLabel, asdaDistance);
+        asdaDistanceHBox.getChildren().add(asdaVBox);
+        asdaDistanceHBox.setPrefWidth(runwayPixelWidth);
 
         // LABEL FOR LDA
         VBox ldaVBox = new VBox();
@@ -376,20 +418,26 @@ public class TopDownView {
         Label ldaLabel = new Label("(LDA = " + LDA + "m)");
         ldaLabel.setFont(new Font("Arial", 10));
         ldaVBox.getChildren().addAll(ldaLabel, ldaDistance);
+        ldaDistanceHBox.getChildren().add(ldaVBox);
+        ldaDistanceHBox.setPrefWidth(runwayPixelWidth);
 
         // LABEL FOR STOPWAY
         VBox stopwayVBox = new VBox();
         stopwayVBox.setAlignment(Pos.CENTER_RIGHT);
         Label stopwayLabel = new Label("(" + stopwayRightDistance + "m)");
         stopwayLabel.setFont(new Font("Arial", 10));
-        stopwayVBox.getChildren().addAll(stopwayLabel, stopwayDistance);
+        if (stopwayRightDistance != 0) {
+            stopwayVBox.getChildren().addAll(stopwayLabel, stopwayDistance);
+        }
 
         // LABEL FOR CLEARWAY
         VBox clearwayVBox = new VBox();
         clearwayVBox.setAlignment(Pos.CENTER_RIGHT);
         Label clearwayLabel = new Label("(" + clearwayRightDistance + "m)");
         clearwayLabel.setFont(new Font("Arial", 10));
-        clearwayVBox.getChildren().addAll(clearwayLabel, clearwayDistance);
+        if (clearwayRightDistance != 0) {
+            clearwayVBox.getChildren().addAll(clearwayLabel, clearwayDistance);
+        }
 
         HBox clearwayHBox = new HBox();
         clearwayHBox.getChildren().add(clearwayVBox);
@@ -402,11 +450,11 @@ public class TopDownView {
         stopwayHBox.setAlignment(Pos.CENTER_RIGHT);
 
         // LABEL FOR RESA
-        resaVBox = new VBox();
-        resaVBox.setAlignment(Pos.CENTER_RIGHT);
+        this.resaVBox = new VBox();
+        this.resaVBox.setAlignment(Pos.CENTER_RIGHT);
         Label resaLabel = new Label("(RESA = " + RESA + "m)");
         resaLabel.setFont(new Font("Arial", 10));
-        resaVBox.getChildren().addAll(resaDistance, resaLabel);
+        this.resaVBox.getChildren().addAll(resaDistance, resaLabel);
 
         HBox resaHBox = new HBox();
         resaHBox.getChildren().add(resaVBox);
@@ -414,11 +462,11 @@ public class TopDownView {
         resaHBox.setAlignment(Pos.CENTER_RIGHT);
 
         // LABEL FOR BLAST
-        blastVBox = new VBox();
-        blastVBox.setAlignment(Pos.CENTER_RIGHT);
+        this.blastVBox = new VBox();
+        this.blastVBox.setAlignment(Pos.CENTER_RIGHT);
         Label blastLabel = new Label("(BLAST = " + BLAST + "M)");
         blastLabel.setFont(new Font("Arial", 10));
-        blastVBox.getChildren().addAll(blastLabel, blastDistance);
+        this.blastVBox.getChildren().addAll(blastLabel, blastDistance);
 
         HBox blastHBox = new HBox();
         blastHBox.getChildren().add(blastVBox);
@@ -435,19 +483,19 @@ public class TopDownView {
 //        clearedGradedHBox.setAlignment(Pos.CENTER_RIGHT);
 
         group.getChildren().addAll(wholeRunway, dashed, plane, runwayVBox,
-                objectVBox, toraVBox, todaVBox, asdaVBox, ldaVBox,
-                stopwayHBox, clearwayHBox, resaHBox, blastHBox, horizontalVBox, verticalVBox,
-                arrowVBox);
+                objectDistanceHBox, toraDistanceHBox, todaDistanceHBox,
+                asdaDistanceHBox, ldaDistanceHBox, clearwayHBox, stopwayHBox,
+                resaHBox, blastHBox, arrowVBox, horizontalVBox, verticalVBox);
 
-        arrowVBox.setLayoutY(-180);
-        arrowVBox.setLayoutX(0.2 * runwayPixelWidth);
+        arrowVBox.setLayoutY(-250);
+        arrowVBox.setLayoutX(runwayPixelWidth/2 - 45);
 
-        todaVBox.setLayoutY(-140);
-        asdaVBox.setLayoutY(-110);
-        toraVBox.setLayoutY(-80);
-        ldaVBox.setLayoutY(-50);
+        todaDistanceHBox.setLayoutY(-195);
+        asdaDistanceHBox.setLayoutY(-165);
+        toraDistanceHBox.setLayoutY(-135);
+        ldaDistanceHBox.setLayoutY(-105);
 
-        objectVBox.setLayoutY(-20);
+        objectDistanceHBox.setLayoutY(-75);
 
         float runwayPosYTop = (obstacleScaledWidth / 2) - (runwayHeight/2);
         float runwayPosYBottom = (obstacleScaledWidth / 2) + (runwayHeight/2);
@@ -457,16 +505,26 @@ public class TopDownView {
         stopwayHBox.setLayoutX(-rightClearwayScaled);
 
         blastHBox.setLayoutY(runwayPosYTop + 17.5);
-        blastHBox.setPrefWidth(obstacleScaledDistance - scaledRESA);
+        if (distancesFromLeft) {
+            blastHBox.setPrefWidth(obstacleScaledDistanceLeft - scaledRESA);
+        } else {
+            blastHBox.setPrefWidth(obstacleScaledDistanceLeft
+                    + obstacleScaledLength + scaledRESA + scaledBlast);
+        }
 
         wholeRunway.setLayoutY(runwayPosYTop);
         dashed.setLayoutY((obstacleScaledWidth / 2 + 50));
         dashed.setLayoutX(leftClearwayScaled + leftStopwayScaled + 5);
-        plane.setLayoutX(obstacleScaledDistance);
+        plane.setLayoutX(obstacleScaledDistanceLeft);
         plane.setLayoutY(obstacleScaledWidth / 2 + 5);
 
         resaHBox.setLayoutY(runwayPosYBottom + 67.5);
-        resaHBox.setPrefWidth(obstacleScaledDistance);
+        if (distancesFromLeft) {
+            resaHBox.setPrefWidth(obstacleScaledDistanceLeft);
+        } else {
+            resaHBox.setPrefWidth(obstacleScaledDistanceLeft
+                    + obstacleScaledLength + scaledRESA);
+        }
 
         runwayVBox.setLayoutY(runwayPosYBottom + 125);
 
@@ -482,7 +540,6 @@ public class TopDownView {
         borderPane.setPrefWidth(630);
 
         borderPane.setCenter(group);
-
         TDVscene = scene;
 
         return borderPane;

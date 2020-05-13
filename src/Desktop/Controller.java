@@ -354,11 +354,23 @@ public class Controller {
         Obstacle selectedObstacle = obstacles.get(obstIndex);
 
         try {
+            resetCalcButton.setDisable(false);
             int leftThresh = Integer.parseInt(leftThreshInput.getText());
             int runwayIndex = changeRunwaysMenu.getSelectionModel().getSelectedIndex();
-            Runway runwayChosen = this.currentAirport.getAirportRunways().get(runwayIndex);
-            selectedObstacle.setRightThreshold(runwayChosen.getTakeOffRunAvail() - selectedObstacle.getObstacleLength() - leftThresh);
+            Runway currentRunway = this.currentAirport.getAirportRunways().get(runwayIndex);
+            selectedObstacle.setRightThreshold(currentRunway.getTakeOffRunAvail() - selectedObstacle.getObstacleLength() - leftThresh);
             selectedObstacle.setLeftThreshold(leftThresh);
+
+            Calculator calc = new Calculator();
+            if(!currentRunway.getAlreadyCalculated()) {
+                resetCalcButton.setDisable(false);
+                calc.calculate(selectedObstacle, currentRunway);
+                calculationsLabel.setText(calc.getCalculationBreakdown());
+                resetView();
+                setUpRunwayTab();
+                currentRunway.calculationsMade();
+            }
+
             notificationSystem.notify(notificationPanel, "Object " + selectedObstacle.getName() + " added!");
         } catch (Exception e) {
             showPopupMessage("Invalid input", Alert.AlertType.ERROR);
@@ -370,14 +382,21 @@ public class Controller {
         System.out.println("Adding " + selectedObstacle.getName()+ " to " + currentRunway.getRunwayName());
         currentRunway.setObstacle(selectedObstacle);
         resetView();
-        topDown.setObstacleVisibility(true);topDown.arrowVisibility(false);
-        sideOn.setObstacleVisibility(true);sideOn.arrowVisibility(false);
+        topDown.setObstacleVisibility(true);topDown.arrowVisibility(true);
+        sideOn.setObstacleVisibility(true);sideOn.arrowVisibility(true);
 
     }
 
     public void remObstacleButtonClicked() {
         if(currentRunway.getObstacle() != null){
             currentRunway.setObstacle(null);
+            resetCalcButton.setDisable(true);
+
+            currentRunway.resetRunwayValues();
+            currentRunway.calculationsReverted();
+            calculationsLabel.setText("");
+            resetView();
+            setUpRunwayTab();
             topDown.setObstacleVisibility(false); topDown.arrowVisibility(false);
             sideOn.setObstacleVisibility(false); sideOn.arrowVisibility(false);
         }
@@ -402,39 +421,39 @@ public class Controller {
 
 
     public void redeclareButtonClicked() {
-
-
         Calculator calc = new Calculator();
-
+        /*
         if(currentRunway == null || currentRunway.getObstacle() == null) {
             showPopupMessage("No obstacle has been placed onto the runway", Alert.AlertType.ERROR);
             return;
         }
-
+        */
         if(!currentRunway.getAlreadyCalculated()) {
-            redeclareButton.setDisable(true);
+            //redeclareButton.setDisable(true);
             resetCalcButton.setDisable(false);
-            topDown.arrowVisibility(true);
-            sideOn.arrowVisibility(true);
+            //topDown.arrowVisibility(true);
+            //sideOn.arrowVisibility(true);
             calc.calculate(currentRunway.getObstacle(), currentRunway);
             calculationsLabel.setText(calc.getCalculationBreakdown());
             resetView();
             setUpRunwayTab();
             currentRunway.calculationsMade();
         }
-
     }
 
     public void resetCalcButtonClicked() {
-        redeclareButton.setDisable(false);
-        resetCalcButton.setDisable(true);
-        topDown.setObstacleVisibility(false);topDown.arrowVisibility(false);
-        sideOn.setObstacleVisibility(false);sideOn.arrowVisibility(false);
-        currentRunway.resetRunwayValues();
-        currentRunway.calculationsReverted();
-        calculationsLabel.setText("");
-        resetView();
-        setUpRunwayTab();
+        if(currentRunway.getObstacle() != null){
+            currentRunway.setObstacle(null);
+            resetCalcButton.setDisable(true);
+
+            currentRunway.resetRunwayValues();
+            currentRunway.calculationsReverted();
+            calculationsLabel.setText("");
+            resetView();
+            setUpRunwayTab();
+            topDown.setObstacleVisibility(false); topDown.arrowVisibility(false);
+            sideOn.setObstacleVisibility(false); sideOn.arrowVisibility(false);
+        }
 
     }
 

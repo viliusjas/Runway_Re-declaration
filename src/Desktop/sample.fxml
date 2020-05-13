@@ -183,8 +183,7 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <Button fx:id="redeclareButton" layoutX="105.0" layoutY="250.0" mnemonicParsing="false" onAction="#redeclareButtonClicked" text="Redeclare" />
-                                        <Button fx:id="resetCalcButton" disable="true" layoutX="210.0" layoutY="250.0" mnemonicParsing="false" onAction="#resetCalcButtonClicked" prefHeight="26.0" prefWidth="68.0" text="Reset" />
+                                        <Button fx:id="resetCalcButton" disable="true" layoutX="105.0" layoutY="250.0" mnemonicParsing="false" onAction="#resetCalcButtonClicked" prefHeight="26.0" prefWidth="168.0" text="Reset" />
                                         <Label fx:id="calculationsLabel" layoutX="38.0" layoutY="38.0" prefHeight="199.0" prefWidth="333.0" wrapText="true">
                                  <font>
                                     <Font size="12.0" />

@@ -64,14 +64,14 @@ public class DataPrint {
         try{ WritableImage TDVimg = new WritableImage(900, 800);
             TopDownView.TDVscene.snapshot(TDVimg);
             RenderedImage TDVImage = SwingFXUtils.fromFXImage(TDVimg, null);
-            ImageIO.write(TDVImage,"JPEG",new FileOutputStream(file));
+            ImageIO.write(TDVImage,"jpeg",new FileOutputStream(file));
             return true;
         } catch (Exception ex) { }
         return false;
     }
 
 
-    /*public static boolean exportJpegSideOnViewData(File file){
+    public static boolean exportJpegSideOnViewData(File file){
         try{
             WritableImage SOVimg = new WritableImage(900, 500);
             SideOnView.SOVscene.snapshot(SOVimg);
@@ -95,12 +95,12 @@ public class DataPrint {
 
     public static boolean exportPngTopDownViewData(File file){
         try{
-            WritableImage TDVimg = new WritableImage(900, 500);
+            WritableImage TDVimg = new WritableImage(800, 600);
             TopDownView.TDVscene.snapshot(TDVimg);
             RenderedImage TDVImage = SwingFXUtils.fromFXImage(TDVimg, null);
             ImageIO.write(TDVImage,"png",new FileOutputStream(file));
             return true;
         } catch (Exception ex) { }
         return false;
-    }*/
+    }
 }

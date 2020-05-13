@@ -692,28 +692,52 @@ public class Controller {
         FileChooser.ExtensionFilter extTxtFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
         FileChooser.ExtensionFilter extJpegSOVFilter = new FileChooser.ExtensionFilter("JPEG SOV files (*.jpeg)", "*.jpeg");
         FileChooser.ExtensionFilter extJpegTDVFilter = new FileChooser.ExtensionFilter("JPEG TDV files (*.jpeg)", "*.jpeg");
-        FileChooser.ExtensionFilter extPngSOVFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
-        FileChooser.ExtensionFilter extPngTDVFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
+        FileChooser.ExtensionFilter extPngSOVFilter = new FileChooser.ExtensionFilter("PNG SOV files (*.png)", "*.png");
+        FileChooser.ExtensionFilter extPngTDVFilter = new FileChooser.ExtensionFilter("PNG TDV files (*.png)", "*.png");
 
         fileChooser.getExtensionFilters().addAll(extTxtFilter, extJpegSOVFilter, extJpegTDVFilter, extPngSOVFilter, extPngTDVFilter);
 
         File file = fileChooser.showSaveDialog(root.getScene().getWindow());
 
-        if(file != null && currentAirport != null){
-           if(Model.Data.DataPrint.exportTxtData(file, currentAirport)){
-               System.out.println("Saving to " + file + "...");}
-           else if(Model.Data.DataPrint.exportJpegTopDownViewData(file)){
-               System.out.println("Saving to " + file + "...");}
+        FileChooser.ExtensionFilter selectedExtensionFilter = fileChooser.getSelectedExtensionFilter();
+        if(file != null && currentAirport != null) {
+            if (selectedExtensionFilter.equals(extTxtFilter)) try{
+                Model.Data.DataPrint.exportTxtData(file, currentAirport);
+                System.out.println("Saving to " + file + "...");
+                notificationSystem.notify(notificationPanel, "Txt exported successfully!");
+                }catch (Exception e) {
+                    showPopupMessage("Notification Error!", Alert.AlertType.ERROR);
+                    return;
+            } else if (selectedExtensionFilter.equals(extJpegTDVFilter)) try{
+                Model.Data.DataPrint.exportJpegTopDownViewData(file);
+                System.out.println("Saving to " + file + "...");
+                notificationSystem.notify(notificationPanel, "TDV Jpeg exported successfully!");
+            }catch (Exception e) {
+                showPopupMessage("Notification Error!", Alert.AlertType.ERROR);
+                return;
+            } else if (selectedExtensionFilter.equals(extJpegSOVFilter)) try{
+                Model.Data.DataPrint.exportJpegSideOnViewData(file);
+                System.out.println("Saving to " + file + "...");
+                notificationSystem.notify(notificationPanel, "SOV Jpeg exported successfully!");
+            }catch (Exception e) {
+                showPopupMessage("Notification Error!", Alert.AlertType.ERROR);
+                return;
+            } else if (selectedExtensionFilter.equals(extPngSOVFilter)) try{
+                Model.Data.DataPrint.exportPngSideOnViewData(file);
+                System.out.println("Saving to " + file + "...");
+                notificationSystem.notify(notificationPanel, "SOV Png exported successfully!");
+            }catch (Exception e) {
+                showPopupMessage("Notification Error!", Alert.AlertType.ERROR);
+                return;
+            } else if (selectedExtensionFilter.equals(extPngTDVFilter)) try{
+                Model.Data.DataPrint.exportPngTopDownViewData(file);
+                System.out.println("Saving to " + file + "...");
+                notificationSystem.notify(notificationPanel, "TDV Png exported successfully!");
+            }catch (Exception e) {
+                showPopupMessage("Notification Error!", Alert.AlertType.ERROR);
+                return;
+            }
         }
-
-        //if(file != null && currentAirport != null){
-        //    if(Model.Data.DataPrint.exportJpegSideOnViewData(file, currentAirport)){
-        //        System.out.println("Saving to " + file + "...");}}
-
-        //if(file != null && currentAirport != null){
-        //if(Model.Data.DataPrint.exportJpegTopDownViewData(file)){
-        //System.out.println("Saving to " + file + "...");}}
-
     }
 
     public void createObstacleButtonClicked() {

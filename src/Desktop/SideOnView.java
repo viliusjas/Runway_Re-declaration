@@ -47,10 +47,10 @@ public class SideOnView {
     private String runwayName;
     private int runwayLength;
     private int runwayPixelWidth = 600;
-    private int BLAST;
+    private int BLAST = 300;
     private int RESA;
     private int TOCS;
-    private int obstaclePosition;
+//    private int obstaclePosition;
 
     private float runwayHeight = 15;
 
@@ -100,8 +100,8 @@ public class SideOnView {
         else if(runwayObject.getDirection().equals("right")) {
             this.distancesFromLeft = true;
             System.out.println("right");
-
         }
+
         if(runwayObject.getObstacle() != null){
             this.obstacleLength = runwayObject.getObstacle().getObstacleLength();
             this.obstacleHeight = runwayObject.getObstacle().getObstacleHeight();

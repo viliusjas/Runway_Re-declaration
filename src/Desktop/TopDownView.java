@@ -85,11 +85,14 @@ public class TopDownView {
         }
 
         if(runwayObject.getDirection().equals("left")) {
-
+            this.distancesFromLeft = false;
+            System.out.println("left");
         }
         else if(runwayObject.getDirection().equals("right")) {
-
+            this.distancesFromLeft = true;
+            System.out.println("right");
         }
+
         if(runwayObject.getObstacle() != null){
             this.obstacleLength = runwayObject.getObstacle().getObstacleLength();
             this.obstacleHeight = runwayObject.getObstacle().getObstacleHeight();

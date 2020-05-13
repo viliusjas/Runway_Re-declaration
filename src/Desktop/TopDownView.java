@@ -21,54 +21,125 @@ import static javafx.scene.paint.Color.*;
 
 public class TopDownView {
 
-    //dummydata
-    private int obstacleLength = 60;
+    private int obstacleLength;
+    private int obstacleHeight;
     private int obstacleWidth = 60;
-    private int obstaclePosition = 2500;
-    private int displacedThreshold = 300;
-    private int threshold = 0;
-    private int RESA = 240;
+    private int obstacleLeftPos;
+    private int obstacleRightPos;
+    private int obstacleLeftDistance;
+    private int obstacleRightDistance;
+//    private int displacedThreshold = 300;
+//    private int threshold = 0;
 
-    private int stopwayLeftDistance = 0;
-    private int clearwayLeftDistance = 0;
-    private int stopwayRightDistance = 40;
-    private int clearwayRightDistance = 100;
+    private int stopwayLeftDistance;
+    private int clearwayLeftDistance;
+    private int stopwayRightDistance;
+    private int clearwayRightDistance;
 
-    private String landingDirection = "LEFT";
+    private String landingDirection;
+    private Boolean distancesFromLeft = false;
 
     private int TORA;
     private int TODA;
     private int ASDA;
     private int LDA;
 
-    private int RUNWAY_LENGTH = 3903;
-    private int runwayWidth = 600;
+    private String runwayName;
+    private int runwayLength;
+    private int runwayPixelWidth = 600;
     private int BLAST = 300;
+    private int RESA;
+    private int TOCS;
+//    private int obstaclePosition;
 
     private float runwayHeight = 50;
 
-    // Visible/invisible lines and boxes
-    VBox arrowVBox;
-    ImageView plane;
-    VBox resaVBox;
-    VBox blastVBox;
-    Line objectDistance;
-    Label objectDistanceLabel;
-
-
-
     public static Scene TDVscene;
-    public BorderPane setUpTopDownView(Runway runwayObject) throws Exception {
 
-        // SETUP VALUES
+    // Visible/invisible lines and boxes
+    private VBox arrowVBox;
+    private ImageView plane;
+    private VBox resaVBox;
+    private VBox blastVBox;
+    private Line objectDistance;
+    private Label objectDistanceLabel;
+    private Line tocsDistance;
+    private Label tocsLabel;
+
+    public BorderPane setUpTopDownView(Runway runwayObject) throws Exception {
+        this.setUpRunwayUI(runwayObject);
+        return getTopDownView(runwayObject);
+    }
+
+    private void setUpRunwayUI(Runway runwayObject) {
+        this.runwayName = runwayObject.getRunwayName();
+
+        this.TORA = runwayObject.getTakeOffRunAvail();
+        this.TODA = runwayObject.getTakeOffDistAvail();
+        this.ASDA = runwayObject.getAccStopDistAvail();
+        this.LDA = runwayObject.getLandDistAvail();
+
+        this.landingDirection = runwayObject.getDirection();
+
+        if(runwayObject.getTakeOffRunAvail() < runwayObject.getToraOG()) {
+            this.runwayLength = runwayObject.getToraOG();
+        } else {
+            this.runwayLength = runwayObject.getTakeOffRunAvail();
+        }
+
+        if(runwayObject.getDirection().equals("left")) {
+
+        }
+        else if(runwayObject.getDirection().equals("right")) {
+
+        }
+        if(runwayObject.getObstacle() != null){
+            this.obstacleLength = runwayObject.getObstacle().getObstacleLength();
+            this.obstacleHeight = runwayObject.getObstacle().getObstacleHeight();
+            this.obstacleLeftPos = runwayObject.getObstacle().getObstacleLeftPos();
+            this.obstacleRightPos = runwayObject.getObstacle().getObstacleRightPos();
+            this.obstacleLeftDistance = this.obstacleLeftPos;
+            this.obstacleRightDistance = runwayLength - this.obstacleLeftPos - this.obstacleLength;
+
+            this.RESA = runwayObject.getRunwayEndSafeArea();
+            this.stopwayRightDistance = runwayObject.getStopwayLength();
+            this.clearwayRightDistance = runwayObject.getClearwayLength();
+            this.TOCS = 50 * this.obstacleHeight;
+        }
+
+        // Need to add these:
+//        this.distancesFromLeft = runwayObject.getDistanceDirection();
+    }
+
+    public void setObstacleVisibility (boolean bool) {
+        this.plane.setVisible(bool);
+        this.objectDistance.setVisible(bool);
+        this.objectDistanceLabel.setVisible(bool);
+    }
+
+    public void arrowVisibility(boolean bool){
+        this.arrowVBox.setVisible(bool);
+        this.tocsDistance.setVisible(bool);
+        this.tocsLabel.setVisible(bool);
+        this.resaVBox.setVisible(bool);
+        this.blastVBox.setVisible(bool);
+    }
+
+    public void setRunwayLength(int runwayLength) {
+        this.runwayLength = runwayLength;
+    }
+
+    public BorderPane getTopDownView(Runway runwayObject) throws Exception {
+
+        // CALCULATIONS FOR SCALE
         this.setUpRunwayUI(runwayObject);
 
-//        // CALCULATIONS FOR SCALE
-        float scale = (float) runwayWidth / RUNWAY_LENGTH;
-        System.out.println(scale);
+        float scale = (float) runwayPixelWidth / runwayLength;
         float obstacleScaledWidth = scale * obstacleWidth * 10;
         float obstacleScaledLength = scale * obstacleLength * 10;
-        float obstacleScaledDistance = scale * obstaclePosition;
+        float obstacleScaledDistanceLeft = scale * obstacleLeftPos;
+        float obstacleScaledDistanceRight = runwayPixelWidth -
+                (scale * obstacleLeftPos) - obstacleScaledLength;
         float scaledTORA = scale * TORA;
         float scaledTODA = scale * TODA;
         float scaledASDA = scale * ASDA;
@@ -77,6 +148,7 @@ public class TopDownView {
         float scaledStopway = scale * stopwayRightDistance;
         float scaledRESA = scale * RESA;
         float scaledBlast = scale * BLAST;
+        float scaledTOCS = scale * TOCS;
 
         BorderPane borderPane = new BorderPane();
         Scene scene = new Scene(borderPane, 600, 400);
@@ -88,7 +160,7 @@ public class TopDownView {
         HBox hBox = new HBox();
         hBox.prefHeight(27);
         hBox.setAlignment(Pos.CENTER_LEFT);
-        hBox.getChildren().add(new Label(runwayObject.getRunwayName()));
+        hBox.getChildren().add(new Label(this.runwayName));
         Insets insets = new Insets(5, 10, 5, 10);
         hBox.setPadding(insets);
 
@@ -165,8 +237,8 @@ public class TopDownView {
             rightWidth = rightStopwayScaled;
         }
 
-        float widthChanged = runwayWidth - leftWidth - rightWidth;
-        float clearedGradedWidth = runwayWidth + leftWidth + rightWidth + 25;
+        float widthChanged = runwayPixelWidth - leftWidth - rightWidth;
+        float clearedGradedWidth = runwayPixelWidth + leftWidth + rightWidth + 25;
 
         runway.setWidth(widthChanged);
         clearedGradedArea.setWidth(clearedGradedWidth);
@@ -215,7 +287,7 @@ public class TopDownView {
         }
 
         // LINE FOR RUNWAY DISTANCE
-        Line runwayDistance = new Line(0, 0, runwayWidth, 0);
+        Line runwayDistance = new Line(0, 0, runwayPixelWidth, 0);
 
         // LINE FOR OBJECT DISTANCE
         objectDistance = new Line(0, 0, obstacleScaledDistance, 0);
@@ -266,7 +338,7 @@ public class TopDownView {
         // LABEL FOR RUNWAY DISTANCE
         VBox runwayVBox = new VBox();
         runwayVBox.setAlignment(Pos.CENTER_RIGHT);
-        Label runwayDistanceLabel = new Label("(Runway Length = " + RUNWAY_LENGTH + "m)");
+        Label runwayDistanceLabel = new Label("(Runway Length = " + runwayLength + "m)");
         runwayDistanceLabel.setFont(new Font("Arial", 10));
         runwayVBox.getChildren().addAll(runwayDistance, runwayDistanceLabel);
 
@@ -321,12 +393,12 @@ public class TopDownView {
 
         HBox clearwayHBox = new HBox();
         clearwayHBox.getChildren().add(clearwayVBox);
-        clearwayHBox.setPrefWidth(runwayWidth);
+        clearwayHBox.setPrefWidth(runwayPixelWidth);
         clearwayHBox.setAlignment(Pos.CENTER_RIGHT);
 
         HBox stopwayHBox = new HBox();
         stopwayHBox.getChildren().add(stopwayVBox);
-        stopwayHBox.setPrefWidth(runwayWidth);
+        stopwayHBox.setPrefWidth(runwayPixelWidth);
         stopwayHBox.setAlignment(Pos.CENTER_RIGHT);
 
         // LABEL FOR RESA
@@ -338,7 +410,7 @@ public class TopDownView {
 
         HBox resaHBox = new HBox();
         resaHBox.getChildren().add(resaVBox);
-        resaHBox.setPrefWidth(runwayWidth);
+        resaHBox.setPrefWidth(runwayPixelWidth);
         resaHBox.setAlignment(Pos.CENTER_RIGHT);
 
         // LABEL FOR BLAST
@@ -350,7 +422,7 @@ public class TopDownView {
 
         HBox blastHBox = new HBox();
         blastHBox.getChildren().add(blastVBox);
-        blastHBox.setPrefWidth(runwayWidth);
+        blastHBox.setPrefWidth(runwayPixelWidth);
         blastHBox.setAlignment(Pos.CENTER_RIGHT);
 
 //        // LABEL FOR CLEARED & GRADED AREA
@@ -368,7 +440,7 @@ public class TopDownView {
                 arrowVBox);
 
         arrowVBox.setLayoutY(-180);
-        arrowVBox.setLayoutX(0.2 * runwayWidth);
+        arrowVBox.setLayoutX(0.2 * runwayPixelWidth);
 
         todaVBox.setLayoutY(-140);
         asdaVBox.setLayoutY(-110);
@@ -415,40 +487,5 @@ public class TopDownView {
 
         return borderPane;
     }
-
-    public void setUpRunwayUI(Runway runwayObject){
-        this.TORA = runwayObject.getTakeOffRunAvail();
-        this.TODA = runwayObject.getTakeOffDistAvail();
-        this.ASDA = runwayObject.getAccStopDistAvail();
-        this.LDA = runwayObject.getLandDistAvail();
-
-        this.landingDirection = runwayObject.getDirection();
-
-        if(runwayObject.getTakeOffRunAvail() < runwayObject.getToraOG())
-            this.RUNWAY_LENGTH = runwayObject.getToraOG();
-        else this.RUNWAY_LENGTH = runwayObject.getTakeOffRunAvail();
-
-        if(runwayObject.getObstacle() != null){
-            this.obstacleLength = runwayObject.getObstacle().getObstacleLength();
-            this.obstaclePosition = runwayObject.getObstacle().getObstacleLeftPos();
-
-            this.RESA = runwayObject.getRunwayEndSafeArea();
-            this.stopwayRightDistance = runwayObject.getStopwayLength();
-            this.clearwayRightDistance = runwayObject.getClearwayLength();
-        }
-    }
-    public void setObstacleVisibility (boolean bool) {
-        arrowVBox.setVisible(bool);
-        plane.setVisible(bool);
-
-        objectDistance.setVisible(bool);
-        objectDistanceLabel.setVisible(bool);
-    }
-    public void arrowVisibility(boolean bool){
-        arrowVBox.setVisible(bool);
-        resaVBox.setVisible(bool);
-        blastVBox.setVisible(bool);
-    }
-
 
 }

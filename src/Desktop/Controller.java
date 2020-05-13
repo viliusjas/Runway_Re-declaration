@@ -133,6 +133,8 @@ public class Controller {
 
             if (currentAirport != null) {
                 System.out.println("Airport " + currentAirport.getAirportName() + " loaded successfully");
+                notificationSystem.notify(notificationPanel, "Airport imported succesfully!");
+
             }
 
             setupRunwayComboBox();
@@ -159,6 +161,8 @@ public class Controller {
 
             if (importResult != null) {
                 System.out.println(importResult.size() + " obstacles loaded successfully");
+                notificationSystem.notify(notificationPanel, "Obstacles imported succesfully!");
+
             }
             setupObstaclesComboBox();
         }  catch (Exception e ) {
@@ -185,6 +189,8 @@ public class Controller {
 
             if (aircrafts != null) {
                 System.out.println(aircrafts.size() + " aircraft loaded successfully");
+                notificationSystem.notify(notificationPanel, "Aircrafts imported succesfully!");
+
             }
         }  catch (Exception e ) {
             e.printStackTrace();
@@ -399,6 +405,12 @@ public class Controller {
             setUpRunwayTab();
             topDown.setObstacleVisibility(false); topDown.arrowVisibility(false);
             sideOn.setObstacleVisibility(false); sideOn.arrowVisibility(false);
+            try{
+                notificationSystem.notify(notificationPanel, "Object removed from the Runway!");
+            }catch (Exception e) {
+                showPopupMessage("Notification Error!", Alert.AlertType.ERROR);
+                return;
+            }
         }
     }
 
@@ -416,6 +428,13 @@ public class Controller {
             topDown.setObstacleVisibility(false); topDown.arrowVisibility(false);
             sideOn.setObstacleVisibility(false); sideOn.arrowVisibility(false);
         }
+        try{
+            notificationSystem.notify(notificationPanel, "Runway " + runwayChosen.getRunwayName() + " selected!");
+        }catch (Exception e) {
+            showPopupMessage("Notification Error!", Alert.AlertType.ERROR);
+            return;
+        }
+
     }
 
 
@@ -453,6 +472,12 @@ public class Controller {
             setUpRunwayTab();
             topDown.setObstacleVisibility(false); topDown.arrowVisibility(false);
             sideOn.setObstacleVisibility(false); sideOn.arrowVisibility(false);
+            try{
+                notificationSystem.notify(notificationPanel, "Calculations reset!");
+            }catch (Exception e) {
+                showPopupMessage("Notification Error!", Alert.AlertType.ERROR);
+                return;
+            }
         }
 
     }
@@ -585,7 +610,7 @@ public class Controller {
         Obstacle obstacle1 = new Obstacle(15, 12, 11, 125);
         Obstacle obstacle2 = new Obstacle(15, 12, 350, 1000);
         Obstacle obstacle3 = new Obstacle(8,12,123,247);
-        Obstacle obstacle4= new Obstacle(255, 20, 13, 150);
+        Obstacle obstacle4= new Obstacle(20, 20, 13, 150);
 
         obstacle1.setName("Obstacle1");
         obstacle2.setName("Obstacle2");

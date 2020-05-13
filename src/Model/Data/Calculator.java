@@ -46,12 +46,14 @@ public class Calculator {
         int runwayDisplaced = runway.getTakeOffRunAvail() - runway.getLandDistAvail();
         if(runway.getRunwayPos().equals("Left")){
             if(obstacle.getObstacleLeftPos() < obstacle.getObstacleRightPos()){
+                runway.setDirection("left");
                 if(runwayDisplaced > 0){
                     takeOffAwaylandingOverDisplaced(obstacle, obstacle.getObstacleLeftPos(), runway);
                 }else{
                     takeOffAwaylandingOver(obstacle, obstacle.getObstacleLeftPos(), runway);
                 }
             }else{
+                runway.setDirection("right");
                 if(runwayDisplaced > 0){
                     takeOffTowardslandingTowardsDisplaced(obstacle, obstacle.getObstacleLeftPos(), runway);
                 }else{

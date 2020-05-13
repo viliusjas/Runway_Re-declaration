@@ -85,6 +85,7 @@ public class SideOnView {
         this.LDA = runwayObject.getLandDistAvail();
 
         this.landingDirection = runwayObject.getDirection();
+        System.out.println(landingDirection);
 
         if(runwayObject.getTakeOffRunAvail() < runwayObject.getToraOG()) {
             this.runwayLength = runwayObject.getToraOG();
@@ -93,9 +94,12 @@ public class SideOnView {
         }
 
         if(runwayObject.getDirection().equals("left")) {
-
+            this.distancesFromLeft = false;
+            System.out.println("left");
         }
         else if(runwayObject.getDirection().equals("right")) {
+            this.distancesFromLeft = true;
+            System.out.println("right");
 
         }
         if(runwayObject.getObstacle() != null){
@@ -497,7 +501,6 @@ public class SideOnView {
             resaHBox.setPrefWidth(obstacleScaledDistanceLeft
                     + obstacleScaledLength + scaledRESA);
         }
-
 
         runwayVBox.setLayoutY(obstacleScaledHeight + 82.5);
 

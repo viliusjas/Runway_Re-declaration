@@ -90,9 +90,12 @@ public class Controller {
     private Label runwayObstacleLabel;
     @FXML
     private Button createObstacleButton;
+    @FXML
+    private ListView<BorderPane> notificationPanel;
 
     private TopDownView topDown = new TopDownView();
     private SideOnView sideOn = new SideOnView();
+    private NotificationPanel notificationSystem = new NotificationPanel();
     private boolean darkMode = false;
     private Scene scene;
 
@@ -356,7 +359,7 @@ public class Controller {
             Runway runwayChosen = this.currentAirport.getAirportRunways().get(runwayIndex);
             selectedObstacle.setRightThreshold(runwayChosen.getTakeOffRunAvail() - selectedObstacle.getObstacleLength() - leftThresh);
             selectedObstacle.setLeftThreshold(leftThresh);
-
+            notificationSystem.notify(notificationPanel, "Object " + selectedObstacle.getName() + " added!");
         } catch (Exception e) {
             showPopupMessage("Invalid input", Alert.AlertType.ERROR);
             return;
@@ -714,5 +717,4 @@ public class Controller {
         }
     }
 
-    }
-
+}

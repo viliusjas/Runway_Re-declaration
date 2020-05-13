@@ -1,11 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.collections.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
 
-<VBox fx:id="root" prefHeight="750.0" prefWidth="1175.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Desktop.Controller">
+<VBox fx:id="root" prefHeight="750.0" prefWidth="1175.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Desktop.Controller">
     <children>
 
         <!-- Top Menu Bars -->
@@ -41,12 +54,16 @@
         <!-- Main body -->
         <AnchorPane fx:id="anchorPane" maxHeight="-1.0" maxWidth="-1.0" prefHeight="724.0" prefWidth="1058.0" VBox.vgrow="ALWAYS">
             <children>
-                <AnchorPane layoutX="21.0" layoutY="31.0" prefHeight="661.0" prefWidth="762.0" />
+                <AnchorPane layoutX="21.0" layoutY="31.0" prefHeight="661.0" prefWidth="762.0">
+               <children>
+                  <Line endX="40.0" endY="585.0" layoutX="686.0" layoutY="86.0" startX="40.0" startY="-94.0" />
+                  <Line endX="560.0" layoutX="133.0" layoutY="615.0" startX="-123.0" />
+               </children></AnchorPane>
                 <!-- Buttons at the bottom -->
                 <HBox alignment="CENTER" layoutX="-79.0" layoutY="653.0" prefHeight="58.0" prefWidth="1020.0" spacing="10">
                     <children>
                         <Button fx:id="switchViewsButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#switchViewsButtonClicked" text="Switch Views" />
-                        <ComboBox fx:id="changeRunwaysMenu" onAction="#changeRunwayButtonClicked" promptText="Choose Runway">
+                        <ComboBox fx:id="changeRunwaysMenu" onAction="#changeRunwayButtonClicked" promptText="Choose a Runway">
                             <items>
                                 <FXCollections fx:factory="observableArrayList">
                                 </FXCollections>
@@ -54,25 +71,29 @@
                         </ComboBox>
                         <Button fx:id="resetButton" alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#reset" text="Reset" />
                     </children>
+               <padding>
+                  <Insets right="125.0" />
+               </padding>
                 </HBox>
-                <TabPane layoutX="793.0" prefHeight="443.0" prefWidth="382.0" tabClosingPolicy="UNAVAILABLE">
+                <TabPane layoutX="780.0" layoutY="15.0" prefHeight="443.0" prefWidth="382.0" tabClosingPolicy="UNAVAILABLE">
                     <tabs>
                         <Tab text="Airport">
                             <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="414.0" prefWidth="401.0">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="382.0">
                                     <children>
-                                        <VBox layoutY="5.0" prefHeight="200.0" prefWidth="100.0">
+                                        <VBox layoutX="38.0" layoutY="38.0" prefHeight="200.0" prefWidth="118.0">
                                             <children>
-                                                <Label text="Airport Name" />
-                                                <Label text="Runways" />
+                                                <Label text="Airport Name:" />
+                                                <Label text="Runways:" />
                                             </children>
                                         </VBox>
-                                        <VBox layoutX="126.0" prefHeight="210.0" prefWidth="153.0">
+                                        <VBox layoutX="220.0" layoutY="38.0" prefHeight="210.0" prefWidth="153.0">
                                             <children>
                                                 <Label fx:id="airportName" />
                                                 <Label fx:id="airportRunways" />
                                             </children>
                                         </VBox>
+                              <Line endX="270.0" layoutX="90.0" layoutY="380.0" startX="-123.0" />
                                     </children>
                                 </AnchorPane>
                             </content>
@@ -81,24 +102,24 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <VBox layoutX="37.0" layoutY="37.0" prefHeight="325.0" prefWidth="135.0">
+                                        <VBox layoutX="38.0" layoutY="38.0" prefHeight="325.0" prefWidth="159.0">
                                             <children>
-                                                <Label text="Number" />
-                                                <Label text="Position" />
-                                                <Label text="TORA" />
-                                                <Label text="TODA" />
-                                                <Label text="ASDA" />
-                                                <Label text="SLD" />
-                                                <Label text="Clearway" />
-                                                <Label text="Stopway" />
-                                                <Label text="Strip End" />
-                                                <Label text="Runway End" />
-                                                <Label text="Approach Land Surface" />
-                                                <Label text="Takeoff Climb Surface" />
-                                                <Label text="Obstacle" />
+                                                <Label text="Number:" />
+                                                <Label text="Position:" />
+                                                <Label text="TORA:" />
+                                                <Label text="TODA:" />
+                                                <Label text="ASDA:" />
+                                                <Label text="LDA:" />
+                                                <Label text="Clearway:" />
+                                                <Label text="Stopway:" />
+                                                <Label text="Strip End:" />
+                                                <Label text="Runway End:" />
+                                                <Label prefHeight="16.0" prefWidth="196.0" text="Approach Land Surface:" />
+                                                <Label text="Takeoff Climb Surface:" />
+                                                <Label text="Obstacle:" />
                                             </children>
                                         </VBox>
-                                        <VBox layoutX="191.0" layoutY="37.0" prefHeight="351.0" prefWidth="181.0">
+                                        <VBox layoutX="220.0" layoutY="38.0" prefHeight="351.0" prefWidth="151.0">
                                             <children>
                                                 <Label fx:id="runwayNumber" />
                                                 <Label fx:id="runwayPos" />
@@ -115,46 +136,45 @@
                                                 <Label fx:id="runwayObstacle" />
                                             </children>
                                         </VBox>
+                              <Line endX="270.0" layoutX="90.0" layoutY="380.0" startX="-123.0" />
                                     </children>
                                 </AnchorPane>
                             </content>
                         </Tab>
                         <Tab text="Obstacle">
                             <content>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="615.0" prefWidth="319.0">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="350.0" prefWidth="382.0" translateX="-25.0" translateY="-20.0">
                                     <children>
-                                        <ComboBox fx:id="addObstacleButton" layoutX="82.0" layoutY="139.0" onAction="#addObstacleButtonClicked" prefHeight="26.0" prefWidth="219.0" promptText="Choose an obstacle">
+                                        <ComboBox fx:id="addObstacleButton" layoutX="100.0" layoutY="61.0" onAction="#addObstacleButtonClicked" prefHeight="26.0" prefWidth="229.0" promptText="Choose an Obstacle">
                                             <items>
                                                 <FXCollections fx:factory="observableArrayList">
                                                 </FXCollections>
                                             </items>
                                         </ComboBox>
-                                        <Label layoutX="108.0" layoutY="171.0" text="Left Threshold" />
-                                        <TextField fx:id="leftThreshInput" layoutX="267.0" layoutY="167.0" prefHeight="25.0" prefWidth="60.0" />
-                                        <Label layoutX="119.0" layoutY="251.0" prefHeight="30.0" prefWidth="190.0" text="Create new obstacle">
+                                        <Label layoutX="124.0" layoutY="105.0" text="Runway Position:" />
+                                        <TextField fx:id="leftThreshInput" layoutX="245.0" layoutY="99.0" prefHeight="25.0" prefWidth="60.0" />
+                                        <Label layoutX="137.0" layoutY="175.0" prefHeight="30.0" prefWidth="190.0" text="Create an Obstacle">
                                             <font>
                                                 <Font size="16.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="95.0" layoutY="294.0" text="Name" />
-                                        <Label layoutX="94.0" layoutY="326.0" text="Height" />
-                                        <TextField fx:id="obstacleNameInput" layoutX="221.0" layoutY="289.0" prefHeight="26.0" prefWidth="59.0" />
-                                        <TextField fx:id="obstacleHeightInput" layoutX="221.0" layoutY="321.0" prefHeight="25.0" prefWidth="60.0" />
-                                        <Label layoutX="93.0" layoutY="359.0" text="Length" />
-                                        <TextField fx:id="obstacleLengthInput" layoutX="221.0" layoutY="354.0" prefHeight="25.0" prefWidth="60.0" />
-                                        <Button fx:id="createObstacleButton" layoutX="83.0" layoutY="387.0" mnemonicParsing="false" onAction="#createObstacleButtonClicked" prefHeight="26.0" prefWidth="218.0" text="Create" />
-                                        <Button fx:id="addObstacleToRunwayButton" layoutX="81.0" layoutY="224.0" mnemonicParsing="false" onAction="#addObstacleToRunwayButtonClicked" prefHeight="26.0" prefWidth="220.0" text="Add" />
-                                        <Label layoutX="96.0" layoutY="109.0" prefHeight="30.0" prefWidth="190.0" text="Add obstacle to runway">
+                                        <Label layoutX="124.0" layoutY="210.0" text="Name:" />
+                                        <Label layoutX="124.0" layoutY="240.0" text="Height:" />
+                                        <TextField fx:id="obstacleNameInput" layoutX="245.0" layoutY="205.0" prefHeight="26.0" prefWidth="59.0" />
+                                        <TextField fx:id="obstacleHeightInput" layoutX="245.0" layoutY="235.0" prefHeight="25.0" prefWidth="60.0" />
+                                        <Label layoutX="124.0" layoutY="270.0" text="Length:" />
+                                        <TextField fx:id="obstacleLengthInput" layoutX="245.0" layoutY="265.0" prefHeight="25.0" prefWidth="60.0" />
+                                        <Button fx:id="createObstacleButton" layoutX="100.0" layoutY="310.0" mnemonicParsing="false" onAction="#createObstacleButtonClicked" prefHeight="26.0" prefWidth="230.0" text="Create" />
+                                        <Button fx:id="addObstacleToRunwayButton" layoutX="100.0" layoutY="135.0" mnemonicParsing="false" onAction="#addObstacleToRunwayButtonClicked" prefHeight="26.0" prefWidth="230.0" text="Add" />
+                                        <Label layoutX="143.0" layoutY="28.0" prefHeight="30.0" prefWidth="151.0" text="Add an Obstacle">
                                             <font>
                                                 <Font size="16.0" />
                                             </font>
                                         </Label>
-                                        <Label layoutX="91.0" layoutY="31.0" prefHeight="30.0" prefWidth="200.0" text="Remove current obstacle">
-                                            <font>
-                                                <Font size="16.0" />
-                                            </font>
-                                        </Label>
-                                        <Button fx:id="remObstacleButton" layoutX="77.0" layoutY="61.0" mnemonicParsing="false" onAction="#remObstacleButtonClicked" prefHeight="26.0" prefWidth="228.0" text="Remove" />
+                                        <Button fx:id="remObstacleButton" layoutX="100.0" layoutY="369.0" mnemonicParsing="false" onAction="#remObstacleButtonClicked" prefHeight="26.0" prefWidth="229.0" text="Remove Current Obstacle" />
+                              <Line endX="214.0" layoutX="146.0" layoutY="169.0" startX="-75.0" />
+                              <Line endX="214.0" layoutX="147.0" layoutY="353.0" startX="-75.0" />
+                              <Line endX="270.0" layoutX="115.0" layoutY="410.0" startX="-123.0" />
                                     </children>
                                 </AnchorPane>
                             </content>
@@ -163,23 +183,20 @@
                             <content>
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
-                                        <Button fx:id="redeclareButton" layoutX="104.0" layoutY="244.0" mnemonicParsing="false" onAction="#redeclareButtonClicked" text="Redeclare" />
-                                        <Button fx:id="resetCalcButton" layoutX="210.0" layoutY="243.0" mnemonicParsing="false" disable="true" onAction="#resetCalcButtonClicked" prefHeight="26.0" prefWidth="68.0" text="Reset" />
-                                        <Label fx:id="calculationsLabel" layoutX="20.0" layoutY="32.0" />
+                                        <Button fx:id="redeclareButton" layoutX="105.0" layoutY="250.0" mnemonicParsing="false" onAction="#redeclareButtonClicked" text="Redeclare" />
+                                        <Button fx:id="resetCalcButton" disable="true" layoutX="210.0" layoutY="250.0" mnemonicParsing="false" onAction="#resetCalcButtonClicked" prefHeight="26.0" prefWidth="68.0" text="Reset" />
+                                        <Label fx:id="calculationsLabel" layoutX="38.0" layoutY="38.0" prefHeight="199.0" prefWidth="333.0" wrapText="true">
+                                 <font>
+                                    <Font size="12.0" />
+                                 </font></Label>
+                              <Line endX="270.0" layoutX="90.0" layoutY="380.0" startX="-123.0" />
                                     </children></AnchorPane>
                             </content>
                         </Tab>
                     </tabs>
                 </TabPane>
-            <TitledPane animated="false" layoutX="800.0" layoutY="478.0" prefHeight="246.0" prefWidth="368.0" text="Notification">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="222.0" prefWidth="294.0">
-                     <children>
-                        <ScrollBar layoutX="352.0" layoutY="2.0" orientation="VERTICAL" prefHeight="219.0" prefWidth="14.0" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </TitledPane>
+
+            <ListView fx:id="notificationPanel" layoutX="780.0" layoutY="450.0" prefHeight="253.0" prefWidth="382.0" />
                 <!-- Side View GridPane -->
                 <!--<BorderPane fx:id="sideViewPane" visible="true">
                 </BorderPane>

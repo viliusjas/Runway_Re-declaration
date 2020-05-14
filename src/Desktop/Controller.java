@@ -1,5 +1,6 @@
 package Desktop;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -7,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -14,8 +16,10 @@ import javafx.stage.Stage;
 import javafx.geometry.Pos;
 
 
+import java.awt.image.RenderedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +30,7 @@ import Model.Data.*;
 import Model.Objects.*;
 import javafx.util.Pair;
 
+import javax.imageio.ImageIO;
 import javax.print.DocFlavor;
 import javax.swing.text.html.ImageView;
 
@@ -97,7 +102,7 @@ public class Controller {
     private SideOnView sideOn = new SideOnView();
     private NotificationPanel notificationSystem = new NotificationPanel();
     private boolean darkMode = false;
-    private Scene scene;
+    public static Scene scene;
 
     /**
      * @currentAirport the currently imported airport
@@ -690,12 +695,10 @@ public class Controller {
     public void exportMenuButtonClicked() {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extTxtFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
-        FileChooser.ExtensionFilter extJpegSOVFilter = new FileChooser.ExtensionFilter("JPEG SOV files (*.jpeg)", "*.jpeg");
-        FileChooser.ExtensionFilter extJpegTDVFilter = new FileChooser.ExtensionFilter("JPEG TDV files (*.jpeg)", "*.jpeg");
-        FileChooser.ExtensionFilter extPngSOVFilter = new FileChooser.ExtensionFilter("PNG SOV files (*.png)", "*.png");
-        FileChooser.ExtensionFilter extPngTDVFilter = new FileChooser.ExtensionFilter("PNG TDV files (*.png)", "*.png");
+        FileChooser.ExtensionFilter extJpegFilter = new FileChooser.ExtensionFilter("JPEG files (*.jpeg)", "*.jpeg");
+        FileChooser.ExtensionFilter extPngFilter = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.png");
 
-        fileChooser.getExtensionFilters().addAll(extTxtFilter, extJpegSOVFilter, extJpegTDVFilter, extPngSOVFilter, extPngTDVFilter);
+        fileChooser.getExtensionFilters().addAll(extTxtFilter, extJpegFilter, extPngFilter);
 
         File file = fileChooser.showSaveDialog(root.getScene().getWindow());
 
@@ -708,36 +711,23 @@ public class Controller {
                 }catch (Exception e) {
                     showPopupMessage("Notification Error!", Alert.AlertType.ERROR);
                     return;
-            } else if (selectedExtensionFilter.equals(extJpegTDVFilter)) try{
-                Model.Data.DataPrint.exportJpegTopDownViewData(file);
+            } else if (selectedExtensionFilter.equals(extJpegFilter)) try{
+                Model.Data.DataPrint.exportJpegData(file);
                 System.out.println("Saving to " + file + "...");
-                notificationSystem.notify(notificationPanel, "TDV Jpeg exported successfully!");
+                notificationSystem.notify(notificationPanel, "Jpeg exported successfully!");
             }catch (Exception e) {
                 showPopupMessage("Notification Error!", Alert.AlertType.ERROR);
                 return;
-            } else if (selectedExtensionFilter.equals(extJpegSOVFilter)) try{
-                Model.Data.DataPrint.exportJpegSideOnViewData(file);
+            } else if (selectedExtensionFilter.equals(extPngFilter)) try{
+                Model.Data.DataPrint.exportPngData(file);
                 System.out.println("Saving to " + file + "...");
-                notificationSystem.notify(notificationPanel, "SOV Jpeg exported successfully!");
-            }catch (Exception e) {
-                showPopupMessage("Notification Error!", Alert.AlertType.ERROR);
-                return;
-            } else if (selectedExtensionFilter.equals(extPngSOVFilter)) try{
-                Model.Data.DataPrint.exportPngSideOnViewData(file);
-                System.out.println("Saving to " + file + "...");
-                notificationSystem.notify(notificationPanel, "SOV Png exported successfully!");
-            }catch (Exception e) {
-                showPopupMessage("Notification Error!", Alert.AlertType.ERROR);
-                return;
-            } else if (selectedExtensionFilter.equals(extPngTDVFilter)) try{
-                Model.Data.DataPrint.exportPngTopDownViewData(file);
-                System.out.println("Saving to " + file + "...");
-                notificationSystem.notify(notificationPanel, "TDV Png exported successfully!");
+                notificationSystem.notify(notificationPanel, "Png exported successfully!");
             }catch (Exception e) {
                 showPopupMessage("Notification Error!", Alert.AlertType.ERROR);
                 return;
             }
         }
+
     }
 
     public void createObstacleButtonClicked() {

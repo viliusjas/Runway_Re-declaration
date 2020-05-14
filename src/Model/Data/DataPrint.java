@@ -60,43 +60,23 @@ public class DataPrint {
         return false;
     }
 
-    public static boolean exportJpegTopDownViewData(File file){
-        try{ WritableImage TDVimg = new WritableImage(900, 800);
-            TopDownView.TDVscene.snapshot(TDVimg);
-            RenderedImage TDVImage = SwingFXUtils.fromFXImage(TDVimg, null);
-            ImageIO.write(TDVImage,"jpeg",new FileOutputStream(file));
+    public static boolean exportJpegData(File file){
+        try{ WritableImage jpegimg = new WritableImage(740, 620);
+            Controller.scene.snapshot(jpegimg);
+            BufferedImage jpegImage = SwingFXUtils.fromFXImage(jpegimg, null);
+            BufferedImage newBuffImg = new BufferedImage(740,620, BufferedImage.TYPE_INT_RGB);
+            newBuffImg.createGraphics().drawImage(jpegImage, 0, 0, Color.WHITE, null);
+            jpegImage.flush();
+            ImageIO.write(newBuffImg,"jpeg",new FileOutputStream(file));
             return true;
         } catch (Exception ex) { }
         return false;
     }
 
-
-    public static boolean exportJpegSideOnViewData(File file){
+    public static boolean exportPngData(File file){
         try{
-            WritableImage SOVimg = new WritableImage(900, 500);
-            SideOnView.SOVscene.snapshot(SOVimg);
-            RenderedImage SOVImage = SwingFXUtils.fromFXImage(SOVimg, null);
-            ImageIO.write(SOVImage,"jpeg",new FileOutputStream(file));
-            return true;
-        } catch (Exception ex) { }
-        return false;
-    }
-
-    public static boolean exportPngSideOnViewData(File file){
-        try{
-            WritableImage SOVimg = new WritableImage(900, 500);
-            SideOnView.SOVscene.snapshot(SOVimg);
-            RenderedImage SOVImage = SwingFXUtils.fromFXImage(SOVimg, null);
-            ImageIO.write(SOVImage,"png",new FileOutputStream(file));
-            return true;
-        } catch (Exception ex) { }
-        return false;
-    }
-
-    public static boolean exportPngTopDownViewData(File file){
-        try{
-            WritableImage TDVimg = new WritableImage(800, 600);
-            TopDownView.TDVscene.snapshot(TDVimg);
+            WritableImage TDVimg = new WritableImage(740, 620);
+            Controller.scene.snapshot(TDVimg);
             RenderedImage TDVImage = SwingFXUtils.fromFXImage(TDVimg, null);
             ImageIO.write(TDVImage,"png",new FileOutputStream(file));
             return true;
